@@ -1,5 +1,5 @@
 import CategoryCard from "@/components/categories/CategoryCard";
-import { Home, Mountain, Car, Tractor } from "lucide-react";
+import { Home, Mountain, Car, Tractor, Sun, ClipboardList } from "lucide-react";
 
 const CategoriesSection = () => {
   const categories = [
@@ -30,6 +30,20 @@ const CategoriesSection = () => {
       imageUrl: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=300&fit=crop",
       icon: <Tractor className="w-6 h-6 text-primary-foreground" />,
       itemCount: 432
+    },
+    {
+      title: "Energia Solar",
+      description: "Soluções fotovoltaicas para o campo e cidade",
+      imageUrl: "https://images.unsplash.com/photo-1509395176047-4a66953fd231?w=400&h=300&fit=crop",
+      icon: <Sun className="w-6 h-6 text-primary-foreground" />,
+      itemCount: 128
+    },
+    {
+      title: "Astec Assessoria",
+      description: "Consultoria e serviços especializados para o agro",
+      imageUrl: "https://images.unsplash.com/photo-1551292831-023188e78222?w=400&h=300&fit=crop",
+      icon: <ClipboardList className="w-6 h-6 text-primary-foreground" />,
+      itemCount: 76
     }
   ];
 
@@ -45,7 +59,7 @@ const CategoriesSection = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-6">
           {categories.map((category, index) => (
             <CategoryCard
               key={index}

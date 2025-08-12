@@ -11,12 +11,12 @@ const Header = () => {
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
               <span className="text-primary-foreground font-bold text-lg">A</span>
             </div>
-            <span className="text-xl font-bold text-foreground">AgroVendas</span>
+            <span className="text-xl font-bold text-foreground">ASTECPLACE</span>
           </div>
 
           {/* Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#" className="text-foreground hover:text-primary transition-colors font-medium">
+            <a href="/" className="text-foreground hover:text-primary transition-colors font-medium">
               Home
             </a>
             <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
@@ -30,6 +30,9 @@ const Header = () => {
             </a>
             <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
               Maquinários
+            </a>
+            <a href="/noticias" className="text-muted-foreground hover:text-primary transition-colors">
+              Notícias
             </a>
             <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
               Quem Somos

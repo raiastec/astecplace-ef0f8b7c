@@ -11,7 +11,7 @@ const Footer = () => {
               <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center">
                 <span className="text-primary font-bold text-lg">A</span>
               </div>
-              <span className="text-xl font-bold">AgroVendas</span>
+              <span className="text-xl font-bold">ASTECPLACE</span>
             </div>
             <p className="text-primary-foreground/80 mb-4 max-w-md">
               O maior portal de vendas rurais e urbanas do Brasil. Conectamos compradores 
@@ -28,7 +28,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="w-4 h-4" />
-                <span className="text-sm">contato@agrovendas.com.br</span>
+                <span className="text-sm">contato@astecplace.com.br</span>
               </div>
             </div>
           </div>
@@ -59,7 +59,7 @@ const Footer = () => {
         <hr className="border-primary-foreground/20 my-8" />
         
         <div className="text-center text-primary-foreground/80">
-          <p>&copy; 2024 AgroVendas. Todos os direitos reservados.</p>
+          <p>&copy; 2024 ASTECPLACE. Todos os direitos reservados.</p>
         </div>
       </div>
     </footer>

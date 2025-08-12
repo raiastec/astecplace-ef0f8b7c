@@ -17,7 +17,7 @@ const HeroSection = () => {
       <div className="relative z-10 container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto text-center text-white mb-8">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className="text-accent">Imóvel Rural</span> é no AgroVendas!
+            <span className="text-accent">Imóvel Rural</span> é no ASTECPLACE!
           </h1>
           <p className="text-xl md:text-2xl mb-4 opacity-90">
             O maior portal de anúncios rurais do Brasil
