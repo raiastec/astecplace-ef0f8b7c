@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Plus, MessageSquare, Instagram, Clock } from "lucide-react";
+import { Plus, MessageSquare, Instagram, Clock, Search } from "lucide-react";
+import { Input } from "@/components/ui/input";
 import astecplaceLogo from "@/assets/astecplace-logo.png";
 
 const Header = () => {
@@ -14,25 +15,22 @@ const Header = () => {
 
           {/* Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
-            <a href="#energia-solar" className="text-muted-foreground hover:text-primary transition-colors">
-              Energia Solar
-            </a>
-            <a href="#astec-assessoria" className="text-muted-foreground hover:text-primary transition-colors">
-              Astec Assessoria
-            </a>
-            <a href="#imobiliaria" className="text-muted-foreground hover:text-primary transition-colors">
-              Imobiliária
-            </a>
-            <a href="#veiculos" className="text-muted-foreground hover:text-primary transition-colors">
-              Veículos
+            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              Catálogo
             </a>
             <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
               Quem Somos
             </a>
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-              Catálogo
-            </a>
           </nav>
+
+          {/* Search Bar */}
+          <div className="hidden md:flex relative max-w-md mx-8 flex-1">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+            <Input 
+              placeholder="Buscar produtos, serviços..." 
+              className="pl-10 pr-4 py-2 w-full"
+            />
+          </div>
 
           {/* Contact Info & Actions */}
           <div className="flex items-center space-x-4">
