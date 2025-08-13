@@ -4,46 +4,36 @@ import { Home, Mountain, Car, Tractor, Sun, ClipboardList } from "lucide-react";
 const CategoriesSection = () => {
   const categories = [
     {
-      title: "Imóveis Urbanos",
-      description: "Casas, apartamentos e terrenos em áreas urbanas",
-      imageUrl: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=300&fit=crop",
-      icon: <Home className="w-6 h-6 text-primary-foreground" />,
-      itemCount: 1245
+      title: "Energia Solar",
+      description: "Soluções fotovoltaicas sustentáveis para campo e cidade",
+      imageUrl: "https://images.unsplash.com/photo-1509395176047-4a66953fd231?w=600&h=400&fit=crop",
+      icon: <Sun className="w-8 h-8 text-white" />,
+      itemCount: 128,
+      gradient: "from-yellow-500 to-orange-500"
     },
     {
-      title: "Imóveis Rurais", 
-      description: "Fazendas, sítios e propriedades rurais",
-      imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=400&h=300&fit=crop",
-      icon: <Mountain className="w-6 h-6 text-primary-foreground" />,
-      itemCount: 856
+      title: "Astec Assessoria",
+      description: "Consultoria especializada para o agronegócio",
+      imageUrl: "https://images.unsplash.com/photo-1551292831-023188e78222?w=600&h=400&fit=crop",
+      icon: <ClipboardList className="w-8 h-8 text-white" />,
+      itemCount: 76,
+      gradient: "from-blue-500 to-purple-500"
+    },
+    {
+      title: "Imobiliária",
+      description: "Imóveis urbanos e rurais para todos os perfis",
+      imageUrl: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop",
+      icon: <Home className="w-8 h-8 text-white" />,
+      itemCount: 2101,
+      gradient: "from-green-500 to-teal-500"
     },
     {
       title: "Veículos",
       description: "Carros, motos e veículos comerciais",
-      imageUrl: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=400&h=300&fit=crop",
-      icon: <Car className="w-6 h-6 text-primary-foreground" />,
-      itemCount: 2341
-    },
-    {
-      title: "Maquinários Agrícolas",
-      description: "Tratores, colheitadeiras e equipamentos rurais",
-      imageUrl: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=300&fit=crop",
-      icon: <Tractor className="w-6 h-6 text-primary-foreground" />,
-      itemCount: 432
-    },
-    {
-      title: "Energia Solar",
-      description: "Soluções fotovoltaicas para o campo e cidade",
-      imageUrl: "https://images.unsplash.com/photo-1509395176047-4a66953fd231?w=400&h=300&fit=crop",
-      icon: <Sun className="w-6 h-6 text-primary-foreground" />,
-      itemCount: 128
-    },
-    {
-      title: "Astec Assessoria",
-      description: "Consultoria e serviços especializados para o agro",
-      imageUrl: "https://images.unsplash.com/photo-1551292831-023188e78222?w=400&h=300&fit=crop",
-      icon: <ClipboardList className="w-6 h-6 text-primary-foreground" />,
-      itemCount: 76
+      imageUrl: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600&h=400&fit=crop",
+      icon: <Car className="w-8 h-8 text-white" />,
+      itemCount: 2341,
+      gradient: "from-red-500 to-pink-500"
     }
   ];
 
@@ -59,7 +49,7 @@ const CategoriesSection = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {categories.map((category, index) => (
             <CategoryCard
               key={index}
@@ -68,6 +58,7 @@ const CategoriesSection = () => {
               imageUrl={category.imageUrl}
               icon={category.icon}
               itemCount={category.itemCount}
+              gradient={category.gradient}
             />
           ))}
         </div>

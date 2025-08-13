@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 const posts = [
   {
@@ -28,6 +29,22 @@ const posts = [
     date: "2025-07-18",
     image: "https://images.unsplash.com/photo-1509395176047-4a66953fd231?w=800&h=500&fit=crop",
   },
+  {
+    id: 4,
+    title: "Crédito rural: novas linhas de financiamento",
+    excerpt: "Conheça as principais modalidades de crédito disponíveis para 2025.",
+    category: "Finanças",
+    date: "2025-07-15",
+    image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=800&h=500&fit=crop",
+  },
+  {
+    id: 5,
+    title: "Tecnologia no agro: drones e agricultura de precisão",
+    excerpt: "Como a tecnologia está revolucionando a produção agrícola moderna.",
+    category: "Tecnologia",
+    date: "2025-07-10",
+    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&h=500&fit=crop",
+  }
 ];
 
 const NoticiasSection = () => {
@@ -44,26 +61,32 @@ const NoticiasSection = () => {
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {posts.map((post) => (
-            <Card key={post.id} className="overflow-hidden">
-              <img src={post.image} alt={post.title} className="w-full h-40 object-cover" loading="lazy" />
-              <CardHeader>
-                <div className="flex items-center gap-2">
-                  <Badge variant="secondary">{post.category}</Badge>
-                  <span className="text-xs text-muted-foreground">{new Date(post.date).toLocaleDateString("pt-BR")}</span>
-                </div>
-                <CardTitle className="text-xl">{post.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">{post.excerpt}</p>
-                <Button variant="link" asChild>
-                  <Link to="/noticias">Ler mais</Link>
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        <Carousel className="w-full">
+          <CarouselContent className="-ml-2 md:-ml-4">
+            {posts.map((post) => (
+              <CarouselItem key={post.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+                <Card className="overflow-hidden hover:shadow-lg transition-all duration-300">
+                  <img src={post.image} alt={post.title} className="w-full h-48 object-cover" loading="lazy" />
+                  <CardHeader>
+                    <div className="flex items-center gap-2">
+                      <Badge variant="secondary">{post.category}</Badge>
+                      <span className="text-xs text-muted-foreground">{new Date(post.date).toLocaleDateString("pt-BR")}</span>
+                    </div>
+                    <CardTitle className="text-xl line-clamp-2">{post.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground mb-4 line-clamp-3">{post.excerpt}</p>
+                    <Button variant="link" asChild className="p-0">
+                      <Link to="/noticias">Ler mais</Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="hidden md:flex" />
+          <CarouselNext className="hidden md:flex" />
+        </Carousel>
       </div>
     </section>
   );

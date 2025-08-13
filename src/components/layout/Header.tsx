@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Search, User, Plus } from "lucide-react";
+import { Plus, MessageSquare, Instagram, Clock } from "lucide-react";
+import astecplaceLogo from "@/assets/astecplace-logo.png";
 
 const Header = () => {
   return (
@@ -7,45 +8,51 @@ const Header = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-lg">A</span>
-            </div>
-            <span className="text-xl font-bold text-foreground">ASTECPLACE</span>
+          <div className="flex items-center space-x-3">
+            <img src={astecplaceLogo} alt="ASTECPLACE" className="h-12 w-auto" />
           </div>
 
           {/* Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <a href="/" className="text-foreground hover:text-primary transition-colors font-medium">
-              Home
+          <nav className="hidden lg:flex items-center space-x-8">
+            <a href="#energia-solar" className="text-muted-foreground hover:text-primary transition-colors">
+              Energia Solar
             </a>
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-              Imóveis Urbanos
+            <a href="#astec-assessoria" className="text-muted-foreground hover:text-primary transition-colors">
+              Astec Assessoria
             </a>
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-              Imóveis Rurais
+            <a href="#imobiliaria" className="text-muted-foreground hover:text-primary transition-colors">
+              Imobiliária
             </a>
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+            <a href="#veiculos" className="text-muted-foreground hover:text-primary transition-colors">
               Veículos
-            </a>
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-              Maquinários
-            </a>
-            <a href="/noticias" className="text-muted-foreground hover:text-primary transition-colors">
-              Notícias
             </a>
             <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
               Quem Somos
             </a>
+            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              Catálogo
+            </a>
           </nav>
 
-          {/* Actions */}
-          <div className="flex items-center space-x-3">
-            <Button variant="outline" size="sm" className="hidden sm:flex">
-              <User className="w-4 h-4 mr-2" />
-              Entrar
-            </Button>
-            <Button size="sm" className="bg-primary hover:bg-primary-hover">
+          {/* Contact Info & Actions */}
+          <div className="flex items-center space-x-4">
+            {/* Contact Info */}
+            <div className="hidden md:flex items-center space-x-4 text-sm">
+              <div className="flex items-center space-x-1 text-muted-foreground">
+                <Clock className="w-4 h-4" />
+                <span>07:30 - 18:00</span>
+              </div>
+              <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-1 text-green-600 hover:text-green-700 transition-colors">
+                <MessageSquare className="w-4 h-4" />
+                <span>WhatsApp</span>
+              </a>
+              <a href="https://instagram.com/astecplace" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-1 text-pink-600 hover:text-pink-700 transition-colors">
+                <Instagram className="w-4 h-4" />
+                <span>Instagram</span>
+              </a>
+            </div>
+            
+            <Button size="sm" className="bg-primary hover:bg-primary/90">
               <Plus className="w-4 h-4 mr-2" />
               Anunciar
             </Button>
