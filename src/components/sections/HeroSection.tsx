@@ -20,10 +20,10 @@ const HeroSection = () => {
             <span className="text-accent">Imóvel Rural</span> é no ASTECPLACE!
           </h1>
           <p className="text-xl md:text-2xl mb-4 opacity-90">
-            O maior portal de anúncios rurais do Brasil
+            O produto que você procura está aqui
           </p>
           <p className="text-lg opacity-80">
-            Aqui comprador fala direto com vendedor!
+            O maior portal de anúncios do Brasil - Aqui comprador fala direto com vendedor!
           </p>
         </div>
         

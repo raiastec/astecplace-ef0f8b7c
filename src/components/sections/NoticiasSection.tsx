@@ -3,6 +3,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { Calendar, ExternalLink } from "lucide-react";
+import { useState } from "react";
 
 const posts = [
   {
@@ -48,45 +50,95 @@ const posts = [
 ];
 
 const NoticiasSection = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   return (
-    <section className="py-16">
+    <section className="py-16 bg-background">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex justify-between items-center mb-8">
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2">Notícias</h2>
-            <p className="text-muted-foreground">Atualizações e conteúdos para o produtor rural</p>
+            <h2 className="text-3xl font-bold text-foreground mb-2">Notícias</h2>
+            <p className="text-muted-foreground">Fique por dentro das últimas novidades do agronegócio</p>
           </div>
           <Button variant="outline" asChild>
-            <Link to="/noticias">Ver todas</Link>
+            <Link to="/noticias" className="flex items-center gap-2">
+              Ver todas
+              <ExternalLink className="w-4 h-4" />
+            </Link>
           </Button>
         </div>
-
-        <Carousel className="w-full">
-          <CarouselContent className="-ml-2 md:-ml-4">
-            {posts.map((post) => (
-              <CarouselItem key={post.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
-                <Card className="overflow-hidden hover:shadow-lg transition-all duration-300">
-                  <img src={post.image} alt={post.title} className="w-full h-48 object-cover" loading="lazy" />
-                  <CardHeader>
-                    <div className="flex items-center gap-2">
-                      <Badge variant="secondary">{post.category}</Badge>
-                      <span className="text-xs text-muted-foreground">{new Date(post.date).toLocaleDateString("pt-BR")}</span>
+        
+        <div className="relative max-w-4xl mx-auto">
+          <Carousel 
+            className="w-full"
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+          >
+            <CarouselContent>
+              {posts.map((post) => (
+                <CarouselItem key={post.id} className="basis-full">
+                  <Card className="overflow-hidden hover:shadow-xl transition-all duration-300">
+                    <div className="grid md:grid-cols-2 gap-0">
+                      {/* Image Section */}
+                      <div className="aspect-[4/3] md:aspect-auto overflow-hidden">
+                        <img 
+                          src={post.image} 
+                          alt={post.title}
+                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                        />
+                      </div>
+                      
+                      {/* Content Section */}
+                      <div className="p-6 md:p-8 flex flex-col justify-center">
+                        <div className="flex items-center gap-3 mb-4">
+                          <Badge variant="secondary" className="text-sm">{post.category}</Badge>
+                          <div className="flex items-center text-sm text-muted-foreground">
+                            <Calendar className="w-4 h-4 mr-2" />
+                            {new Date(post.date).toLocaleDateString("pt-BR")}
+                          </div>
+                        </div>
+                        
+                        <CardTitle className="text-2xl md:text-3xl font-bold mb-4 leading-tight">
+                          {post.title}
+                        </CardTitle>
+                        
+                        <p className="text-muted-foreground text-base leading-relaxed mb-6">
+                          {post.excerpt}
+                        </p>
+                        
+                        <Button variant="default" className="w-fit">
+                          Ler matéria completa
+                          <ExternalLink className="w-4 h-4 ml-2" />
+                        </Button>
+                      </div>
                     </div>
-                    <CardTitle className="text-xl line-clamp-2">{post.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground mb-4 line-clamp-3">{post.excerpt}</p>
-                    <Button variant="link" asChild className="p-0">
-                      <Link to="/noticias">Ler mais</Link>
-                    </Button>
-                  </CardContent>
-                </Card>
-              </CarouselItem>
+                  </Card>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            
+            {/* Navigation Arrows */}
+            <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm border shadow-lg hover:bg-background" />
+            <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm border shadow-lg hover:bg-background" />
+          </Carousel>
+          
+          {/* Indicators */}
+          <div className="flex justify-center mt-6 gap-2">
+            {posts.map((_, index) => (
+              <button
+                key={index}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index === currentIndex 
+                    ? 'bg-primary w-8' 
+                    : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
+                }`}
+                onClick={() => setCurrentIndex(index)}
+              />
             ))}
-          </CarouselContent>
-          <CarouselPrevious className="hidden md:flex" />
-          <CarouselNext className="hidden md:flex" />
-        </Carousel>
+          </div>
+        </div>
       </div>
     </section>
   );
