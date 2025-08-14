@@ -10,7 +10,7 @@ const SearchCard = () => {
       <Tabs defaultValue="comprar" className="w-full">
         <TabsList className="grid w-full grid-cols-2 mb-6">
           <TabsTrigger value="comprar">Comprar</TabsTrigger>
-          <TabsTrigger value="alugar">Alugar</TabsTrigger>
+          <TabsTrigger value="alugar">Arrendar</TabsTrigger>
         </TabsList>
 
         <div className="space-y-4">
