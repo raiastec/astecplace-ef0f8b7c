@@ -1,39 +1,24 @@
-import CategoryCard from "@/components/categories/CategoryCard";
-import { Home, Mountain, Car, Tractor, Sun, ClipboardList } from "lucide-react";
-
 const CategoriesSection = () => {
   const categories = [
     {
       title: "Energia Solar",
-      description: "Soluções fotovoltaicas sustentáveis para campo e cidade",
-      imageUrl: "https://images.unsplash.com/photo-1509395176047-4a66953fd231?w=600&h=400&fit=crop",
-      icon: <Sun className="w-8 h-8 text-white" />,
-      itemCount: 128,
-      gradient: "from-yellow-500 to-orange-500"
+      imageUrl: "https://images.unsplash.com/photo-1509395176047-4a66953fd231?w=800&h=400&fit=crop",
+      itemCount: 128
     },
     {
       title: "Astec Assessoria",
-      description: "Consultoria especializada para o agronegócio",
-      imageUrl: "https://images.unsplash.com/photo-1551292831-023188e78222?w=600&h=400&fit=crop",
-      icon: <ClipboardList className="w-8 h-8 text-white" />,
-      itemCount: 76,
-      gradient: "from-blue-500 to-purple-500"
+      imageUrl: "https://images.unsplash.com/photo-1551292831-023188e78222?w=800&h=400&fit=crop",
+      itemCount: 76
     },
     {
       title: "Imobiliária",
-      description: "Imóveis urbanos e rurais para todos os perfis",
-      imageUrl: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop",
-      icon: <Home className="w-8 h-8 text-white" />,
-      itemCount: 2101,
-      gradient: "from-green-500 to-teal-500"
+      imageUrl: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=400&fit=crop",
+      itemCount: 2101
     },
     {
       title: "Veículos",
-      description: "Carros, motos e veículos comerciais",
-      imageUrl: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600&h=400&fit=crop",
-      icon: <Car className="w-8 h-8 text-white" />,
-      itemCount: 2341,
-      gradient: "from-red-500 to-pink-500"
+      imageUrl: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800&h=400&fit=crop",
+      itemCount: 2341
     }
   ];
 
@@ -49,17 +34,34 @@ const CategoriesSection = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {categories.map((category, index) => (
-            <CategoryCard
+            <div 
               key={index}
-              title={category.title}
-              description={category.description}
-              imageUrl={category.imageUrl}
-              icon={category.icon}
-              itemCount={category.itemCount}
-              gradient={category.gradient}
-            />
+              className="group relative h-64 rounded-lg overflow-hidden shadow-lg cursor-pointer transition-all duration-300 hover:shadow-xl"
+            >
+              {/* Background Image */}
+              <div 
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                style={{ backgroundImage: `url(${category.imageUrl})` }}
+              />
+              
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors duration-300" />
+              
+              {/* Content - Hidden by default, shown on hover */}
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6">
+                <h3 className="text-2xl font-bold mb-2">{category.title}</h3>
+                <p className="text-lg">
+                  {category.itemCount.toLocaleString()} anúncios
+                </p>
+              </div>
+              
+              {/* Mobile - Always show title at bottom */}
+              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
+                <h3 className="text-white text-lg font-semibold">{category.title}</h3>
+              </div>
+            </div>
           ))}
         </div>
       </div>
