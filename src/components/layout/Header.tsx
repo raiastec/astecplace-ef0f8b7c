@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Plus, MessageSquare, Instagram, Clock, Search, Menu, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import astecplaceLogo from "@/assets/astecplace-logo.png";
+// Using the uploaded logo directly
+const astecplaceLogo = "/lovable-uploads/d5888ab4-0964-48d3-be66-b673599f99cd.png";
 
 const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -14,7 +15,11 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <img src={astecplaceLogo} alt="ASTECPLACE" className="h-12 w-auto" />
+            <img 
+              src={astecplaceLogo} 
+              alt="ASTECPLACE" 
+              className="w-auto max-w-[150px] md:max-w-[150px] max-w-[100px] h-auto max-h-12" 
+            />
           </div>
 
           {/* Desktop Navigation */}
