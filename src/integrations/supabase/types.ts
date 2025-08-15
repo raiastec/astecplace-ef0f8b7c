@@ -14,16 +14,142 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      anuncios: {
+        Row: {
+          ativo: boolean
+          categoria: string | null
+          created_at: string
+          data_publicacao: string
+          descricao: string | null
+          id: string
+          imagens: string[] | null
+          preco: number | null
+          titulo: string
+          updated_at: string
+          usuario_id: string
+        }
+        Insert: {
+          ativo?: boolean
+          categoria?: string | null
+          created_at?: string
+          data_publicacao?: string
+          descricao?: string | null
+          id?: string
+          imagens?: string[] | null
+          preco?: number | null
+          titulo: string
+          updated_at?: string
+          usuario_id: string
+        }
+        Update: {
+          ativo?: boolean
+          categoria?: string | null
+          created_at?: string
+          data_publicacao?: string
+          descricao?: string | null
+          id?: string
+          imagens?: string[] | null
+          preco?: number | null
+          titulo?: string
+          updated_at?: string
+          usuario_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "anuncios_usuario_id_fkey"
+            columns: ["usuario_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      noticias: {
+        Row: {
+          autor_id: string
+          conteudo: string
+          created_at: string
+          data_publicacao: string
+          id: string
+          imagem_capa: string | null
+          publicado: boolean
+          titulo: string
+          updated_at: string
+        }
+        Insert: {
+          autor_id: string
+          conteudo: string
+          created_at?: string
+          data_publicacao?: string
+          id?: string
+          imagem_capa?: string | null
+          publicado?: boolean
+          titulo: string
+          updated_at?: string
+        }
+        Update: {
+          autor_id?: string
+          conteudo?: string
+          created_at?: string
+          data_publicacao?: string
+          id?: string
+          imagem_capa?: string | null
+          publicado?: boolean
+          titulo?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "noticias_autor_id_fkey"
+            columns: ["autor_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          nome: string
+          role: Database["public"]["Enums"]["user_role"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          nome: string
+          role?: Database["public"]["Enums"]["user_role"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          nome?: string
+          role?: Database["public"]["Enums"]["user_role"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_user_role: {
+        Args: { user_uuid: string }
+        Returns: Database["public"]["Enums"]["user_role"]
+      }
     }
     Enums: {
-      [_ in never]: never
+      user_role: "admin" | "anunciante"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +276,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      user_role: ["admin", "anunciante"],
+    },
   },
 } as const
