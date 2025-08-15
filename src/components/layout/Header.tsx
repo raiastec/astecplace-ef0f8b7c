@@ -30,6 +30,9 @@ const Header = () => {
             <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
               Quem Somos
             </a>
+            <a href="/admin/login" className="text-primary hover:text-primary/80 transition-colors font-medium">
+              Painel Admin
+            </a>
           </nav>
 
           {/* Desktop Search Bar */}
