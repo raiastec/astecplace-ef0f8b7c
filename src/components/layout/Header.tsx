@@ -3,11 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Plus, MessageSquare, Instagram, Clock, Search, Menu, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { useAuth } from "@/hooks/useAuth";
 // Using the uploaded logo directly
 const astecplaceLogo = "/lovable-uploads/d5888ab4-0964-48d3-be66-b673599f99cd.png";
 
 const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const { isAdmin } = useAuth();
 
   return (
     <header className="bg-background/95 backdrop-blur-sm border-b border-border sticky top-0 z-50">
@@ -30,9 +32,11 @@ const Header = () => {
             <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
               Quem Somos
             </a>
-            <a href="/admin/login" className="text-primary hover:text-primary/80 transition-colors font-medium">
-              Painel Admin
-            </a>
+            {isAdmin && (
+              <a href="/admin/dashboard" className="text-primary hover:text-primary/80 transition-colors font-medium">
+                Painel Admin
+              </a>
+            )}
           </nav>
 
           {/* Desktop Search Bar */}

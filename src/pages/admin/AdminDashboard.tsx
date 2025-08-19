@@ -42,6 +42,36 @@ export const AdminDashboard = () => {
       </header>
 
       <main className="container mx-auto px-4 py-8">
+        {/* Seção de Cadastros Rápidos - Apenas Admin */}
+        {isAdmin && (
+          <div className="mb-8">
+            <Card className="bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-lg">
+                  <PlusCircle className="h-6 w-6 text-primary" />
+                  Cadastros Rápidos
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-wrap gap-3">
+                  <Button asChild className="flex-1 min-w-[200px]">
+                    <Link to="/admin/anuncios/novo">
+                      <Megaphone className="mr-2 h-4 w-4" />
+                      Novo Anúncio
+                    </Link>
+                  </Button>
+                  <Button asChild className="flex-1 min-w-[200px]">
+                    <Link to="/admin/noticias/nova">
+                      <Newspaper className="mr-2 h-4 w-4" />
+                      Nova Notícia
+                    </Link>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+        
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {/* Gerenciar Anúncios */}
           <Card className="hover:shadow-lg transition-shadow">
