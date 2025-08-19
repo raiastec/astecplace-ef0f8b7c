@@ -6,8 +6,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./hooks/useAuth";
 import { ProtectedRoute } from "./components/admin/ProtectedRoute";
 import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
 import Noticias from "./pages/Noticias";
+import Catalogo from "./pages/Catalogo";
+import NotFound from "./pages/NotFound";
 import { AdminLogin } from "./pages/admin/AdminLogin";
 import { AdminDashboard } from "./pages/admin/AdminDashboard";
 import { AnunciosList } from "./pages/admin/AnunciosList";
@@ -28,6 +29,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/noticias" element={<Noticias />} />
+            <Route path="/catalogo" element={<Catalogo />} />
             
             {/* Admin Routes */}
             <Route path="/admin/login" element={<AdminLogin />} />

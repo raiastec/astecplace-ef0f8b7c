@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ImageUpload } from '@/components/admin/ImageUpload';
 import { toast } from '@/hooks/use-toast';
 import { ArrowLeft, Save } from 'lucide-react';
@@ -21,6 +22,15 @@ interface AnuncioFormData {
   ativo: boolean;
 }
 
+const categoriaOptions = [
+  { value: 'imoveis_rurais', label: 'Imóveis Rurais' },
+  { value: 'veiculos', label: 'Veículos' },
+  { value: 'energia_solar', label: 'Energia Solar' },
+  { value: 'astec_assessoria', label: 'Astec Assessoria' },
+  { value: 'maquinas_agricolas', label: 'Máquinas Agrícolas' },
+  { value: 'outros', label: 'Outros' }
+];
+
 export const AnuncioForm = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -32,7 +42,7 @@ export const AnuncioForm = () => {
     titulo: '',
     descricao: '',
     preco: '',
-    categoria: '',
+    categoria: 'outros',
     imagens: [],
     ativo: true
   });

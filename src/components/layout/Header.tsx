@@ -26,7 +26,7 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+            <a href="/catalogo" className="text-muted-foreground hover:text-primary transition-colors">
               Catálogo
             </a>
             <a href="#" className="text-muted-foreground hover:text-primary transition-colors">

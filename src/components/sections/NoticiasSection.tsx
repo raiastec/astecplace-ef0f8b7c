@@ -4,53 +4,69 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Calendar, ExternalLink } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
-const posts = [
-  {
-    id: 1,
-    title: "Declaração de ITR: prazos e orientações",
-    excerpt: "Entenda quem precisa declarar, prazos e como evitar multas no ITR.",
-    category: "Tributário",
-    date: "2025-08-01",
-    image: "https://images.unsplash.com/photo-1529078155058-5d716f45d604?w=800&h=500&fit=crop",
-  },
-  {
-    id: 2,
-    title: "Safra de soja: expectativas e mercado",
-    excerpt: "Veja as principais projeções para a safra e os impactos nas cotações.",
-    category: "Agro",
-    date: "2025-07-25",
-    image: "https://images.unsplash.com/photo-1519003300449-424ad0405076?w=800&h=500&fit=crop",
-  },
-  {
-    id: 3,
-    title: "Energia solar no campo: quando vale a pena?",
-    excerpt: "Comparamos retorno do investimento em diferentes cenários no agro.",
-    category: "Energia",
-    date: "2025-07-18",
-    image: "https://images.unsplash.com/photo-1509395176047-4a66953fd231?w=800&h=500&fit=crop",
-  },
-  {
-    id: 4,
-    title: "Crédito rural: novas linhas de financiamento",
-    excerpt: "Conheça as principais modalidades de crédito disponíveis para 2025.",
-    category: "Finanças",
-    date: "2025-07-15",
-    image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=800&h=500&fit=crop",
-  },
-  {
-    id: 5,
-    title: "Tecnologia no agro: drones e agricultura de precisão",
-    excerpt: "Como a tecnologia está revolucionando a produção agrícola moderna.",
-    category: "Tecnologia",
-    date: "2025-07-10",
-    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&h=500&fit=crop",
-  }
-];
+interface Noticia {
+  id: string;
+  titulo: string;
+  conteudo: string;
+  imagem_capa?: string;
+  data_publicacao: string;
+  publicado: boolean;
+}
 
 const NoticiasSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [noticias, setNoticias] = useState<Noticia[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchNoticias();
+  }, []);
+
+  const fetchNoticias = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('noticias')
+        .select('*')
+        .eq('publicado', true)
+        .order('data_publicacao', { ascending: false })
+        .limit(5);
+
+      if (error) throw error;
+      setNoticias(data || []);
+    } catch (error) {
+      console.error('Erro ao buscar notícias:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <section className="py-16 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center">
+            <p className="text-muted-foreground">Carregando notícias...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (noticias.length === 0) {
+    return (
+      <section className="py-16 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-foreground mb-2">Notícias</h2>
+            <p className="text-muted-foreground">Nenhuma notícia publicada no momento.</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-16 bg-background">
@@ -77,35 +93,41 @@ const NoticiasSection = () => {
             }}
           >
             <CarouselContent>
-              {posts.map((post) => (
-                <CarouselItem key={post.id} className="basis-full">
+              {noticias.map((noticia) => (
+                <CarouselItem key={noticia.id} className="basis-full">
                   <Card className="overflow-hidden hover:shadow-xl transition-all duration-300">
                     <div className="grid md:grid-cols-2 gap-0">
                       {/* Image Section */}
                       <div className="aspect-[4/3] md:aspect-auto overflow-hidden">
-                        <img 
-                          src={post.image} 
-                          alt={post.title}
-                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                        />
+                        {noticia.imagem_capa ? (
+                          <img 
+                            src={noticia.imagem_capa} 
+                            alt={noticia.titulo}
+                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-muted flex items-center justify-center">
+                            <span className="text-muted-foreground">Sem imagem</span>
+                          </div>
+                        )}
                       </div>
                       
                       {/* Content Section */}
                       <div className="p-6 md:p-8 flex flex-col justify-center">
                         <div className="flex items-center gap-3 mb-4">
-                          <Badge variant="secondary" className="text-sm">{post.category}</Badge>
+                          <Badge variant="secondary" className="text-sm">Notícia</Badge>
                           <div className="flex items-center text-sm text-muted-foreground">
                             <Calendar className="w-4 h-4 mr-2" />
-                            {new Date(post.date).toLocaleDateString("pt-BR")}
+                            {new Date(noticia.data_publicacao).toLocaleDateString("pt-BR")}
                           </div>
                         </div>
                         
                         <CardTitle className="text-2xl md:text-3xl font-bold mb-4 leading-tight">
-                          {post.title}
+                          {noticia.titulo}
                         </CardTitle>
                         
-                        <p className="text-muted-foreground text-base leading-relaxed mb-6">
-                          {post.excerpt}
+                        <p className="text-muted-foreground text-base leading-relaxed mb-6 line-clamp-3">
+                          {noticia.conteudo}
                         </p>
                         
                         <Button variant="default" className="w-fit">
@@ -126,7 +148,7 @@ const NoticiasSection = () => {
           
           {/* Indicators */}
           <div className="flex justify-center mt-6 gap-2">
-            {posts.map((_, index) => (
+            {noticias.map((_, index) => (
               <button
                 key={index}
                 className={`w-2 h-2 rounded-full transition-all duration-300 ${
