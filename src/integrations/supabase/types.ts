@@ -23,7 +23,10 @@ export type Database = {
           descricao: string | null
           id: string
           imagens: string[] | null
+          localizacao: string | null
           preco: number | null
+          tags: string[] | null
+          tipo_negocio: string | null
           titulo: string
           updated_at: string
           usuario_id: string
@@ -36,7 +39,10 @@ export type Database = {
           descricao?: string | null
           id?: string
           imagens?: string[] | null
+          localizacao?: string | null
           preco?: number | null
+          tags?: string[] | null
+          tipo_negocio?: string | null
           titulo: string
           updated_at?: string
           usuario_id: string
@@ -49,7 +55,10 @@ export type Database = {
           descricao?: string | null
           id?: string
           imagens?: string[] | null
+          localizacao?: string | null
           preco?: number | null
+          tags?: string[] | null
+          tipo_negocio?: string | null
           titulo?: string
           updated_at?: string
           usuario_id?: string

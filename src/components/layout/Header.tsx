@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Plus, MessageSquare, Instagram, Clock, Search, Menu, X } from "lucide-react";
-import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useAuth } from "@/hooks/useAuth";
+import HeaderSearchInput from "@/components/search/HeaderSearchInput";
 // Using the uploaded logo directly
 const astecplaceLogo = "/lovable-uploads/d5888ab4-0964-48d3-be66-b673599f99cd.png";
 
@@ -41,11 +41,7 @@ const Header = () => {
 
           {/* Desktop Search Bar */}
           <div className="hidden lg:flex relative max-w-md mx-8 flex-1">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-            <Input 
-              placeholder="Buscar produtos, serviços..." 
-              className="pl-10 pr-4 py-2 w-full"
-            />
+            <HeaderSearchInput />
           </div>
 
           {/* Desktop Contact Info & Actions */}
@@ -108,16 +104,10 @@ const Header = () => {
                     </a>
                   </nav>
 
-                  {/* Search Bar in Menu */}
+                   {/* Search Bar in Menu */}
                   <div className="space-y-2">
                     <h3 className="font-medium text-sm text-muted-foreground">Buscar</h3>
-                    <div className="relative">
-                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-                      <Input 
-                        placeholder="Buscar produtos, serviços..." 
-                        className="pl-10"
-                      />
-                    </div>
+                    <HeaderSearchInput />
                   </div>
 
                   {/* Contact Info */}
@@ -151,14 +141,7 @@ const Header = () => {
         {/* Mobile Search Bar - Expandable */}
         {isSearchOpen && (
           <div className="lg:hidden py-3 border-t mt-4">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-              <Input 
-                placeholder="Buscar produtos, serviços..." 
-                className="pl-10 w-full"
-                autoFocus
-              />
-            </div>
+            <HeaderSearchInput autoFocus />
           </div>
         )}
       </div>

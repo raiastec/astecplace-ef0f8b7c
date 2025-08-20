@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Card, CardContent } from '@/components/ui/card';
@@ -7,66 +7,47 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Calendar, Search, Filter, Eye } from 'lucide-react';
+import { Search, Filter, Eye, Calendar } from 'lucide-react';
 import { useSearch, SearchFilters } from '@/hooks/useSearch';
 
-interface Anuncio {
-  id: string;
-  titulo: string;
-  descricao: string;
-  preco: number;
-  categoria: string;
-  imagens: string[];
-  data_publicacao: string;
-  ativo: boolean;
-}
-
 const categoriaLabels = {
-  'imoveis_rurais': 'Imóveis Rurais',
   'veiculos': 'Veículos',
-  'energia_solar': 'Energia Solar',
-  'astec_assessoria': 'Astec Assessoria',
-  'maquinas_agricolas': 'Máquinas Agrícolas',
-  'outros': 'Outros'
+  'imoveis_rurais': 'Imóveis Rurais'
 };
 
-const Catalogo = () => {
+const CategoryListing = () => {
+  const { categoria } = useParams<{ categoria: string }>();
   const [searchParams] = useSearchParams();
   const { anuncios, loading, searchAnuncios } = useSearch();
+  
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [sortBy, setSortBy] = useState('recent');
 
   useEffect(() => {
-    // Initialize from URL params
-    const urlSearch = searchParams.get('search');
-    const urlCategory = searchParams.get('categoria');
-    const urlLocation = searchParams.get('localizacao');
-    const urlTipoNegocio = searchParams.get('tipo_negocio');
-    const urlPrecoMin = searchParams.get('preco_min');
-    const urlPrecoMax = searchParams.get('preco_max');
+    if (categoria) {
+      const filters: SearchFilters = {
+        categoria: categoria
+      };
 
-    if (urlSearch) setSearchTerm(urlSearch);
-    if (urlCategory) setSelectedCategory(urlCategory);
+      // Apply any URL search params
+      const searchParam = searchParams.get('search');
+      if (searchParam) {
+        filters.searchTerm = searchParam;
+        setSearchTerm(searchParam);
+      }
 
-    const filters: SearchFilters = {};
-    if (urlSearch) filters.searchTerm = urlSearch;
-    if (urlCategory && urlCategory !== 'all') filters.categoria = urlCategory;
-    if (urlLocation) filters.localizacao = urlLocation;
-    if (urlTipoNegocio) filters.tipoNegocio = urlTipoNegocio;
-    if (urlPrecoMin) filters.precoMin = parseFloat(urlPrecoMin);
-    if (urlPrecoMax) filters.precoMax = parseFloat(urlPrecoMax);
+      searchAnuncios(filters);
+    }
+  }, [categoria, searchParams, searchAnuncios]);
 
-    // If no filters from URL, load all anuncios
-    searchAnuncios(Object.keys(filters).length > 0 ? filters : {});
-  }, [searchParams, searchAnuncios]);
-
-  const handleFilter = () => {
-    const filters: SearchFilters = {};
-    
-    if (searchTerm) filters.searchTerm = searchTerm;
-    if (selectedCategory !== 'all') filters.categoria = selectedCategory;
-    
-    searchAnuncios(filters);
+  const handleSearch = () => {
+    if (categoria) {
+      const filters: SearchFilters = {
+        categoria: categoria,
+        searchTerm: searchTerm || undefined
+      };
+      searchAnuncios(filters);
+    }
   };
 
   const formatPrice = (price: number) => {
@@ -76,13 +57,27 @@ const Catalogo = () => {
     }).format(price);
   };
 
-  if (loading) {
+  const sortedAnuncios = [...anuncios].sort((a, b) => {
+    switch (sortBy) {
+      case 'price-asc':
+        return (a.preco || 0) - (b.preco || 0);
+      case 'price-desc':
+        return (b.preco || 0) - (a.preco || 0);
+      case 'oldest':
+        return new Date(a.data_publicacao).getTime() - new Date(b.data_publicacao).getTime();
+      default: // 'recent'
+        return new Date(b.data_publicacao).getTime() - new Date(a.data_publicacao).getTime();
+    }
+  });
+
+  if (!categoria || !categoriaLabels[categoria as keyof typeof categoriaLabels]) {
     return (
       <div className="min-h-screen bg-background">
         <Header />
         <main className="container mx-auto px-4 py-8">
-          <div className="flex items-center justify-center h-64">
-            <p>Carregando anúncios...</p>
+          <div className="text-center">
+            <h1 className="text-2xl font-bold mb-4">Categoria não encontrada</h1>
+            <p className="text-muted-foreground">A categoria solicitada não existe.</p>
           </div>
         </main>
         <Footer />
@@ -90,67 +85,68 @@ const Catalogo = () => {
     );
   }
 
+  const categoryTitle = categoriaLabels[categoria as keyof typeof categoriaLabels];
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
       <main className="container mx-auto px-4 py-8">
-        {/* Título e Descrição */}
+        {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-foreground mb-4">
-            Catálogo de Anúncios
+            {categoryTitle}
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Explore nossos anúncios organizados por categoria. Encontre exatamente o que você precisa.
+            Explore todos os anúncios da categoria {categoryTitle.toLowerCase()}
           </p>
         </div>
 
-        {/* Filtros */}
+        {/* Filters */}
         <div className="bg-card rounded-lg p-6 mb-8 shadow-sm border">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
                 <Input
-                  placeholder="Buscar anúncios..."
+                  placeholder={`Buscar em ${categoryTitle.toLowerCase()}...`}
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleFilter()}
                   className="pl-10"
+                  onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
                 />
               </div>
             </div>
-            <div className="md:w-64">
-              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+            <div className="md:w-48">
+              <Select value={sortBy} onValueChange={setSortBy}>
                 <SelectTrigger>
                   <Filter className="h-4 w-4 mr-2" />
-                  <SelectValue placeholder="Todas as categorias" />
+                  <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">Todas as categorias</SelectItem>
-                  {Object.entries(categoriaLabels).map(([key, label]) => (
-                    <SelectItem key={key} value={key}>{label}</SelectItem>
-                  ))}
+                  <SelectItem value="recent">Mais recentes</SelectItem>
+                  <SelectItem value="oldest">Mais antigos</SelectItem>
+                  <SelectItem value="price-asc">Preço: menor para maior</SelectItem>
+                  <SelectItem value="price-desc">Preço: maior para menor</SelectItem>
                 </SelectContent>
               </Select>
             </div>
-            <Button onClick={handleFilter}>
-              <Search className="w-4 h-4 mr-2" />
-              Filtrar
+            <Button onClick={handleSearch}>
+              <Search className="h-4 w-4 mr-2" />
+              Buscar
             </Button>
           </div>
         </div>
 
-        {/* Contador de Resultados */}
+        {/* Results */}
         <div className="mb-6">
           <p className="text-muted-foreground">
-            {loading ? 'Carregando...' : `${anuncios.length} anúncios encontrados`}
-            {selectedCategory !== 'all' && ` em ${categoriaLabels[selectedCategory as keyof typeof categoriaLabels]}`}
+            {loading ? 'Carregando...' : `${sortedAnuncios.length} anúncios encontrados`}
           </p>
         </div>
 
-        {/* Grid de Anúncios */}
+        {/* Listings Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {anuncios.map((anuncio) => (
+          {sortedAnuncios.map((anuncio) => (
             <Card key={anuncio.id} className="group hover:shadow-lg transition-all duration-300 cursor-pointer overflow-hidden">
               <div className="relative h-48 overflow-hidden">
                 {anuncio.imagens && anuncio.imagens.length > 0 ? (
@@ -165,7 +161,7 @@ const Catalogo = () => {
                   </div>
                 )}
                 <Badge className="absolute top-3 left-3 bg-background/80 text-foreground">
-                  {categoriaLabels[anuncio.categoria as keyof typeof categoriaLabels] || 'Outros'}
+                  {categoryTitle}
                 </Badge>
               </div>
               
@@ -175,6 +171,11 @@ const Catalogo = () => {
                     <Calendar className="w-3 h-3 mr-1" />
                     {new Date(anuncio.data_publicacao).toLocaleDateString('pt-BR')}
                   </span>
+                  {anuncio.localizacao && (
+                    <span className="text-xs text-muted-foreground">
+                      {anuncio.localizacao}
+                    </span>
+                  )}
                 </div>
                 
                 <h3 className="font-semibold mb-2 text-foreground line-clamp-2 group-hover:text-primary transition-colors">
@@ -201,12 +202,12 @@ const Catalogo = () => {
           ))}
         </div>
 
-        {/* Mensagem quando não há anúncios */}
-        {!loading && anuncios.length === 0 && (
+        {/* No results message */}
+        {!loading && sortedAnuncios.length === 0 && (
           <div className="text-center py-12">
             <h3 className="text-lg font-semibold mb-2">Nenhum anúncio encontrado</h3>
             <p className="text-muted-foreground">
-              Tente ajustar os filtros ou buscar por outros termos.
+              Não encontramos anúncios para os filtros selecionados. Tente ajustar sua busca.
             </p>
           </div>
         )}
@@ -216,4 +217,4 @@ const Catalogo = () => {
   );
 };
 
-export default Catalogo;
+export default CategoryListing;

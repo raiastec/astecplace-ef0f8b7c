@@ -35,12 +35,29 @@ const CategoriesSection = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {categories.map((category, index) => (
-            <a 
-              href="/catalogo"
-              key={index}
-              className="group relative h-64 rounded-lg overflow-hidden shadow-lg cursor-pointer transition-all duration-300 hover:shadow-xl"
-            >
+          {categories.map((category, index) => {
+            const getCategoryLink = (title: string) => {
+              switch (title) {
+                case 'Energia Solar':
+                  return '/energia-solar';
+                case 'Astec Assessoria':
+                  return '/astec-assessoria';
+                case 'Veículos':
+                  return '/categoria/veiculos';
+                case 'Imobiliária':
+                  return '/categoria/imoveis_rurais';
+                default:
+                  return '/catalogo';
+              }
+            };
+
+            return (
+              <a 
+                href={getCategoryLink(category.title)}
+                key={index}
+                className="group relative h-64 rounded-lg overflow-hidden shadow-lg cursor-pointer transition-all duration-300 hover:shadow-xl"
+              >
+            
               {/* Background Image */}
               <div 
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
@@ -62,8 +79,9 @@ const CategoriesSection = () => {
               <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
                 <h3 className="text-white text-lg font-semibold">{category.title}</h3>
               </div>
-            </a>
-          ))}
+              </a>
+            );
+          })}
         </div>
       </div>
     </section>
