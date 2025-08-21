@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams, Link } from 'react-router-dom';
-import { supabase } from '@/integrations/supabase/client';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
+import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { ImageUpload } from '@/components/admin/ImageUpload';
-import { toast } from '@/hooks/use-toast';
 import { ArrowLeft, Save } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
-interface NoticiaFormData {
+interface NoticiaData {
   titulo: string;
   conteudo: string;
   imagem_capa: string;
@@ -23,25 +23,25 @@ export const NoticiaForm = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { profile } = useAuth();
-  const isEdit = !!id;
+  const { toast } = useToast();
+  const isEditing = !!id;
 
-  const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState<NoticiaFormData>({
+  const [formData, setFormData] = useState<NoticiaData>({
     titulo: '',
     conteudo: '',
     imagem_capa: '',
     publicado: false
   });
+  
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (isEdit) {
+    if (isEditing) {
       fetchNoticia();
     }
   }, [id]);
 
   const fetchNoticia = async () => {
-    if (!id) return;
-
     try {
       const { data, error } = await supabase
         .from('noticias')
@@ -50,69 +50,68 @@ export const NoticiaForm = () => {
         .single();
 
       if (error) throw error;
-
+      
       setFormData({
-        titulo: data.titulo || '',
-        conteudo: data.conteudo || '',
+        titulo: data.titulo,
+        conteudo: data.conteudo,
         imagem_capa: data.imagem_capa || '',
         publicado: data.publicado
       });
-    } catch (error: any) {
+    } catch (error) {
+      console.error('Erro ao carregar notícia:', error);
       toast({
         title: "Erro",
         description: "Não foi possível carregar a notícia.",
-        variant: "destructive"
+        variant: "destructive",
       });
-      navigate('/admin/noticias');
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!profile) return;
+    if (!profile?.user_id) return;
 
     setLoading(true);
 
     try {
       const noticiaData = {
-        titulo: formData.titulo,
-        conteudo: formData.conteudo,
-        imagem_capa: formData.imagem_capa,
-        publicado: formData.publicado,
-        autor_id: profile.user_id
+        ...formData,
+        autor_id: profile.user_id,
+        imagem_capa: formData.imagem_capa || null
       };
 
-      if (isEdit) {
+      if (isEditing) {
         const { error } = await supabase
           .from('noticias')
           .update(noticiaData)
           .eq('id', id);
 
         if (error) throw error;
-
+        
         toast({
-          title: "Sucesso",
-          description: "Notícia atualizada com sucesso!"
+          title: "Sucesso!",
+          description: "Notícia atualizada com sucesso.",
         });
       } else {
         const { error } = await supabase
           .from('noticias')
-          .insert([noticiaData]);
+          .insert(noticiaData);
 
         if (error) throw error;
-
+        
         toast({
-          title: "Sucesso",
-          description: "Notícia criada com sucesso!"
+          title: "Sucesso!",
+          description: "Notícia criada com sucesso.",
         });
       }
 
       navigate('/admin/noticias');
-    } catch (error: any) {
+    } catch (error) {
+      console.error('Erro ao salvar notícia:', error);
       toast({
         title: "Erro",
-        description: error.message,
-        variant: "destructive"
+        description: "Não foi possível salvar a notícia.",
+        variant: "destructive",
       });
     } finally {
       setLoading(false);
@@ -126,90 +125,97 @@ export const NoticiaForm = () => {
     }));
   };
 
-  const handleImageRemove = () => {
-    setFormData(prev => ({
-      ...prev,
-      imagem_capa: ''
-    }));
-  };
-
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex items-center gap-4 mb-6">
-        <Button variant="outline" asChild>
-          <Link to="/admin/noticias">
+    <div className="min-h-screen bg-background p-4">
+      <div className="max-w-4xl mx-auto">
+        <div className="flex items-center gap-4 mb-6">
+          <Button variant="outline" onClick={() => navigate('/admin/noticias')}>
             <ArrowLeft className="mr-2 h-4 w-4" />
             Voltar
-          </Link>
-        </Button>
-        <h1 className="text-3xl font-bold">
-          {isEdit ? 'Editar Notícia' : 'Nova Notícia'}
-        </h1>
-      </div>
+          </Button>
+          <h1 className="text-3xl font-bold">
+            {isEditing ? 'Editar Notícia' : 'Nova Notícia'}
+          </h1>
+        </div>
 
-      <Card className="max-w-4xl">
-        <CardHeader>
-          <CardTitle>
-            {isEdit ? 'Editar Notícia' : 'Criar Nova Notícia'}
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-2">
-              <Label htmlFor="titulo">Título *</Label>
-              <Input
-                id="titulo"
-                value={formData.titulo}
-                onChange={(e) => setFormData(prev => ({ ...prev, titulo: e.target.value }))}
-                required
-              />
-            </div>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>Informações Básicas</CardTitle>
+              <CardDescription>
+                Preencha os dados principais da notícia
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <Label htmlFor="titulo">Título *</Label>
+                <Input
+                  id="titulo"
+                  value={formData.titulo}
+                  onChange={(e) => setFormData(prev => ({ ...prev, titulo: e.target.value }))}
+                  placeholder="Título da notícia"
+                  required
+                />
+              </div>
 
-            <div className="space-y-2">
-              <Label>Imagem de Capa</Label>
+              <div>
+                <Label htmlFor="conteudo">Conteúdo *</Label>
+                <Textarea
+                  id="conteudo"
+                  value={formData.conteudo}
+                  onChange={(e) => setFormData(prev => ({ ...prev, conteudo: e.target.value }))}
+                  placeholder="Conteúdo da notícia..."
+                  rows={10}
+                  required
+                />
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <Switch
+                  id="publicado"
+                  checked={formData.publicado}
+                  onCheckedChange={(checked) => setFormData(prev => ({ ...prev, publicado: checked }))}
+                />
+                <Label htmlFor="publicado">Publicar notícia</Label>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Imagem de Capa</CardTitle>
+              <CardDescription>
+                Adicione uma imagem de capa para a notícia (opcional)
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
               <ImageUpload
                 bucket="noticias"
                 onUpload={handleImageUpload}
-                onRemove={handleImageRemove}
                 images={formData.imagem_capa ? [formData.imagem_capa] : []}
-                multiple={false}
               />
-            </div>
+            </CardContent>
+          </Card>
 
-            <div className="space-y-2">
-              <Label htmlFor="conteudo">Conteúdo *</Label>
-              <Textarea
-                id="conteudo"
-                value={formData.conteudo}
-                onChange={(e) => setFormData(prev => ({ ...prev, conteudo: e.target.value }))}
-                rows={12}
-                placeholder="Escreva o conteúdo da notícia..."
-                required
-              />
-            </div>
-
-            <div className="flex items-center space-x-2">
-              <Switch
-                id="publicado"
-                checked={formData.publicado}
-                onCheckedChange={(checked) => setFormData(prev => ({ ...prev, publicado: checked }))}
-              />
-              <Label htmlFor="publicado">
-                Publicar notícia {formData.publicado ? '(visível no site)' : '(salvar como rascunho)'}
-              </Label>
-            </div>
-
-            <Button type="submit" disabled={loading} className="w-full">
-              {loading ? 'Salvando...' : (
-                <>
-                  <Save className="mr-2 h-4 w-4" />
-                  {isEdit ? 'Atualizar' : 'Criar'} Notícia
-                </>
-              )}
+          <div className="flex gap-4">
+            <Button 
+              type="submit" 
+              disabled={loading}
+              className="flex-1"
+            >
+              <Save className="mr-2 h-4 w-4" />
+              {loading ? 'Salvando...' : (isEditing ? 'Atualizar' : 'Criar')} Notícia
             </Button>
-          </form>
-        </CardContent>
-      </Card>
+            <Button 
+              type="button" 
+              variant="outline"
+              onClick={() => navigate('/admin/noticias')}
+            >
+              Cancelar
+            </Button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

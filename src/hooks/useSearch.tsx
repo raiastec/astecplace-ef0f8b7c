@@ -29,9 +29,11 @@ export const useSearch = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const searchAnuncios = async (filters: SearchFilters) => {
+  const searchAnuncios = async (filters: SearchFilters = {}) => {
     setLoading(true);
     setError(null);
+    
+    console.log('Buscando anúncios com filtros:', filters);
 
     try {
       let query = supabase
@@ -71,6 +73,8 @@ export const useSearch = () => {
       query = query.order('data_publicacao', { ascending: false });
 
       const { data, error } = await query;
+      
+      console.log('Resultado da busca:', { data, error });
 
       if (error) throw error;
       setAnuncios(data || []);

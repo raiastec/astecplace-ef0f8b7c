@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useParams, useSearchParams, Link } from 'react-router-dom';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Card, CardContent } from '@/components/ui/card';
@@ -192,9 +192,11 @@ const CategoryListing = () => {
                   <span className="text-xl font-bold text-primary">
                     {anuncio.preco ? formatPrice(anuncio.preco) : 'Consulte'}
                   </span>
-                  <Button variant="outline" size="sm">
-                    <Eye className="h-4 w-4 mr-2" />
-                    Ver detalhes
+                  <Button variant="outline" size="sm" asChild>
+                    <Link to={`/anuncio/${anuncio.id}`}>
+                      <Eye className="h-4 w-4 mr-2" />
+                      Ver detalhes
+                    </Link>
                   </Button>
                 </div>
               </CardContent>

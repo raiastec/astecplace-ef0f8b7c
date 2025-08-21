@@ -19,6 +19,7 @@ import { UsuariosList } from "./pages/admin/UsuariosList";
 import EnergiaSolar from "./pages/categories/EnergiaSolar";
 import AstecAssessoria from "./pages/categories/AstecAssessoria";
 import CategoryListing from "./pages/categories/CategoryListing";
+import AnuncioDetails from "./pages/AnuncioDetails";
 
 const queryClient = new QueryClient();
 
@@ -31,8 +32,9 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/noticias" element={<Noticias />} />
-            <Route path="/catalogo" element={<Catalogo />} />
+        <Route path="/noticias" element={<Noticias />} />
+        <Route path="/catalogo" element={<Catalogo />} />
+        <Route path="/anuncio/:id" element={<AnuncioDetails />} />
             
             {/* Category Pages */}
             <Route path="/energia-solar" element={<EnergiaSolar />} />
