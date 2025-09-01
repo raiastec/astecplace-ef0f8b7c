@@ -47,164 +47,159 @@ export const AdminDashboard = () => {
         {/* Seção Principal - Apenas Admin */}
         {isAdmin && (
           <>
-            {/* Cards Principais */}
-            <div className="grid gap-6 md:grid-cols-2 mb-8">
-              {/* Anúncios */}
-              <Card className="hover:shadow-lg transition-shadow">
-                <CardHeader className="pb-3">
-                  <CardTitle className="flex items-center gap-2 text-green-700">
-                    <Megaphone className="h-5 w-5" />
-                    Anúncios
-                  </CardTitle>
-                  <CardDescription>
-                    Gerencie os anúncios do site
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <Button asChild variant="default" size="sm" className="bg-green-600 hover:bg-green-700">
-                    <Link to="/admin/anuncios">
-                      <FileText className="mr-2 h-4 w-4" />
-                      Ver Todos
-                    </Link>
-                  </Button>
-                  <Button asChild variant="outline" size="sm">
-                    <Link to="/admin/anuncios/novo">
-                      <PlusCircle className="mr-2 h-4 w-4" />
-                      Novo
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
+            {/* Gestão de Conteúdo */}
+            <div className="mb-8">
+              <h2 className="text-2xl font-semibold mb-6 text-foreground">Gestão de Conteúdo</h2>
+              <div className="grid gap-6 md:grid-cols-2">
+                {/* Anúncios */}
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardHeader className="pb-3">
+                    <CardTitle className="flex items-center gap-2 text-green-700">
+                      <Megaphone className="h-5 w-5" />
+                      Anúncios
+                    </CardTitle>
+                    <CardDescription>
+                      Gerencie todos os anúncios do marketplace
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="flex flex-wrap gap-2">
+                      <Button asChild variant="default" size="sm" className="bg-green-600 hover:bg-green-700">
+                        <Link to="/admin/anuncios">
+                          <FileText className="mr-2 h-4 w-4" />
+                          Ver Todos
+                        </Link>
+                      </Button>
+                      <Button asChild variant="outline" size="sm">
+                        <Link to="/admin/anuncios/novo">
+                          <PlusCircle className="mr-2 h-4 w-4" />
+                          Novo Anúncio
+                        </Link>
+                      </Button>
+                      <Button asChild variant="ghost" size="sm">
+                        <Link to="/catalogo">
+                          <Eye className="mr-2 h-4 w-4" />
+                          Ver Catálogo
+                        </Link>
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
 
-              {/* Configurações */}
-              <Card className="hover:shadow-lg transition-shadow">
-                <CardHeader className="pb-3">
-                  <CardTitle className="flex items-center gap-2 text-blue-700">
-                    <Settings className="h-5 w-5" />
-                    Configurações
-                  </CardTitle>
-                  <CardDescription>
-                    Configurações da conta
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Button variant="outline" size="sm" className="w-fit">
-                    <Settings className="mr-2 h-4 w-4" />
-                    Configurar
-                  </Button>
-                </CardContent>
-              </Card>
+                {/* Notícias */}
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardHeader className="pb-3">
+                    <CardTitle className="flex items-center gap-2 text-orange-700">
+                      <Newspaper className="h-5 w-5" />
+                      Notícias
+                    </CardTitle>
+                    <CardDescription>
+                      Gerencie todas as notícias do site
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="flex flex-wrap gap-2">
+                      <Button asChild variant="default" size="sm" className="bg-orange-600 hover:bg-orange-700">
+                        <Link to="/admin/noticias">
+                          <FileText className="mr-2 h-4 w-4" />
+                          Ver Todas
+                        </Link>
+                      </Button>
+                      <Button asChild variant="outline" size="sm">
+                        <Link to="/admin/noticias/nova">
+                          <PlusCircle className="mr-2 h-4 w-4" />
+                          Nova Notícia
+                        </Link>
+                      </Button>
+                      <Button asChild variant="ghost" size="sm">
+                        <Link to="/noticias">
+                          <Eye className="mr-2 h-4 w-4" />
+                          Ver Publicadas
+                        </Link>
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
 
-            {/* Cadastro de Notícias */}
+            {/* Gestão de Usuários */}
             <div className="mb-8">
-              <Card className="hover:shadow-lg transition-shadow">
-                <CardHeader className="pb-3">
-                  <CardTitle className="flex items-center gap-2 text-orange-700">
-                    <Newspaper className="h-5 w-5" />
-                    Cadastro de Notícias
-                  </CardTitle>
-                  <CardDescription>
-                    Criar uma seção no painel chamada "Notícias"
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <Button asChild variant="default" size="sm" className="bg-orange-600 hover:bg-orange-700">
-                    <Link to="/admin/noticias">
-                      <FileText className="mr-2 h-4 w-4" />
-                      Ver Todas
-                    </Link>
-                  </Button>
-                  <Button asChild variant="outline" size="sm">
-                    <Link to="/admin/noticias/nova">
-                      <PlusCircle className="mr-2 h-4 w-4" />
-                      Nova
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            </div>
+              <h2 className="text-2xl font-semibold mb-6 text-foreground">Administração</h2>
+              <div className="grid gap-6 md:grid-cols-2">
+                {/* Usuários */}
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardHeader className="pb-3">
+                    <CardTitle className="flex items-center gap-2 text-indigo-700">
+                      <Users className="h-5 w-5" />
+                      Usuários
+                    </CardTitle>
+                    <CardDescription>
+                      Gerencie todos os usuários do sistema
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Button asChild variant="default" size="sm" className="bg-indigo-600 hover:bg-indigo-700">
+                      <Link to="/admin/usuarios">
+                        <Eye className="mr-2 h-4 w-4" />
+                        Ver Todos
+                      </Link>
+                    </Button>
+                  </CardContent>
+                </Card>
 
-            {/* Catálogo de Anúncios */}
-            <div className="mb-8">
-              <Card className="hover:shadow-lg transition-shadow">
-                <CardHeader className="pb-3">
-                  <CardTitle className="flex items-center gap-2 text-purple-700">
-                    <Package className="h-5 w-5" />
-                    Catálogo de Anúncios
-                  </CardTitle>
-                  <CardDescription>
-                    Os anúncios cadastrados devem ficar vinculados a categorias
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <Button asChild variant="default" size="sm" className="bg-purple-600 hover:bg-purple-700">
-                    <Link to="/catalogo">
-                      <Eye className="mr-2 h-4 w-4" />
-                      Ver Catálogo
-                    </Link>
-                  </Button>
-                  <Button asChild variant="outline" size="sm">
-                    <Link to="/admin/anuncios/novo">
-                      <PlusCircle className="mr-2 h-4 w-4" />
-                      Novo Anúncio
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Gerenciar Usuários */}
-            <div className="mb-8">
-              <Card className="hover:shadow-lg transition-shadow">
-                <CardHeader className="pb-3">
-                  <CardTitle className="flex items-center gap-2 text-indigo-700">
-                    <Users className="h-5 w-5" />
-                    Usuários
-                  </CardTitle>
-                  <CardDescription>
-                    Gerencie os usuários do sistema
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Button asChild variant="outline" size="sm">
-                    <Link to="/admin/usuarios">
-                      <Eye className="mr-2 h-4 w-4" />
-                      Ver Todos
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
+                {/* Configurações */}
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardHeader className="pb-3">
+                    <CardTitle className="flex items-center gap-2 text-blue-700">
+                      <Settings className="h-5 w-5" />
+                      Configurações
+                    </CardTitle>
+                    <CardDescription>
+                      Configurações gerais do sistema
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Button variant="outline" size="sm" disabled>
+                      <Settings className="mr-2 h-4 w-4" />
+                      Em breve
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           </>
         )}
 
-        {/* Se não for admin, mostrar apenas anúncios */}
+        {/* Se não for admin, mostrar painel simplificado */}
         {!isAdmin && (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mb-8">
+            <h2 className="text-2xl font-semibold mb-6 text-foreground">Meus Anúncios</h2>
             <Card className="hover:shadow-lg transition-shadow">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
+                <CardTitle className="flex items-center gap-2 text-green-700">
                   <Megaphone className="h-5 w-5" />
-                  Meus Anúncios
+                  Gerenciar Anúncios
                 </CardTitle>
                 <CardDescription>
-                  Gerencie seus anúncios
+                  Crie e gerencie seus anúncios no marketplace
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-3">
-                <Button asChild variant="outline" className="w-full justify-start">
-                  <Link to="/admin/anuncios">
-                    <Eye className="mr-2 h-4 w-4" />
-                    Ver Todos
-                  </Link>
-                </Button>
-                <Button asChild className="w-full justify-start">
-                  <Link to="/admin/anuncios/novo">
-                    <PlusCircle className="mr-2 h-4 w-4" />
-                    Novo
-                  </Link>
-                </Button>
+                <div className="flex flex-wrap gap-2">
+                  <Button asChild variant="default" className="bg-green-600 hover:bg-green-700">
+                    <Link to="/admin/anuncios">
+                      <Eye className="mr-2 h-4 w-4" />
+                      Ver Meus Anúncios
+                    </Link>
+                  </Button>
+                  <Button asChild variant="outline">
+                    <Link to="/admin/anuncios/novo">
+                      <PlusCircle className="mr-2 h-4 w-4" />
+                      Criar Novo
+                    </Link>
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           </div>
@@ -214,20 +209,49 @@ export const AdminDashboard = () => {
         <div className="mt-8">
           <Card>
             <CardHeader>
-              <CardTitle>Acesso Rápido</CardTitle>
+              <CardTitle className="flex items-center gap-2">
+                <Package className="h-5 w-5" />
+                Ações Rápidas
+              </CardTitle>
+              <CardDescription>
+                Links úteis para navegação e criação
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="flex flex-wrap gap-3">
                 <Button variant="outline" asChild size="sm">
-                  <Link to="/">Ver Site</Link>
+                  <Link to="/">
+                    <Eye className="mr-2 h-4 w-4" />
+                    Ver Site
+                  </Link>
                 </Button>
                 <Button variant="outline" asChild size="sm">
-                  <Link to="/admin/anuncios/novo">Novo Anúncio</Link>
+                  <Link to="/catalogo">
+                    <Package className="mr-2 h-4 w-4" />
+                    Catálogo
+                  </Link>
+                </Button>
+                <Button variant="outline" asChild size="sm">
+                  <Link to="/admin/anuncios/novo">
+                    <PlusCircle className="mr-2 h-4 w-4" />
+                    Novo Anúncio
+                  </Link>
                 </Button>
                 {isAdmin && (
-                  <Button variant="outline" asChild size="sm">
-                    <Link to="/admin/noticias/nova">Nova Notícia</Link>
-                  </Button>
+                  <>
+                    <Button variant="outline" asChild size="sm">
+                      <Link to="/admin/noticias/nova">
+                        <PlusCircle className="mr-2 h-4 w-4" />
+                        Nova Notícia
+                      </Link>
+                    </Button>
+                    <Button variant="outline" asChild size="sm">
+                      <Link to="/noticias">
+                        <Newspaper className="mr-2 h-4 w-4" />
+                        Ver Notícias
+                      </Link>
+                    </Button>
+                  </>
                 )}
               </div>
             </CardContent>
