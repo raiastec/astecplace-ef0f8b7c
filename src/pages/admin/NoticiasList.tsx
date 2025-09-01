@@ -99,7 +99,7 @@ export const NoticiasList = () => {
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-4">
             <Button variant="outline" asChild>
-              <Link to="/admin">
+              <Link to="/admin/dashboard">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Voltar
               </Link>
@@ -163,7 +163,7 @@ export const NoticiasList = () => {
                   </p>
                   <div className="flex gap-2">
                     <Button variant="outline" size="sm" asChild>
-                      <Link to={`/admin/noticias/${noticia.id}`}>
+                      <Link to={`/admin/noticias/${noticia.id}/editar`}>
                         <Edit2 className="mr-2 h-3 w-3" />
                         Editar
                       </Link>
