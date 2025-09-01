@@ -8,11 +8,17 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Search, Filter, Eye, Calendar } from 'lucide-react';
-import { useSearch, SearchFilters } from '@/hooks/useSearch';
+import { useSearch, SearchFilters, Anuncio } from '@/hooks/useSearch';
 
-const categoriaLabels = {
+const categoriaLabels: Record<string, string> = {
   'veiculos': 'Veículos',
-  'imoveis_rurais': 'Imóveis Rurais'
+  'Veiculos': 'Veículos',
+  'imoveis_rurais': 'Imóveis Rurais',
+  'Imovel Rural': 'Imóveis Rurais',
+  'energia_solar': 'Energia Solar',
+  'Energia Solar': 'Energia Solar',
+  'astec_assessoria': 'Astec Assessoria',
+  'Astec Assessoria': 'Astec Assessoria'
 };
 
 const CategoryListing = () => {
@@ -38,7 +44,7 @@ const CategoryListing = () => {
 
       searchAnuncios(filters);
     }
-  }, [categoria, searchParams, searchAnuncios]);
+  }, [categoria, searchParams]); // Removed searchAnuncios dependency to prevent infinite loop
 
   const handleSearch = () => {
     if (categoria) {

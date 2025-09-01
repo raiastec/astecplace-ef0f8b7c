@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 
 export interface SearchFilters {
@@ -13,15 +13,18 @@ export interface SearchFilters {
 export interface Anuncio {
   id: string;
   titulo: string;
-  descricao: string;
-  preco: number;
-  categoria: string;
+  descricao: string | null;
+  preco: number | null;
+  categoria: string | null;
   imagens: string[];
-  localizacao: string;
-  tipo_negocio: string;
-  tags: string[];
+  localizacao: string | null;
+  tipo_negocio: string | null;
+  tags: string[] | null;
   data_publicacao: string;
   ativo: boolean;
+  usuario_id: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export const useSearch = () => {
@@ -29,7 +32,7 @@ export const useSearch = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const searchAnuncios = async (filters: SearchFilters = {}) => {
+  const searchAnuncios = useCallback(async (filters: SearchFilters = {}) => {
     setLoading(true);
     setError(null);
     
@@ -84,7 +87,7 @@ export const useSearch = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   return {
     anuncios,

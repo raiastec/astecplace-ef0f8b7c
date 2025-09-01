@@ -8,26 +8,23 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Calendar, Search, Filter, Eye } from 'lucide-react';
-import { useSearch, SearchFilters } from '@/hooks/useSearch';
+import { useSearch, SearchFilters, Anuncio } from '@/hooks/useSearch';
 
-interface Anuncio {
-  id: string;
-  titulo: string;
-  descricao: string;
-  preco: number;
-  categoria: string;
-  imagens: string[];
-  data_publicacao: string;
-  ativo: boolean;
-}
+// Using Anuncio interface from useSearch hook
 
-const categoriaLabels = {
+const categoriaLabels: Record<string, string> = {
   'imoveis_rurais': 'Imóveis Rurais',
+  'Imovel Rural': 'Imóveis Rurais',
   'veiculos': 'Veículos',
+  'Veiculos': 'Veículos',
   'energia_solar': 'Energia Solar',
+  'Energia Solar': 'Energia Solar',
   'astec_assessoria': 'Astec Assessoria',
+  'Astec Assessoria': 'Astec Assessoria',
   'maquinas_agricolas': 'Máquinas Agrícolas',
-  'outros': 'Outros'
+  'Maquinas Agricolas': 'Máquinas Agrícolas',
+  'outros': 'Outros',
+  'Outros': 'Outros'
 };
 
 const Catalogo = () => {
@@ -58,7 +55,7 @@ const Catalogo = () => {
 
     // If no filters from URL, load all anuncios
     searchAnuncios(Object.keys(filters).length > 0 ? filters : {});
-  }, [searchParams, searchAnuncios]);
+  }, [searchParams]); // Removed searchAnuncios dependency to prevent infinite loop
 
   const handleFilter = () => {
     const filters: SearchFilters = {};
@@ -165,7 +162,7 @@ const Catalogo = () => {
                   </div>
                 )}
                 <Badge className="absolute top-3 left-3 bg-background/80 text-foreground">
-                  {categoriaLabels[anuncio.categoria as keyof typeof categoriaLabels] || 'Outros'}
+                  {categoriaLabels[anuncio.categoria || 'outros'] || 'Outros'}
                 </Badge>
               </div>
               
