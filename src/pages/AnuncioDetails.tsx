@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import ContactForm from '@/components/forms/ContactForm';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -47,6 +48,7 @@ const AnuncioDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
 
   useEffect(() => {
     const fetchAnuncio = async () => {
@@ -299,11 +301,20 @@ const AnuncioDetails = () => {
               <CardContent className="p-6 space-y-4">
                 <h3 className="text-lg font-semibold">Interessado? Entre em contato</h3>
                 <div className="space-y-2">
-                  <Button className="w-full" size="lg">
+                  <Button 
+                    className="w-full" 
+                    size="lg"
+                    onClick={() => setIsContactFormOpen(true)}
+                  >
                     <Phone className="h-4 w-4 mr-2" />
                     Entrar em contato
                   </Button>
-                  <Button variant="outline" className="w-full" size="lg">
+                  <Button 
+                    variant="outline" 
+                    className="w-full" 
+                    size="lg"
+                    onClick={() => setIsContactFormOpen(true)}
+                  >
                     <Mail className="h-4 w-4 mr-2" />
                     Enviar mensagem
                   </Button>
@@ -314,6 +325,12 @@ const AnuncioDetails = () => {
         </div>
       </main>
       <Footer />
+      
+      <ContactForm 
+        isOpen={isContactFormOpen}
+        onClose={() => setIsContactFormOpen(false)}
+        productName={anuncio?.titulo}
+      />
     </div>
   );
 };

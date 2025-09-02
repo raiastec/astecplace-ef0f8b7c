@@ -29,7 +29,7 @@ const Header = () => {
             <a href="/catalogo" className="text-muted-foreground hover:text-primary transition-colors">
               Catálogo
             </a>
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+            <a href="/#quem-somos" className="text-muted-foreground hover:text-primary transition-colors">
               Quem Somos
             </a>
             {isAdmin && (
@@ -99,7 +99,7 @@ const Header = () => {
                     <a href="#" className="text-lg font-medium text-foreground hover:text-primary transition-colors">
                       Catálogo
                     </a>
-                    <a href="#" className="text-lg font-medium text-foreground hover:text-primary transition-colors">
+                    <a href="/#quem-somos" className="text-lg font-medium text-foreground hover:text-primary transition-colors">
                       Quem Somos
                     </a>
                   </nav>

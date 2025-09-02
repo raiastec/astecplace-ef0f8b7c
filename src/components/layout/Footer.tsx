@@ -20,15 +20,15 @@ const Footer = () => {
             <div className="space-y-2">
               <div className="flex items-center space-x-2">
                 <MapPin className="w-4 h-4" />
-                <span className="text-sm">São Paulo, SP - Brasil</span>
+                <span className="text-sm">São Miguel do Guaporé, RO - Brasil</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Phone className="w-4 h-4" />
-                <span className="text-sm">(11) 9999-9999</span>
+                <span className="text-sm">(69) 3642-2585</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="w-4 h-4" />
-                <span className="text-sm">contato@astecplace.com.br</span>
+                <span className="text-sm">astec_assessoria@hotmail.com</span>
               </div>
             </div>
           </div>
@@ -37,10 +37,11 @@ const Footer = () => {
           <div>
             <h3 className="font-semibold mb-4">Categorias</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-primary-foreground/80 hover:text-accent transition-colors">Imóveis Urbanos</a></li>
-              <li><a href="#" className="text-primary-foreground/80 hover:text-accent transition-colors">Imóveis Rurais</a></li>
-              <li><a href="#" className="text-primary-foreground/80 hover:text-accent transition-colors">Veículos</a></li>
-              <li><a href="#" className="text-primary-foreground/80 hover:text-accent transition-colors">Maquinários</a></li>
+              <li><a href="/categoria/imoveis_rurais" className="text-primary-foreground/80 hover:text-accent transition-colors">Imóveis Rurais</a></li>
+              <li><a href="/categoria/veiculos" className="text-primary-foreground/80 hover:text-accent transition-colors">Veículos</a></li>
+              <li><a href="/energia-solar" className="text-primary-foreground/80 hover:text-accent transition-colors">Energia Solar</a></li>
+              <li><a href="/astec-assessoria" className="text-primary-foreground/80 hover:text-accent transition-colors">Astec Assessoria</a></li>
+              <li><a href="/categoria/maquinas_agricolas" className="text-primary-foreground/80 hover:text-accent transition-colors">Máquinas Agrícolas</a></li>
             </ul>
           </div>
 
