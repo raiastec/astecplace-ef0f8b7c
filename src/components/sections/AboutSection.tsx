@@ -1,6 +1,8 @@
+import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import GeneralContactForm from "@/components/forms/GeneralContactForm";
 import { 
   Target, 
   Users, 
@@ -12,6 +14,18 @@ import {
 } from "lucide-react";
 
 const AboutSection = () => {
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+  const [formType, setFormType] = useState<'anunciar' | 'consultor'>('anunciar');
+
+  const handleAnunciarClick = () => {
+    setFormType('anunciar');
+    setIsContactFormOpen(true);
+  };
+
+  const handleConsultorClick = () => {
+    setFormType('consultor');
+    setIsContactFormOpen(true);
+  };
   return (
     <section id="quem-somos" className="py-16 bg-background">
       <div className="container mx-auto px-4">
@@ -27,37 +41,41 @@ const AboutSection = () => {
           </p>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          <Card className="text-center">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-lg mx-auto mb-4">
-                <Users className="h-6 w-6 text-primary" />
-              </div>
-              <h3 className="text-2xl font-bold mb-2">50.000+</h3>
-              <p className="text-muted-foreground">Usuários Ativos</p>
-            </CardContent>
-          </Card>
+        {/* Process Steps */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <div className="text-center relative">
+            <div className="flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-lg mx-auto mb-6">
+              <Target className="h-10 w-10 text-primary" />
+            </div>
+            <h3 className="text-xl font-bold mb-3">Anuncie seu produto ou serviço</h3>
+            <p className="text-muted-foreground">
+              Cadastre seus produtos e serviços de forma rápida e fácil em nossa plataforma.
+            </p>
+            {/* Connector arrow */}
+            <div className="hidden md:block absolute top-10 -right-4 w-8 h-0.5 bg-primary/30"></div>
+          </div>
           
-          <Card className="text-center">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-lg mx-auto mb-4">
-                <TrendingUp className="h-6 w-6 text-primary" />
-              </div>
-              <h3 className="text-2xl font-bold mb-2">15.000+</h3>
-              <p className="text-muted-foreground">Anúncios Ativos</p>
-            </CardContent>
-          </Card>
+          <div className="text-center relative">
+            <div className="flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-lg mx-auto mb-6">
+              <Users className="h-10 w-10 text-primary" />
+            </div>
+            <h3 className="text-xl font-bold mb-3">Conecte-se a compradores e vendedores</h3>
+            <p className="text-muted-foreground">
+              Nossa plataforma conecta você diretamente com interessados em seus produtos.
+            </p>
+            {/* Connector arrow */}
+            <div className="hidden md:block absolute top-10 -right-4 w-8 h-0.5 bg-primary/30"></div>
+          </div>
           
-          <Card className="text-center">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-lg mx-auto mb-4">
-                <Award className="h-6 w-6 text-primary" />
-              </div>
-              <h3 className="text-2xl font-bold mb-2">98%</h3>
-              <p className="text-muted-foreground">Satisfação</p>
-            </CardContent>
-          </Card>
+          <div className="text-center">
+            <div className="flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-lg mx-auto mb-6">
+              <Award className="h-10 w-10 text-primary" />
+            </div>
+            <h3 className="text-xl font-bold mb-3">Planos e Destaques</h3>
+            <p className="text-muted-foreground">
+              Escolha o plano ideal e destaque seus anúncios para alcançar mais clientes.
+            </p>
+          </div>
         </div>
 
         {/* Mission & Values */}
@@ -126,16 +144,22 @@ const AboutSection = () => {
             Cadastre seu produto agora e alcance milhares de compradores em potencial.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-primary hover:bg-primary/90">
+            <Button size="lg" className="bg-primary hover:bg-primary/90" onClick={handleAnunciarClick}>
               <MessageSquare className="h-5 w-5 mr-2" />
               Anunciar Agora
             </Button>
-            <Button variant="outline" size="lg">
+            <Button variant="outline" size="lg" onClick={handleConsultorClick}>
               <Calendar className="h-5 w-5 mr-2" />
               Falar com Consultor
             </Button>
           </div>
         </div>
+
+        <GeneralContactForm 
+          isOpen={isContactFormOpen}
+          onClose={() => setIsContactFormOpen(false)}
+          formType={formType}
+        />
       </div>
     </section>
   );
