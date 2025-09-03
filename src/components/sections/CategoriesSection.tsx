@@ -2,12 +2,12 @@ const CategoriesSection = () => {
   const categories = [
     {
       title: "Energia Solar",
-      imageUrl: "https://images.unsplash.com/photo-1509395176047-4a66953fd231?w=800&h=400&fit=crop",
+      imageUrl: "/lovable-uploads/d2fbd689-55ef-483a-a521-936906840abc.png",
       itemCount: 128
     },
     {
       title: "Astec Assessoria",
-      imageUrl: "https://images.unsplash.com/photo-1551292831-023188e78222?w=800&h=400&fit=crop",
+      imageUrl: "/lovable-uploads/98278bd0-3ec7-4308-a78e-de9884b89a86.png",
       itemCount: 76
     },
     {
