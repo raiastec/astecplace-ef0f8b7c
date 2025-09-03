@@ -149,12 +149,12 @@ const CotacoesSection = () => {
                     <div className="flex items-end justify-between">
                       <div>
                         <div className="text-2xl font-bold">
-                          {r.last !== undefined ? r.last.toFixed(2) : "Sem dados"}
+                          {r.last !== undefined ? `R$ ${r.last.toFixed(2)}` : "N/A"}
                         </div>
                         <div className={`text-sm ${up ? "text-success" : "text-destructive"}`}>
-                          {r.change !== undefined ? r.change.toFixed(2) : "Sem dados"}
+                          {r.change !== undefined ? `${up ? '+' : ''}${r.change.toFixed(2)}` : "N/A"}
                           {" "}
-                          ({r.percent !== undefined ? r.percent.toFixed(2) : "Sem dados"}%)
+                          ({r.percent !== undefined ? `${up ? '+' : ''}${r.percent.toFixed(2)}` : "N/A"}%)
                         </div>
                       </div>
                       <div className={`rounded-md p-2 ${up ? "bg-success/10 text-success" : "bg-destructive/10 text-destructive"}`}>

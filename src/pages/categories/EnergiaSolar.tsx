@@ -15,7 +15,7 @@ const EnergiaSolar = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
               <div className="flex justify-center mb-6">
-                <Sun className="h-16 w-16 text-yellow-500" />
+                <img src="/lovable-uploads/d2fbd689-55ef-483a-a521-936906840abc.png" alt="EcoPower Energia Solar" className="h-32 w-auto" />
               </div>
               <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
                 Energia Solar

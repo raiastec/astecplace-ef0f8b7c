@@ -15,7 +15,7 @@ const AstecAssessoria = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
               <div className="flex justify-center mb-6">
-                <Shield className="h-16 w-16 text-blue-600" />
+                <img src="/lovable-uploads/98278bd0-3ec7-4308-a78e-de9884b89a86.png" alt="Astec Assessoria Agropecuária" className="h-40 w-auto rounded-lg" />
               </div>
               <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
                 Astec Assessoria

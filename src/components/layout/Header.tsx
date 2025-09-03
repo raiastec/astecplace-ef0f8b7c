@@ -4,11 +4,13 @@ import { Plus, MessageSquare, Instagram, Clock, Search, Menu, X } from "lucide-r
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useAuth } from "@/hooks/useAuth";
 import HeaderSearchInput from "@/components/search/HeaderSearchInput";
+import GeneralContactForm from "@/components/forms/GeneralContactForm";
 // Using the uploaded logo directly
 const astecplaceLogo = "/lovable-uploads/d5888ab4-0964-48d3-be66-b673599f99cd.png";
 
 const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
   const { isAdmin } = useAuth();
 
   return (
@@ -61,7 +63,7 @@ const Header = () => {
               </a>
             </div>
             
-            <Button size="sm" className="bg-primary hover:bg-primary/90">
+            <Button size="sm" className="bg-primary hover:bg-primary/90" onClick={() => setIsContactFormOpen(true)}>
               <Plus className="w-4 h-4 mr-2" />
               Anunciar
             </Button>
@@ -80,7 +82,7 @@ const Header = () => {
             </Button>
 
             {/* Anunciar Button - Always visible */}
-            <Button size="sm" className="bg-primary hover:bg-primary/90">
+            <Button size="sm" className="bg-primary hover:bg-primary/90" onClick={() => setIsContactFormOpen(true)}>
               <Plus className="w-4 h-4 mr-1" />
               <span className="hidden sm:inline">Anunciar</span>
             </Button>
@@ -128,7 +130,7 @@ const Header = () => {
                   </div>
 
                   {/* Action Button */}
-                  <Button className="w-full bg-primary hover:bg-primary/90">
+                  <Button className="w-full bg-primary hover:bg-primary/90" onClick={() => setIsContactFormOpen(true)}>
                     <Plus className="w-4 h-4 mr-2" />
                     Anunciar Produto
                   </Button>
@@ -145,6 +147,12 @@ const Header = () => {
           </div>
         )}
       </div>
+
+      <GeneralContactForm
+        isOpen={isContactFormOpen}
+        onClose={() => setIsContactFormOpen(false)}
+        formType="anunciar"
+      />
     </header>
   );
 };
