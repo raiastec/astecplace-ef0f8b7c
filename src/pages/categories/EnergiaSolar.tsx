@@ -3,137 +3,117 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { MessageSquare, Sun, Zap, Leaf, TrendingUp } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 
 const EnergiaSolar = () => {
+  const portfolioImages = [
+    "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800",
+    "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=800",
+    "https://images.unsplash.com/photo-1497440001374-f26997328c1b?w=800",
+    "https://images.unsplash.com/photo-1559302504-64aae6ca6b6d?w=800",
+    "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800",
+    "https://images.unsplash.com/photo-1624397640148-949b1732bb0a?w=800"
+  ];
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
       <main>
-        {/* Hero Section */}
-        <section className="py-20 bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-950/20 dark:to-orange-950/20">
+        {/* Hero Section - Serviço Solar Especializado */}
+        <section className="relative h-[500px] flex items-center justify-center overflow-hidden">
+          <div className="absolute inset-0">
+            <img 
+              src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1920" 
+              alt="Painéis Solares" 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black/50" />
+          </div>
+          <div className="relative z-10 text-center px-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Serviço Solar<br />
+              <span className="text-green-400">Especializado</span>
+            </h1>
+            <p className="text-white/90 text-lg mb-6 max-w-2xl mx-auto">
+              Acreditamos em práticas de energia sustentável que ajudam a melhorar os serviços de instalação de painéis solares.
+            </p>
+            <Button size="lg" className="bg-green-500 hover:bg-green-600 text-white">
+              Descubra mais
+            </Button>
+          </div>
+        </section>
+
+        {/* Sobre a Empresa Section */}
+        <section className="py-20 bg-background">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center">
-              <div className="flex justify-center mb-6">
-                <img src="/lovable-uploads/d2fbd689-55ef-483a-a521-936906840abc.png" alt="EcoPower Energia Solar" className="h-32 w-auto" />
+            <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+              <div className="flex justify-center">
+                <img 
+                  src="/lovable-uploads/d2fbd689-55ef-483a-a521-936906840abc.png" 
+                  alt="EcoPower Franchising" 
+                  className="max-w-[300px] w-full h-auto"
+                />
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-                Energia Solar
-              </h1>
-              <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-                Transforme sua propriedade com energia limpa e renovável. 
-                Economize na conta de luz e contribua para um futuro mais sustentável.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-yellow-600 hover:bg-yellow-700">
-                  <MessageSquare className="w-5 h-5 mr-2" />
-                  Solicitar Orçamento
-                </Button>
-                <Button variant="outline" size="lg">
-                  Ver Projetos
+              <div>
+                <div className="inline-block px-4 py-2 bg-green-100 dark:bg-green-900/20 text-green-600 dark:text-green-400 rounded-full text-sm font-semibold mb-4">
+                  SOBRE A EMPRESA
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+                  Acreditamos em práticas sustentáveis de energia
+                </h2>
+                <p className="text-muted-foreground mb-6 leading-relaxed">
+                  Estamos encontrando maneiras de levar energia a mais pessoas, todos os dias. 
+                  Nosso objetivo é fornecer mais energia limpa e sustentável para todo o país.
+                </p>
+                <ul className="space-y-3 mb-8">
+                  {[
+                    'Custos de energia mais baixos',
+                    'Ecologicamente correto',
+                    'Aumento no valor da sua casa',
+                    'Independência energética'
+                  ].map((item, index) => (
+                    <li key={index} className="flex items-center gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
+                      <span className="text-foreground">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Button size="lg" className="bg-green-500 hover:bg-green-600 text-white">
+                  Entrar em contato
                 </Button>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Benefits Section */}
-        <section className="py-16">
+        {/* Portfolio Section */}
+        <section className="py-20 bg-secondary/30">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
+              <div className="inline-block px-4 py-2 bg-green-100 dark:bg-green-900/20 text-green-600 dark:text-green-400 rounded-full text-sm font-semibold mb-4">
+                PORTFÓLIO
+              </div>
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Por que escolher Energia Solar?
+                Projetos
               </h2>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Vantagens que fazem toda a diferença para seu bolso e para o meio ambiente
+              <p className="text-muted-foreground max-w-3xl mx-auto">
+                Somos capazes de concluir projetos de qualquer escala, da preferência do cliente. 
+                Nossos serviços incluem, entre outros, design, construção e instalação.
               </p>
             </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <Card className="text-center p-6">
-                <CardContent className="pt-6">
-                  <TrendingUp className="h-12 w-12 text-green-500 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold mb-3">Economia Garantida</h3>
-                  <p className="text-muted-foreground">
-                    Reduza sua conta de luz em até 95% e tenha retorno do investimento em poucos anos.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="text-center p-6">
-                <CardContent className="pt-6">
-                  <Leaf className="h-12 w-12 text-green-500 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold mb-3">Sustentabilidade</h3>
-                  <p className="text-muted-foreground">
-                    Energia 100% limpa e renovável, contribuindo para a preservação do meio ambiente.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="text-center p-6">
-                <CardContent className="pt-6">
-                  <Zap className="h-12 w-12 text-yellow-500 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold mb-3">Energia Confiável</h3>
-                  <p className="text-muted-foreground">
-                    Sistema robusto e de baixa manutenção, com garantia de até 25 anos.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </section>
-
-        {/* Services Section */}
-        <section className="py-16 bg-secondary/30">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Nossos Serviços
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Solução completa em energia solar do projeto à instalação
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[
-                "Projeto Personalizado",
-                "Instalação Profissional", 
-                "Manutenção Preventiva",
-                "Monitoramento Online"
-              ].map((service, index) => (
-                <Card key={index} className="p-6 text-center hover:shadow-lg transition-shadow">
-                  <CardContent className="pt-4">
-                    <h3 className="font-semibold text-lg mb-2">{service}</h3>
-                    <p className="text-muted-foreground text-sm">
-                      Serviço completo e especializado para sua necessidade
-                    </p>
-                  </CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+              {portfolioImages.map((image, index) => (
+                <Card key={index} className="overflow-hidden group cursor-pointer">
+                  <div className="relative h-64 overflow-hidden">
+                    <img 
+                      src={image} 
+                      alt={`Projeto ${index + 1}`}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
                 </Card>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                Pronto para economizar com energia solar?
-              </h2>
-              <p className="text-xl text-muted-foreground mb-8">
-                Entre em contato conosco e receba um orçamento personalizado sem compromisso
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-yellow-600 hover:bg-yellow-700">
-                  <MessageSquare className="w-5 h-5 mr-2" />
-                  Falar no WhatsApp
-                </Button>
-                <Button variant="outline" size="lg">
-                  Calcular Economia
-                </Button>
-              </div>
             </div>
           </div>
         </section>

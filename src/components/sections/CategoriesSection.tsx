@@ -69,10 +69,7 @@ const CategoriesSection = () => {
               
               {/* Content - Hidden by default, shown on hover */}
               <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6">
-                <h3 className="text-2xl font-bold mb-2">{category.title}</h3>
-                <p className="text-lg">
-                  {category.itemCount.toLocaleString()} anúncios
-                </p>
+                <h3 className="text-2xl font-bold">{category.title}</h3>
               </div>
               
               {/* Mobile - Always show title at bottom */}
