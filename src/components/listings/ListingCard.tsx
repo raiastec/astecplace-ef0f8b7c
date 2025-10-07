@@ -2,8 +2,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Calendar, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 interface ListingCardProps {
+  id: string;
   title: string;
   price: string;
   location: string;
@@ -14,6 +16,7 @@ interface ListingCardProps {
 }
 
 const ListingCard = ({ 
+  id,
   title, 
   price, 
   location, 
@@ -22,8 +25,14 @@ const ListingCard = ({
   isNew = false, 
   publishedDate 
 }: ListingCardProps) => {
+  const navigate = useNavigate();
+
+  const handleViewDetails = () => {
+    navigate(`/anuncio/${id}`);
+  };
+
   return (
-    <Card className="group hover:shadow-lg transition-all duration-300 cursor-pointer overflow-hidden">
+    <Card className="group hover:shadow-lg transition-all duration-300 cursor-pointer overflow-hidden" onClick={handleViewDetails}>
       <div className="relative h-48 overflow-hidden">
         <img 
           src={imageUrl} 
@@ -66,7 +75,14 @@ const ListingCard = ({
         
         <div className="flex items-center justify-between">
           <span className="text-xl font-bold text-primary">{price}</span>
-          <Button variant="outline" size="sm">
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleViewDetails();
+            }}
+          >
             Ver detalhes
           </Button>
         </div>

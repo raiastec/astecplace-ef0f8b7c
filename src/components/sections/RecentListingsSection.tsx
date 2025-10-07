@@ -107,6 +107,7 @@ const RecentListingsSection = () => {
           {anuncios.map((anuncio) => (
             <ListingCard
               key={anuncio.id}
+              id={anuncio.id}
               title={anuncio.titulo}
               price={anuncio.preco ? formatPrice(anuncio.preco) : 'Consulte'}
               location="MS" // Por enquanto padrão, depois pode vir do banco
