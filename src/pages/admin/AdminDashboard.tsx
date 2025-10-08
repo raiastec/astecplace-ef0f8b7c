@@ -32,7 +32,7 @@ export const AdminDashboard = () => {
             <p className="text-muted-foreground">
               Bem-vindo, {profile?.nome}
               <Badge variant="secondary" className="ml-2">
-                {profile?.role}
+                {profile?.user_roles?.some(ur => ur.role === 'admin') ? 'Admin' : 'Anunciante'}
               </Badge>
             </p>
           </div>

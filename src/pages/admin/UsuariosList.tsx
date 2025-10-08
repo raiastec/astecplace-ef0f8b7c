@@ -22,13 +22,17 @@ import {
 import { toast } from '@/hooks/use-toast';
 import { ArrowLeft, Shield, User } from 'lucide-react';
 
+interface UserRole {
+  role: string;
+}
+
 interface Profile {
   id: string;
   user_id: string;
   nome: string;
   email: string;
-  role: 'admin' | 'anunciante';
   created_at: string;
+  user_roles: UserRole[];
 }
 
 export const UsuariosList = () => {
@@ -41,13 +45,28 @@ export const UsuariosList = () => {
 
   const fetchUsuarios = async () => {
     try {
-      const { data, error } = await supabase
+      // Fetch all profiles
+      const { data: profilesData, error: profilesError } = await supabase
         .from('profiles')
         .select('*')
         .order('created_at', { ascending: false });
 
-      if (error) throw error;
-      setUsuarios(data || []);
+      if (profilesError) throw profilesError;
+
+      // Fetch all user roles
+      const { data: rolesData, error: rolesError } = await supabase
+        .from('user_roles')
+        .select('user_id, role');
+
+      if (rolesError) throw rolesError;
+
+      // Combine profiles with their roles
+      const usuariosWithRoles = profilesData?.map(profile => ({
+        ...profile,
+        user_roles: rolesData?.filter(r => r.user_id === profile.user_id) || []
+      })) || [];
+
+      setUsuarios(usuariosWithRoles);
     } catch (error: any) {
       toast({
         title: "Erro",
@@ -61,12 +80,20 @@ export const UsuariosList = () => {
 
   const updateUserRole = async (userId: string, newRole: 'admin' | 'anunciante') => {
     try {
-      const { error } = await supabase
-        .from('profiles')
-        .update({ role: newRole })
+      // First, delete all existing roles for the user
+      const { error: deleteError } = await supabase
+        .from('user_roles')
+        .delete()
         .eq('user_id', userId);
 
-      if (error) throw error;
+      if (deleteError) throw deleteError;
+
+      // Then insert the new role
+      const { error: insertError } = await supabase
+        .from('user_roles')
+        .insert({ user_id: userId, role: newRole });
+
+      if (insertError) throw insertError;
 
       toast({
         title: "Sucesso",
@@ -132,10 +159,10 @@ export const UsuariosList = () => {
                       <TableCell>{usuario.email}</TableCell>
                       <TableCell>
                         <Badge 
-                          variant={usuario.role === 'admin' ? "default" : "secondary"}
+                          variant={usuario.user_roles?.some(ur => ur.role === 'admin') ? "default" : "secondary"}
                           className="flex items-center gap-1 w-fit"
                         >
-                          {usuario.role === 'admin' ? (
+                          {usuario.user_roles?.some(ur => ur.role === 'admin') ? (
                             <>
                               <Shield className="h-3 w-3" />
                               Admin
@@ -153,7 +180,7 @@ export const UsuariosList = () => {
                       </TableCell>
                       <TableCell className="text-right">
                         <Select
-                          value={usuario.role}
+                          value={usuario.user_roles?.some(ur => ur.role === 'admin') ? 'admin' : 'anunciante'}
                           onValueChange={(value: 'admin' | 'anunciante') => 
                             updateUserRole(usuario.user_id, value)
                           }

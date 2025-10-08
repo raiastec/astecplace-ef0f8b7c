@@ -6,6 +6,14 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/hooks/use-toast';
 import { Loader2, MessageSquare } from 'lucide-react';
+import { z } from 'zod';
+
+const generalContactSchema = z.object({
+  nome: z.string().trim().min(1, 'Nome é obrigatório').max(100, 'Nome muito longo'),
+  telefone: z.string().trim().min(1, 'Telefone é obrigatório').max(20, 'Telefone inválido'),
+  cidade: z.string().trim().min(1, 'Cidade é obrigatória').max(100, 'Cidade muito longa'),
+  mensagem: z.string().trim().max(1000, 'Mensagem muito longa').optional()
+});
 
 interface GeneralContactFormProps {
   isOpen: boolean;
@@ -34,6 +42,21 @@ const GeneralContactForm: React.FC<GeneralContactFormProps> = ({ isOpen, onClose
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate input
+    try {
+      generalContactSchema.parse(formData);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        toast({
+          title: 'Erro de validação',
+          description: error.errors[0].message,
+          variant: 'destructive'
+        });
+      }
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
