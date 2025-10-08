@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Plus, MessageSquare, Instagram, Clock, Search, Menu, X } from "lucide-react";
+import { Plus, MessageSquare, Instagram, Clock, Search, Menu, X, Home } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useAuth } from "@/hooks/useAuth";
+import { useLocation, Link } from "react-router-dom";
 import HeaderSearchInput from "@/components/search/HeaderSearchInput";
 import GeneralContactForm from "@/components/forms/GeneralContactForm";
 // Using the uploaded logo directly
@@ -12,18 +13,30 @@ const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
   const { isAdmin } = useAuth();
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   return (
     <header className="bg-background/95 backdrop-blur-sm border-b border-border sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          {/* Logo */}
+          {/* Logo and Back Button */}
           <div className="flex items-center space-x-3">
-            <img 
-              src={astecplaceLogo} 
-              alt="ASTECPLACE" 
-              className="w-auto max-w-[150px] md:max-w-[150px] max-w-[100px] h-auto max-h-12" 
-            />
+            <Link to="/" className="flex items-center">
+              <img 
+                src={astecplaceLogo} 
+                alt="ASTECPLACE" 
+                className="w-auto h-12 md:h-16 hover:opacity-80 transition-opacity" 
+              />
+            </Link>
+            {!isHomePage && (
+              <Link to="/">
+                <Button variant="outline" size="sm" className="hidden md:flex items-center gap-2">
+                  <Home className="w-4 h-4" />
+                  Voltar ao Início
+                </Button>
+              </Link>
+            )}
           </div>
 
           {/* Desktop Navigation */}
@@ -71,6 +84,15 @@ const Header = () => {
 
           {/* Mobile Actions */}
           <div className="flex lg:hidden items-center space-x-2">
+            {/* Back to Home - Mobile */}
+            {!isHomePage && (
+              <Link to="/">
+                <Button variant="ghost" size="icon" className="h-10 w-10">
+                  <Home className="h-4 w-4" />
+                </Button>
+              </Link>
+            )}
+            
             {/* Search Toggle for Mobile */}
             <Button
               variant="ghost"

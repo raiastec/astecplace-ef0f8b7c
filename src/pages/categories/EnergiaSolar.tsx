@@ -4,6 +4,8 @@ import Footer from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { CheckCircle2 } from 'lucide-react';
+import SolarCalculator from '@/components/sections/SolarCalculator';
+import BanksFinancingSection from '@/components/sections/BanksFinancingSection';
 
 const EnergiaSolar = () => {
   const portfolioImages = [
@@ -85,6 +87,12 @@ const EnergiaSolar = () => {
             </div>
           </div>
         </section>
+
+        {/* Solar Calculator Section */}
+        <SolarCalculator />
+
+        {/* Banks Financing Section */}
+        <BanksFinancingSection />
 
         {/* Portfolio Section */}
         <section className="py-20 bg-secondary/30">

@@ -126,14 +126,9 @@ const NoticiasSection = () => {
                           {noticia.titulo}
                         </CardTitle>
                         
-                        <p className="text-muted-foreground text-base leading-relaxed mb-6 line-clamp-3">
+                        <p className="text-muted-foreground text-base leading-relaxed line-clamp-4">
                           {noticia.conteudo}
                         </p>
-                        
-                        <Button variant="default" className="w-fit">
-                          Ler matéria completa
-                          <ExternalLink className="w-4 h-4 ml-2" />
-                        </Button>
                       </div>
                     </div>
                   </Card>
