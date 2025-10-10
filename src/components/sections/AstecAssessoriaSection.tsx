@@ -96,30 +96,26 @@ const AstecAssessoriaSection = () => {
     }
   ];
 
-  return (
-    <section className="relative py-20 overflow-hidden">
-      {/* Full-width Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${conexaoImage})` }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/60" />
-      </div>
+  // Filtrar apenas os serviços desejados
+  const featuredServices = services.filter(service => 
+    ['Investimento', 'Custeio', 'CAR - Regularização Ambiental', 'Outorga d\'Água', 'PRAD', 'Serviços Agronômicos'].includes(service.title)
+  );
 
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-4">
+  return (
+    <section className="py-20 bg-gradient-to-br from-secondary/30 via-background to-secondary/20">
+      <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             Astec Assessoria Agropecuária
           </h2>
-          <p className="text-white/90 text-lg max-w-3xl mx-auto">
+          <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
             Consultoria completa para o agronegócio - Do crédito à regularização ambiental
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
-          {services.map((service, index) => (
-            <Card key={index} className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm hover:shadow-2xl transition-all duration-300 group hover:scale-105">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {featuredServices.map((service, index) => (
+            <Card key={index} className="hover:shadow-2xl transition-all duration-300 group hover:scale-105">
               <CardContent className="p-6 text-center space-y-4">
                 <div className={`${service.color} mx-auto w-16 h-16 rounded-full bg-secondary/20 flex items-center justify-center group-hover:scale-110 transition-transform`}>
                   {service.icon}
@@ -141,7 +137,7 @@ const AstecAssessoriaSection = () => {
         </div>
 
         <div className="text-center mt-12">
-          <Card className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm inline-block">
+          <Card className="inline-block">
             <CardContent className="p-6">
               <p className="text-lg font-semibold mb-4">
                 Precisa de consultoria especializada?

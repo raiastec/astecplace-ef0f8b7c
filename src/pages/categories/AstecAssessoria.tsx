@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { MessageSquare, DollarSign, FileText, Leaf, Stethoscope, Calculator, Home, Droplets, Shield, Building, TreePine, Wheat } from 'lucide-react';
+import GeneralContactForm from '@/components/forms/GeneralContactForm';
 
 const AstecAssessoria = () => {
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -48,84 +50,141 @@ const AstecAssessoria = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <Card className="p-6 hover:shadow-lg transition-shadow">
-                <CardContent className="pt-4">
+                <CardContent className="pt-4 space-y-4">
                   <DollarSign className="h-12 w-12 text-green-600 mb-4" />
                   <h3 className="text-lg font-semibold mb-3">INVESTIMENTO</h3>
                   <p className="text-muted-foreground text-sm">
                     Procurando oportunidades de investimento? Nós oferecemos consultoria especializada para maximizar seus retornos! Entre em contato e descubra as melhores opções para o seu capital.
                   </p>
+                  <Button 
+                    onClick={() => setIsContactFormOpen(true)}
+                    className="w-full bg-primary hover:bg-primary/90"
+                  >
+                    <MessageSquare className="w-4 h-4 mr-2" />
+                    Entrar em Contato
+                  </Button>
                 </CardContent>
               </Card>
               
               <Card className="p-6 hover:shadow-lg transition-shadow">
-                <CardContent className="pt-4">
+                <CardContent className="pt-4 space-y-4">
                   <Calculator className="h-12 w-12 text-blue-600 mb-4" />
                   <h3 className="text-lg font-semibold mb-3">CUSTEIO</h3>
                   <p className="text-muted-foreground text-sm">
                     Precisando de custeio agrícola a pecuário? Oferecemos soluções financeiras para apoiar a sua produção! Entre em contato e impulsione seu negócio com nossos recursos.
                   </p>
+                  <Button 
+                    onClick={() => setIsContactFormOpen(true)}
+                    className="w-full bg-primary hover:bg-primary/90"
+                  >
+                    <MessageSquare className="w-4 h-4 mr-2" />
+                    Entrar em Contato
+                  </Button>
                 </CardContent>
               </Card>
               
               <Card className="p-6 hover:shadow-lg transition-shadow">
-                <CardContent className="pt-4">
+                <CardContent className="pt-4 space-y-4">
                   <FileText className="h-12 w-12 text-purple-600 mb-4" />
                   <h3 className="text-lg font-semibold mb-3">CONSÓRCIO</h3>
                   <p className="text-muted-foreground text-sm">
                     Pensando em consórcio? Nós oferecemos as melhores opções para você! Entre em contato e descubra como realizar seus planos com nossos consórcios vantajosos.
                   </p>
+                  <Button 
+                    onClick={() => setIsContactFormOpen(true)}
+                    className="w-full bg-primary hover:bg-primary/90"
+                  >
+                    <MessageSquare className="w-4 h-4 mr-2" />
+                    Entrar em Contato
+                  </Button>
                 </CardContent>
               </Card>
               
               <Card className="p-6 hover:shadow-lg transition-shadow">
-                <CardContent className="pt-4">
+                <CardContent className="pt-4 space-y-4">
                   <Building className="h-12 w-12 text-orange-600 mb-4" />
                   <h3 className="text-lg font-semibold mb-3">CONSIGNADO</h3>
                   <p className="text-muted-foreground text-sm">
                     Precisando de crédito consignado? Nós oferecemos condições especiais para você! Entre em contato e obtenha o crédito que precisa com facilidade e segurança.
                   </p>
+                  <Button 
+                    onClick={() => setIsContactFormOpen(true)}
+                    className="w-full bg-primary hover:bg-primary/90"
+                  >
+                    <MessageSquare className="w-4 h-4 mr-2" />
+                    Entrar em Contato
+                  </Button>
                 </CardContent>
               </Card>
               
               <Card className="p-6 hover:shadow-lg transition-shadow">
-                <CardContent className="pt-4">
+                <CardContent className="pt-4 space-y-4">
                   <DollarSign className="h-12 w-12 text-red-600 mb-4" />
                   <h3 className="text-lg font-semibold mb-3">CRÉDITO COMERCIAL</h3>
                   <p className="text-muted-foreground text-sm">
                     Procurando crédito comercial? Oferecemos soluções financeiras flexíveis para impulsionar seu negócio! Entre em contato e descubra como podemos apoiar seu crescimento.
                   </p>
+                  <Button 
+                    onClick={() => setIsContactFormOpen(true)}
+                    className="w-full bg-primary hover:bg-primary/90"
+                  >
+                    <MessageSquare className="w-4 h-4 mr-2" />
+                    Entrar em Contato
+                  </Button>
                 </CardContent>
               </Card>
               
               <Card className="p-6 hover:shadow-lg transition-shadow">
-                <CardContent className="pt-4">
+                <CardContent className="pt-4 space-y-4">
                   <Shield className="h-12 w-12 text-indigo-600 mb-4" />
                   <h3 className="text-lg font-semibold mb-3">SEGURO PATRIMONIAL</h3>
                   <p className="text-muted-foreground text-sm">
                     Precisa de seguro patrimonial ou veicular? Nós oferecemos proteção completa para seu patrimônio e veículos! Entre em contato e garanta a segurança que você merece.
                   </p>
+                  <Button 
+                    onClick={() => setIsContactFormOpen(true)}
+                    className="w-full bg-primary hover:bg-primary/90"
+                  >
+                    <MessageSquare className="w-4 h-4 mr-2" />
+                    Entrar em Contato
+                  </Button>
                 </CardContent>
               </Card>
               
               <Card className="p-6 hover:shadow-lg transition-shadow">
-                <CardContent className="pt-4">
+                <CardContent className="pt-4 space-y-4">
                   <Wheat className="h-12 w-12 text-yellow-600 mb-4" />
                   <h3 className="text-lg font-semibold mb-3">SEGURO AGRÍCOLA</h3>
                   <p className="text-muted-foreground text-sm">
                     Proteja sua produção com nosso seguro agrícola! Oferecemos coberturas completas para garantir a segurança do seu cultivo. Entre em contato e assegure seu negócio com tranquilidade.
                   </p>
+                  <Button 
+                    onClick={() => setIsContactFormOpen(true)}
+                    className="w-full bg-primary hover:bg-primary/90"
+                  >
+                    <MessageSquare className="w-4 h-4 mr-2" />
+                    Entrar em Contato
+                  </Button>
                 </CardContent>
               </Card>
               
               <Card className="p-6 hover:shadow-lg transition-shadow">
-                <CardContent className="pt-4">
+                <CardContent className="pt-4 space-y-4">
                   <Home className="h-12 w-12 text-green-700 mb-4" />
                   <h3 className="text-lg font-semibold mb-3">CRÉDITO FUNDIÁRIO</h3>
                   <p className="text-muted-foreground text-sm">
                     Precisando de crédito fundiário? Oferecemos soluções financeiras para aquisição e melhoria de terras! Entre em contato e realize seus projetos com nosso apoio especializado.
                   </p>
+                  <Button 
+                    onClick={() => setIsContactFormOpen(true)}
+                    className="w-full bg-primary hover:bg-primary/90"
+                  >
+                    <MessageSquare className="w-4 h-4 mr-2" />
+                    Entrar em Contato
+                  </Button>
                 </CardContent>
               </Card>
+              
             </div>
           </div>
         </section>
@@ -141,82 +200,138 @@ const AstecAssessoria = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <Card className="p-6 hover:shadow-lg transition-shadow">
-                <CardContent className="pt-4">
+                <CardContent className="pt-4 space-y-4">
                   <FileText className="h-12 w-12 text-green-600 mb-4" />
                   <h3 className="text-lg font-semibold mb-3">CCIR</h3>
                   <p className="text-muted-foreground text-sm">
                     Precisa do Certificado de Cadastro de Imóvel Rural (CCIR)? Nós facilitamos o processo para você! Entre em contato e regularize seu imóvel rural com segurança e eficiência.
                   </p>
+                  <Button 
+                    onClick={() => setIsContactFormOpen(true)}
+                    className="w-full bg-primary hover:bg-primary/90"
+                  >
+                    <MessageSquare className="w-4 h-4 mr-2" />
+                    Entrar em Contato
+                  </Button>
                 </CardContent>
               </Card>
               
               <Card className="p-6 hover:shadow-lg transition-shadow">
-                <CardContent className="pt-4">
+                <CardContent className="pt-4 space-y-4">
                   <Calculator className="h-12 w-12 text-blue-600 mb-4" />
                   <h3 className="text-lg font-semibold mb-3">NIRF ITR</h3>
                   <p className="text-muted-foreground text-sm">
                     Precisando regularizar seu ITR? Estamos prontos para ajudar você a cumprir suas obrigações fiscais com a receita federal nossa empresa oferece serviço especializado para a declaração do ITR.
                   </p>
+                  <Button 
+                    onClick={() => setIsContactFormOpen(true)}
+                    className="w-full bg-primary hover:bg-primary/90"
+                  >
+                    <MessageSquare className="w-4 h-4 mr-2" />
+                    Entrar em Contato
+                  </Button>
                 </CardContent>
               </Card>
               
               <Card className="p-6 hover:shadow-lg transition-shadow">
-                <CardContent className="pt-4">
+                <CardContent className="pt-4 space-y-4">
                   <FileText className="h-12 w-12 text-purple-600 mb-4" />
                   <h3 className="text-lg font-semibold mb-3">DECLARAÇÃO DE ITR</h3>
                   <p className="text-muted-foreground text-sm">
                     Precisando declarar seu ITR? Nossa empresa oferece serviço especializado para a declaração do ITR.
                   </p>
+                  <Button 
+                    onClick={() => setIsContactFormOpen(true)}
+                    className="w-full bg-primary hover:bg-primary/90"
+                  >
+                    <MessageSquare className="w-4 h-4 mr-2" />
+                    Entrar em Contato
+                  </Button>
                 </CardContent>
               </Card>
               
               <Card className="p-6 hover:shadow-lg transition-shadow">
-                <CardContent className="pt-4">
+                <CardContent className="pt-4 space-y-4">
                   <Building className="h-12 w-12 text-orange-600 mb-4" />
                   <h3 className="text-lg font-semibold mb-3">MEMORIAL DESCRITIVO</h3>
                   <p className="text-muted-foreground text-sm">
                     Precisando de memorial descritivo? Nós elaboramos documentos detalhados e precisos para seu projeto! Entre em contato e garanta a qualidade e a conformidade do seu empreendimento.
                   </p>
+                  <Button 
+                    onClick={() => setIsContactFormOpen(true)}
+                    className="w-full bg-primary hover:bg-primary/90"
+                  >
+                    <MessageSquare className="w-4 h-4 mr-2" />
+                    Entrar em Contato
+                  </Button>
                 </CardContent>
               </Card>
               
               <Card className="p-6 hover:shadow-lg transition-shadow">
-                <CardContent className="pt-4">
+                <CardContent className="pt-4 space-y-4">
                   <Shield className="h-12 w-12 text-red-600 mb-4" />
                   <h3 className="text-lg font-semibold mb-3">CRO NA PGT E GOV</h3>
                   <p className="text-muted-foreground text-sm">
                     Precisando da Certidão de Regularização da Obra (CRO) na PGT e GOV? Nós cuidamos de todo o processo para você! Entre em contato e regularize sua obra com eficiência e segurança.
                   </p>
+                  <Button 
+                    onClick={() => setIsContactFormOpen(true)}
+                    className="w-full bg-primary hover:bg-primary/90"
+                  >
+                    <MessageSquare className="w-4 h-4 mr-2" />
+                    Entrar em Contato
+                  </Button>
                 </CardContent>
               </Card>
               
               <Card className="p-6 hover:shadow-lg transition-shadow">
-                <CardContent className="pt-4">
+                <CardContent className="pt-4 space-y-4">
                   <Calculator className="h-12 w-12 text-indigo-600 mb-4" />
                   <h3 className="text-lg font-semibold mb-3">TOPOGRAFIA</h3>
                   <p className="text-muted-foreground text-sm">
                     Precisa de serviços de topografia? Oferecemos medições precisas e detalhadas para seu projeto! Entre em contato e conte com nossa expertise para obter resultados confiáveis.
                   </p>
+                  <Button 
+                    onClick={() => setIsContactFormOpen(true)}
+                    className="w-full bg-primary hover:bg-primary/90"
+                  >
+                    <MessageSquare className="w-4 h-4 mr-2" />
+                    Entrar em Contato
+                  </Button>
                 </CardContent>
               </Card>
               
               <Card className="p-6 hover:shadow-lg transition-shadow">
-                <CardContent className="pt-4">
+                <CardContent className="pt-4 space-y-4">
                   <FileText className="h-12 w-12 text-yellow-600 mb-4" />
                   <h3 className="text-lg font-semibold mb-3">ESCRITURA</h3>
                   <p className="text-muted-foreground text-sm">
                     Precisando de escritura? Nós cuidamos de todo o processo para você! Entre em contato e regularize seu imóvel com segurança e tranquilidade.
                   </p>
+                  <Button 
+                    onClick={() => setIsContactFormOpen(true)}
+                    className="w-full bg-primary hover:bg-primary/90"
+                  >
+                    <MessageSquare className="w-4 h-4 mr-2" />
+                    Entrar em Contato
+                  </Button>
                 </CardContent>
               </Card>
               
               <Card className="p-6 hover:shadow-lg transition-shadow">
-                <CardContent className="pt-4">
+                <CardContent className="pt-4 space-y-4">
                   <Home className="h-12 w-12 text-green-700 mb-4" />
                   <h3 className="text-lg font-semibold mb-3">TÍTULO NA PGT</h3>
                   <p className="text-muted-foreground text-sm">
                     Precisa de título na PGT? Nós facilitamos todo o processo para você! Entre em contato e regularize seu imóvel com segurança e eficiência.
                   </p>
+                  <Button 
+                    onClick={() => setIsContactFormOpen(true)}
+                    className="w-full bg-primary hover:bg-primary/90"
+                  >
+                    <MessageSquare className="w-4 h-4 mr-2" />
+                    Entrar em Contato
+                  </Button>
                 </CardContent>
               </Card>
             </div>
@@ -234,62 +349,121 @@ const AstecAssessoria = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <Card className="p-6 hover:shadow-lg transition-shadow">
-                <CardContent className="pt-4">
+                <CardContent className="pt-4 space-y-4">
                   <Leaf className="h-12 w-12 text-green-600 mb-4" />
                   <h3 className="text-lg font-semibold mb-3">CAR</h3>
                   <p className="text-muted-foreground text-sm">
                     Oferecemos o serviço completo de cadastro ambiental rural (CAR), essencial para garantir a conformidade ambiental da sua propriedade e assegurar diversos benefícios legais e econômicos.
                   </p>
+                  <Button 
+                    onClick={() => setIsContactFormOpen(true)}
+                    className="w-full bg-primary hover:bg-primary/90"
+                  >
+                    <MessageSquare className="w-4 h-4 mr-2" />
+                    Entrar em Contato
+                  </Button>
                 </CardContent>
               </Card>
               
               <Card className="p-6 hover:shadow-lg transition-shadow">
-                <CardContent className="pt-4">
+                <CardContent className="pt-4 space-y-4">
                   <Droplets className="h-12 w-12 text-blue-600 mb-4" />
                   <h3 className="text-lg font-semibold mb-3">OUTORGA D'ÁGUA</h3>
                   <p className="text-muted-foreground text-sm">
                     precisando de outorga de água? nós cuidamos de todo o processo para você! entre em contato e garanta a regularização e segurança no uso dos recursos hídricos.
                   </p>
+                  <Button 
+                    onClick={() => setIsContactFormOpen(true)}
+                    className="w-full bg-primary hover:bg-primary/90"
+                  >
+                    <MessageSquare className="w-4 h-4 mr-2" />
+                    Entrar em Contato
+                  </Button>
                 </CardContent>
               </Card>
               
               <Card className="p-6 hover:shadow-lg transition-shadow">
-                <CardContent className="pt-4">
+                <CardContent className="pt-4 space-y-4">
                   <Droplets className="h-12 w-12 text-purple-600 mb-4" />
                   <h3 className="text-lg font-semibold mb-3">DISPENSA DA OUTORGA D'ÁGUA</h3>
                   <p className="text-muted-foreground text-sm">
                     precisa de dispensa de outorga de água? nós facilitamos o processo para você! entre em contato e regularize sua situação de forma rápida e segura.
                   </p>
+                  <Button 
+                    onClick={() => setIsContactFormOpen(true)}
+                    className="w-full bg-primary hover:bg-primary/90"
+                  >
+                    <MessageSquare className="w-4 h-4 mr-2" />
+                    Entrar em Contato
+                  </Button>
                 </CardContent>
               </Card>
               
               <Card className="p-6 hover:shadow-lg transition-shadow">
-                <CardContent className="pt-4">
+                <CardContent className="pt-4 space-y-4">
                   <Shield className="h-12 w-12 text-orange-600 mb-4" />
                   <h3 className="text-lg font-semibold mb-3">LICENÇA DE OPERAÇÃO LP, LI E LO</h3>
                   <p className="text-muted-foreground text-sm">
                     precisa de licença prévia (lp), licença de instalação (li) ou licença de operação (lo)? nós cuidamos de todo o processo para você! entre em contato e garanta a regularização ambiental do seu empreendimento.
                   </p>
+                  <Button 
+                    onClick={() => setIsContactFormOpen(true)}
+                    className="w-full bg-primary hover:bg-primary/90"
+                  >
+                    <MessageSquare className="w-4 h-4 mr-2" />
+                    Entrar em Contato
+                  </Button>
                 </CardContent>
               </Card>
               
               <Card className="p-6 hover:shadow-lg transition-shadow">
-                <CardContent className="pt-4">
+                <CardContent className="pt-4 space-y-4">
                   <TreePine className="h-12 w-12 text-red-600 mb-4" />
                   <h3 className="text-lg font-semibold mb-3">PRAD</h3>
                   <p className="text-muted-foreground text-sm">
                     precisando de plano de recuperação de áreas degradadas (prad)? nós elaboramos e executamos projetos completos para você! entre em contato e garanta a sustentabilidade e recuperação ambiental.
                   </p>
+                  <Button 
+                    onClick={() => setIsContactFormOpen(true)}
+                    className="w-full bg-primary hover:bg-primary/90"
+                  >
+                    <MessageSquare className="w-4 h-4 mr-2" />
+                    Entrar em Contato
+                  </Button>
                 </CardContent>
               </Card>
               
               <Card className="p-6 hover:shadow-lg transition-shadow">
-                <CardContent className="pt-4">
+                <CardContent className="pt-4 space-y-4">
                   <Wheat className="h-12 w-12 text-indigo-600 mb-4" />
                   <h3 className="text-lg font-semibold mb-3">LICENÇA DE LIMPEZA DE PASTAGEM</h3>
                   <p className="text-muted-foreground text-sm">
                     precisa de licença para limpeza de pastagem? nós cuidamos de todo o processo para você! entre em contato e regularize sua atividade com segurança e agilidade.
                   </p>
+                  <Button 
+                    onClick={() => setIsContactFormOpen(true)}
+                    className="w-full bg-primary hover:bg-primary/90"
+                  >
+                    <MessageSquare className="w-4 h-4 mr-2" />
+                    Entrar em Contato
+                  </Button>
+                </CardContent>
+              </Card>
+              
+              <Card className="p-6 hover:shadow-lg transition-shadow">
+                <CardContent className="pt-4 space-y-4">
+                  <FileText className="h-12 w-12 text-yellow-600 mb-4" />
+                  <h3 className="text-lg font-semibold mb-3">LAUDO</h3>
+                  <p className="text-muted-foreground text-sm">
+                    Precisando de laudo técnico? Nós oferecemos serviços completos e precisos para atender suas necessidades! Entre em contato e garanta a qualidade e confiabilidade do seu projeto.
+                  </p>
+                  <Button 
+                    onClick={() => setIsContactFormOpen(true)}
+                    className="w-full bg-primary hover:bg-primary/90"
+                  >
+                    <MessageSquare className="w-4 h-4 mr-2" />
+                    Entrar em Contato
+                  </Button>
                 </CardContent>
               </Card>
               
@@ -316,65 +490,26 @@ const AstecAssessoria = () => {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <Card className="p-6 hover:shadow-lg transition-shadow">
-                <CardContent className="pt-4">
-                  <Stethoscope className="h-12 w-12 text-green-600 mb-4" />
-                  <h3 className="text-lg font-semibold mb-3">EXAME ANDROLÓGICO</h3>
-                  <p className="text-muted-foreground text-sm">
-                    Precisando de exame andrológico? Nós oferecemos diagnósticos completos e precisos para garantir a saúde reprodutiva dos seus animais! Entre em contato e agende uma avaliação.
-                  </p>
-                </CardContent>
-              </Card>
-              
-              <Card className="p-6 hover:shadow-lg transition-shadow">
-                <CardContent className="pt-4">
-                  <Stethoscope className="h-12 w-12 text-blue-600 mb-4" />
-                  <h3 className="text-lg font-semibold mb-3">EXAME DE BRUCELOSE E TUBERCULOSE</h3>
-                  <p className="text-muted-foreground text-sm">
-                    Precisando de exames de brucelose e tuberculose? Oferecemos diagnósticos precisos para garantir a saúde do seu rebanho! Entre em contato e agende seus exames.
-                  </p>
-                </CardContent>
-              </Card>
-              
-              <Card className="p-6 hover:shadow-lg transition-shadow">
-                <CardContent className="pt-4">
-                  <Shield className="h-12 w-12 text-purple-600 mb-4" />
-                  <h3 className="text-lg font-semibold mb-3">ATESTADO DE SANIDADE ANIMAL</h3>
-                  <p className="text-muted-foreground text-sm">
-                    Precisa de atestado de sanidade animal? Nós oferecemos laudos confiáveis para garantir a saúde do seu rebanho! Entre em contato e obtenha a certificação necessária.
-                  </p>
-                </CardContent>
-              </Card>
-              
-              <Card className="p-6 hover:shadow-lg transition-shadow">
-                <CardContent className="pt-4">
-                  <Calculator className="h-12 w-12 text-orange-600 mb-4" />
-                  <h3 className="text-lg font-semibold mb-3">CONSULTORIA PECUÁRIA</h3>
-                  <p className="text-muted-foreground text-sm">
-                    Precisando de consultoria pecuária? Nós oferecemos soluções especializadas para melhorar a eficiência e a produtividade do seu rebanho! Entre em contato e transforme sua produção.
-                  </p>
-                </CardContent>
-              </Card>
-              
-              <Card className="p-6 hover:shadow-lg transition-shadow">
-                <CardContent className="pt-4">
-                  <Wheat className="h-12 w-12 text-red-600 mb-4" />
-                  <h3 className="text-lg font-semibold mb-3">CONSULTORIA AGRÍCOLA</h3>
-                  <p className="text-muted-foreground text-sm">
-                    Precisando de consultoria agrícola? Nós oferecemos soluções especializadas para melhorar a eficiência e a produtividade da sua lavoura! Entre em contato e transforme sua produção.
-                  </p>
-                </CardContent>
-              </Card>
-              
-              <Card className="p-6 hover:shadow-lg transition-shadow">
-                <CardContent className="pt-4">
-                  <DollarSign className="h-12 w-12 text-indigo-600 mb-4" />
-                  <h3 className="text-lg font-semibold mb-3">CORRETAGEM DE AGROPRODUTOS</h3>
-                  <p className="text-muted-foreground text-sm">
-                    Precisando de corretagem de agroprodutos? Nós conectamos você aos melhores negócios do setor! Entre em contato e maximize seus resultados com nossa expertise.
-                  </p>
-                </CardContent>
-              </Card>
+              {[
+                { icon: <Stethoscope className="h-12 w-12 text-green-600 mb-4" />, title: "EXAME ANDROLÓGICO", desc: "Precisando de exame andrológico? Nós oferecemos diagnósticos completos e precisos para garantir a saúde reprodutiva dos seus animais! Entre em contato e agende uma avaliação." },
+                { icon: <Stethoscope className="h-12 w-12 text-blue-600 mb-4" />, title: "EXAME DE BRUCELOSE E TUBERCULOSE", desc: "Precisando de exames de brucelose e tuberculose? Oferecemos diagnósticos precisos para garantir a saúde do seu rebanho! Entre em contato e agende seus exames." },
+                { icon: <Shield className="h-12 w-12 text-purple-600 mb-4" />, title: "ATESTADO DE SANIDADE ANIMAL", desc: "Precisa de atestado de sanidade animal? Nós oferecemos laudos confiáveis para garantir a saúde do seu rebanho! Entre em contato e obtenha a certificação necessária." },
+                { icon: <Calculator className="h-12 w-12 text-orange-600 mb-4" />, title: "CONSULTORIA PECUÁRIA", desc: "Precisando de consultoria pecuária? Nós oferecemos soluções especializadas para melhorar a eficiência e a produtividade do seu rebanho! Entre em contato e transforme sua produção." },
+                { icon: <Wheat className="h-12 w-12 text-red-600 mb-4" />, title: "CONSULTORIA AGRÍCOLA", desc: "Precisando de consultoria agrícola? Nós oferecemos soluções especializadas para melhorar a eficiência e a produtividade da sua lavoura! Entre em contato e transforme sua produção." },
+                { icon: <DollarSign className="h-12 w-12 text-indigo-600 mb-4" />, title: "CORRETAGEM DE AGROPRODUTOS", desc: "Precisando de corretagem de agroprodutos? Nós conectamos você aos melhores negócios do setor! Entre em contato e maximize seus resultados com nossa expertise." }
+              ].map((service, idx) => (
+                <Card key={idx} className="p-6 hover:shadow-lg transition-shadow">
+                  <CardContent className="pt-4 space-y-4">
+                    {service.icon}
+                    <h3 className="text-lg font-semibold mb-3">{service.title}</h3>
+                    <p className="text-muted-foreground text-sm">{service.desc}</p>
+                    <Button onClick={() => setIsContactFormOpen(true)} className="w-full bg-primary hover:bg-primary/90">
+                      <MessageSquare className="w-4 h-4 mr-2" />
+                      Entrar em Contato
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
         </section>
@@ -451,6 +586,12 @@ const AstecAssessoria = () => {
         </section>
       </main>
       <Footer />
+      
+      <GeneralContactForm 
+        isOpen={isContactFormOpen}
+        onClose={() => setIsContactFormOpen(false)}
+        formType="consultor"
+      />
     </div>
   );
 };

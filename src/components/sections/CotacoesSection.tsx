@@ -26,49 +26,68 @@ const desired = [
 
 const fetchCommodities = async (): Promise<CommodityItem[]> => {
   try {
-    // Primeira tentativa: API de commodities agropecuárias
+    // Tentativa 1: API CEPEA (Fonte oficial brasileira)
+    const cepeaUrl = `https://api.cepea.esalq.usp.br/commodities`;
+    const cepeaRes = await fetch(cepeaUrl);
+    if (cepeaRes.ok) {
+      const cepeaData = await cepeaRes.json();
+      // Transformar dados CEPEA para o formato esperado
+      return cepeaData.map((item: any) => ({
+        name: item.nome || item.name,
+        last: item.valor || item.price,
+        change: item.variacao || item.change,
+        percent: item.percentual || item.percent
+      }));
+    }
+  } catch (error) {
+    console.warn("CEPEA API não disponível, tentando Trading Economics:", error);
+  }
+
+  try {
+    // Tentativa 2: Trading Economics (API internacional)
     const url = `https://api.tradingeconomics.com/markets/commodities?c=guest:guest&format=json`;
     const res = await fetch(url);
     if (res.ok) {
       return res.json();
     }
-    throw new Error("API primária indisponível");
   } catch (error) {
-    console.warn("Falha na API primária, usando dados simulados:", error);
-    // Retorna dados simulados realistas baseados no mercado de Rondônia
-    return [
-      { 
-        name: "Soja", 
-        last: 1520.50 + (Math.random() - 0.5) * 100,
-        change: (Math.random() - 0.5) * 50,
-        percent: (Math.random() - 0.5) * 5 
-      },
-      { 
-        name: "Milho", 
-        last: 680.30 + (Math.random() - 0.5) * 50,
-        change: (Math.random() - 0.5) * 30,
-        percent: (Math.random() - 0.5) * 4 
-      },
-      { 
-        name: "Café", 
-        last: 850.75 + (Math.random() - 0.5) * 75,
-        change: (Math.random() - 0.5) * 40,
-        percent: (Math.random() - 0.5) * 6 
-      },
-      { 
-        name: "Boi Gordo", 
-        last: 285.40 + (Math.random() - 0.5) * 15,
-        change: (Math.random() - 0.5) * 8,
-        percent: (Math.random() - 0.5) * 3 
-      },
-      { 
-        name: "Açúcar", 
-        last: 45.80 + (Math.random() - 0.5) * 5,
-        change: (Math.random() - 0.5) * 2,
-        percent: (Math.random() - 0.5) * 4 
-      }
-    ];
+    console.warn("Trading Economics API não disponível:", error);
   }
+
+  // Fallback: Dados simulados realistas baseados no mercado brasileiro
+  console.info("Usando dados simulados com valores de referência do mercado brasileiro");
+  return [
+    { 
+      name: "Soja", 
+      last: 1520.50 + (Math.random() - 0.5) * 100,
+      change: (Math.random() - 0.5) * 50,
+      percent: (Math.random() - 0.5) * 5 
+    },
+    { 
+      name: "Milho", 
+      last: 680.30 + (Math.random() - 0.5) * 50,
+      change: (Math.random() - 0.5) * 30,
+      percent: (Math.random() - 0.5) * 4 
+    },
+    { 
+      name: "Café", 
+      last: 850.75 + (Math.random() - 0.5) * 75,
+      change: (Math.random() - 0.5) * 40,
+      percent: (Math.random() - 0.5) * 6 
+    },
+    { 
+      name: "Boi Gordo", 
+      last: 285.40 + (Math.random() - 0.5) * 15,
+      change: (Math.random() - 0.5) * 8,
+      percent: (Math.random() - 0.5) * 3 
+    },
+    { 
+      name: "Açúcar", 
+      last: 45.80 + (Math.random() - 0.5) * 5,
+      change: (Math.random() - 0.5) * 2,
+      percent: (Math.random() - 0.5) * 4 
+    }
+  ];
 };
 
 const toNumber = (v: any): number | undefined => {
