@@ -52,29 +52,26 @@ const ContactForm: React.FC<ContactFormProps> = ({ isOpen, onClose, productName 
     setIsSubmitting(true);
 
     try {
-      // Integração com Bitrix24
-      const bitrixData = {
-        fields: {
-          NAME: formData.nome,
-          PHONE: [{ VALUE: formData.telefone, VALUE_TYPE: 'WORK' }],
-          ADDRESS_CITY: formData.cidade,
-          COMMENTS: `Produto de interesse: ${formData.produto}\n\nMensagem: ${formData.mensagem}`,
-          SOURCE_ID: 'WEB',
-          SOURCE_DESCRIPTION: 'Formulário de contato ASTECPLACE'
-        }
+      // Integração com Bitrix24 via Edge Function
+      const leadData = {
+        TITLE: `Lead - ${formData.produto}`,
+        NAME: formData.nome,
+        PHONE: [{ VALUE: formData.telefone, VALUE_TYPE: 'WORK' }],
+        ADDRESS_CITY: formData.cidade,
+        COMMENTS: `Produto de interesse: ${formData.produto}\n\nMensagem: ${formData.mensagem}`
       };
 
-      const response = await fetch('https://astecassessoriaagropecuaria.bitrix24.com.br/rest/31/xxnbvv4is9jfat4j/crm.lead.add.json', {
+      const response = await fetch('https://uzopxniwvpzafjapeykp.supabase.co/functions/v1/bitrix24-lead', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(bitrixData)
+        body: JSON.stringify(leadData)
       });
 
       const result = await response.json();
 
-      if (result.result) {
+      if (result.success) {
         toast({
           title: 'Mensagem enviada com sucesso!',
           description: 'Nossa equipe entrará em contato em breve.',

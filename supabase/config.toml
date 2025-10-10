@@ -1,1 +1,4 @@
 project_id = "uzopxniwvpzafjapeykp"
+
+[functions.bitrix24-lead]
+verify_jwt = false
