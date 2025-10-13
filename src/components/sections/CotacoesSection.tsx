@@ -7,51 +7,32 @@ import { TrendingUp, TrendingDown, RefreshCw } from "lucide-react";
 interface CommodityItem {
   name: string;
   last?: number;
-  close?: number;
-  price?: number;
   change?: number;
-  DailyChange?: number;
-  changesPercentage?: number;
-  DailyPercentual?: number;
   percent?: number;
 }
 
-const desired = [
-  { match: "Soybean", label: "Soja", symbol: "SOYBEAN" },
-  { match: "Corn", label: "Milho", symbol: "CORN" },
-  { match: "Coffee", label: "Café", symbol: "COFFEE" },
-  { match: "Sugar", label: "Açúcar", symbol: "SUGAR" },
-  { match: "Cattle", label: "Boi Gordo", symbol: "CATTLE" },
+const mockData = [
+  { name: "Soja", last: 120.65, change: 0, percent: 0 },
+  { name: "Milho", last: 61.73, change: 0, percent: 0 },
+  { name: "Boi Gordo", last: 271.50, change: 0, percent: 0 },
+  { name: "Leite", last: 2.45, change: 0, percent: 0 },
 ];
 
 const fetchCommodities = async (): Promise<CommodityItem[]> => {
   try {
-    // Tentativa 1: API CEPEA (Fonte oficial brasileira)
-    const cepeaUrl = `https://api.cepea.esalq.usp.br/commodities`;
-    const cepeaRes = await fetch(cepeaUrl);
-    if (cepeaRes.ok) {
-      const cepeaData = await cepeaRes.json();
-      // Transformar dados CEPEA para o formato esperado
-      return cepeaData.map((item: any) => ({
-        name: item.nome || item.name,
-        last: item.valor || item.price,
-        change: item.variacao || item.change,
-        percent: item.percentual || item.percent
-      }));
-    }
-  } catch (error) {
-    console.warn("CEPEA API não disponível, tentando Trading Economics:", error);
-  }
-
-  try {
-    // Tentativa 2: Trading Economics (API internacional)
-    const url = `https://api.tradingeconomics.com/markets/commodities?c=guest:guest&format=json`;
+    // Buscar cotações do Agrolink via Edge Function
+    const url = 'https://uzopxniwvpzafjapeykp.supabase.co/functions/v1/agrolink-cotacoes';
     const res = await fetch(url);
+    
     if (res.ok) {
-      return res.json();
+      const data = await res.json();
+      console.log('Cotações Agrolink recebidas:', data);
+      return data;
+    } else {
+      throw new Error('Erro ao buscar cotações do Agrolink');
     }
   } catch (error) {
-    console.warn("Trading Economics API não disponível:", error);
+    console.warn("Agrolink API não disponível:", error);
   }
 
   // Fallback: Dados simulados realistas baseados no mercado brasileiro
@@ -90,27 +71,6 @@ const fetchCommodities = async (): Promise<CommodityItem[]> => {
   ];
 };
 
-const toNumber = (v: any): number | undefined => {
-  const n = typeof v === "string" ? parseFloat(v) : v;
-  return isFinite(n) ? n : undefined;
-};
-
-const getValue = (item: any) => {
-  const last = toNumber(item.Last ?? item.last ?? item.close ?? item.price);
-  const change = toNumber(item.DailyChange ?? item.change);
-  const percent = toNumber(
-    item.DailyPercentual ?? item.changesPercentage ?? item.change_p
-  );
-  return { last, change, percent };
-};
-
-const mockData = desired.map(d => ({
-  name: d.label,
-  last: Math.random() * 100 + 50,
-  change: (Math.random() - 0.5) * 2,
-  percent: (Math.random() - 0.5) * 2,
-}));
-
 const CotacoesSection = () => {
   const { data, isLoading, isError, refetch, isFetching } = useQuery({
     queryKey: ["commodities"],
@@ -119,20 +79,15 @@ const CotacoesSection = () => {
   });
 
   const rows = (() => {
-    if (isError || !data) return mockData;
-    const items = desired.map(d => {
-      const item = (data as any[]).find(x =>
-        String(x.name ?? x.Symbol ?? x.symbol ?? "").toLowerCase().includes(d.match.toLowerCase())
-      );
-      const { last, change, percent } = item ? getValue(item) : {} as any;
-      return {
-        name: d.label,
-        last: last ?? undefined,
-        change: change ?? undefined,
-        percent: percent ?? undefined,
-      };
-    });
-    return items;
+    if (isError || !data || data.length === 0) return mockData;
+    
+    // Os dados já vêm no formato correto da API Agrolink
+    return data.map(item => ({
+      name: item.name,
+      last: item.last,
+      change: item.change,
+      percent: item.percent,
+    }));
   })();
 
   return (
@@ -150,13 +105,13 @@ const CotacoesSection = () => {
         </div>
 
         {isLoading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-            {Array.from({ length: 5 }).map((_, i) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {Array.from({ length: 4 }).map((_, i) => (
               <Skeleton key={i} className="h-28" />
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {rows.map((r, idx) => {
               const up = (r.change ?? 0) >= 0;
               return (
