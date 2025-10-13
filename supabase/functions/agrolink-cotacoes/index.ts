@@ -37,7 +37,7 @@ serve(async (req) => {
       if (name && !isNaN(price)) {
         // Normalizar nomes
         let normalizedName = name;
-        if (name.includes('Boi')) normalizedName = 'Boi Gordo';
+        if (name.includes('Boi') || name === 'RO') normalizedName = 'Boi Gordo';
         else if (name.includes('Leite')) normalizedName = 'Leite';
         else if (name.includes('Milho')) normalizedName = 'Milho';
         else if (name.includes('Soja')) normalizedName = 'Soja';

@@ -95,7 +95,7 @@ const CotacoesSection = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2">Cotações Agropecuárias</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2">Cotações Agropecuárias de Rondônia</h2>
             <p className="text-muted-foreground">Atualização automática a cada 60s</p>
           </div>
           <Button variant="outline" onClick={() => refetch()} disabled={isFetching}>
@@ -127,8 +127,6 @@ const CotacoesSection = () => {
                         </div>
                         <div className={`text-sm ${up ? "text-success" : "text-destructive"}`}>
                           {r.change !== undefined ? `${up ? '+' : ''}${r.change.toFixed(2)}` : "N/A"}
-                          {" "}
-                          ({r.percent !== undefined ? `${up ? '+' : ''}${r.percent.toFixed(2)}` : "N/A"}%)
                         </div>
                       </div>
                       <div className={`rounded-md p-2 ${up ? "bg-success/10 text-success" : "bg-destructive/10 text-destructive"}`}>
