@@ -1,16 +1,28 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Building2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import GeneralContactForm from "@/components/forms/GeneralContactForm";
+import bancoDoBrasilLogo from "@/assets/banks/banco-do-brasil.png";
+import caixaLogo from "@/assets/banks/caixa.png";
+import santanderLogo from "@/assets/banks/santander.png";
+import bradescoLogo from "@/assets/banks/bradesco.png";
+import itauLogo from "@/assets/banks/itau.png";
+import sicoobLogo from "@/assets/banks/sicoob.png";
+import sicrediLogo from "@/assets/banks/sicredi.png";
+import bvLogo from "@/assets/banks/bv.png";
 
 const BanksFinancingSection = () => {
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+
   const banks = [
-    { name: "Banco do Brasil", color: "bg-yellow-500" },
-    { name: "Caixa Econômica", color: "bg-blue-600" },
-    { name: "Santander", color: "bg-red-600" },
-    { name: "Bradesco", color: "bg-red-700" },
-    { name: "Itaú", color: "bg-orange-500" },
-    { name: "Sicoob", color: "bg-green-700" },
-    { name: "Sicredi", color: "bg-green-600" },
-    { name: "BV Financeira", color: "bg-blue-800" },
+    { name: "Banco do Brasil", logo: bancoDoBrasilLogo },
+    { name: "Caixa Econômica", logo: caixaLogo },
+    { name: "Santander", logo: santanderLogo },
+    { name: "Bradesco", logo: bradescoLogo },
+    { name: "Itaú", logo: itauLogo },
+    { name: "Sicoob", logo: sicoobLogo },
+    { name: "Sicredi", logo: sicrediLogo },
+    { name: "BV Financeira", logo: bvLogo },
   ];
 
   return (
@@ -28,24 +40,45 @@ const BanksFinancingSection = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {banks.map((bank, index) => (
-              <Card key={index} className="hover:shadow-xl transition-all duration-300 group cursor-pointer">
-                <CardContent className="p-6 text-center">
-                  <div className={`${bank.color} w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform`}>
-                    <Building2 className="w-8 h-8 text-white" />
+              <Card key={index} className="hover:shadow-xl transition-all duration-300 group">
+                <CardContent className="p-6 text-center space-y-4">
+                  <div className="w-full h-24 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <img 
+                      src={bank.logo} 
+                      alt={`Logo ${bank.name}`}
+                      className="max-w-full max-h-full object-contain"
+                    />
                   </div>
                   <h3 className="font-semibold text-sm">{bank.name}</h3>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    className="w-full"
+                    onClick={() => setIsContactFormOpen(true)}
+                  >
+                    Solicitar Contato
+                  </Button>
                 </CardContent>
               </Card>
             ))}
           </div>
 
           <div className="mt-12 bg-primary/5 rounded-xl p-6 text-center">
-            <p className="text-muted-foreground">
+            <p className="text-muted-foreground mb-4">
               Entre em contato conosco para descobrir as melhores condições de financiamento para seu projeto de energia solar
             </p>
+            <Button onClick={() => setIsContactFormOpen(true)}>
+              Falar com Consultor
+            </Button>
           </div>
         </div>
       </div>
+
+      <GeneralContactForm 
+        isOpen={isContactFormOpen}
+        onClose={() => setIsContactFormOpen(false)}
+        formType="consultor"
+      />
     </section>
   );
 };
