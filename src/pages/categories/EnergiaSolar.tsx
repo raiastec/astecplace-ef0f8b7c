@@ -1,7 +1,6 @@
 import React from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { CheckCircle2 } from 'lucide-react';
 import SolarCalculator from '@/components/sections/SolarCalculator';
@@ -36,12 +35,9 @@ const EnergiaSolar = () => {
               Serviço Solar<br />
               <span className="text-green-400">Especializado</span>
             </h1>
-            <p className="text-white/90 text-lg mb-6 max-w-2xl mx-auto">
+            <p className="text-white/90 text-lg max-w-2xl mx-auto">
               Acreditamos em práticas de energia sustentável que ajudam a melhorar os serviços de instalação de painéis solares.
             </p>
-            <Button size="lg" className="bg-green-500 hover:bg-green-600 text-white">
-              Descubra mais
-            </Button>
           </div>
         </section>
 
@@ -80,9 +76,6 @@ const EnergiaSolar = () => {
                     </li>
                   ))}
                 </ul>
-                <Button size="lg" className="bg-green-500 hover:bg-green-600 text-white">
-                  Entrar em contato
-                </Button>
               </div>
             </div>
           </div>

@@ -4,12 +4,10 @@ import { useState } from "react";
 import GeneralContactForm from "@/components/forms/GeneralContactForm";
 import bancoDoBrasilLogo from "@/assets/banks/banco-do-brasil.png";
 import caixaLogo from "@/assets/banks/caixa.png";
-import santanderLogo from "@/assets/banks/santander.png";
-import bradescoLogo from "@/assets/banks/bradesco.png";
-import itauLogo from "@/assets/banks/itau.png";
 import sicoobLogo from "@/assets/banks/sicoob.png";
 import sicrediLogo from "@/assets/banks/sicredi.png";
-import bvLogo from "@/assets/banks/bv.png";
+import cresolLogo from "@/assets/banks/cresol.png";
+import bancoAmazoniaLogo from "@/assets/banks/banco-amazonia.jpg";
 
 const BanksFinancingSection = () => {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
@@ -17,12 +15,10 @@ const BanksFinancingSection = () => {
   const banks = [
     { name: "Banco do Brasil", logo: bancoDoBrasilLogo },
     { name: "Caixa Econômica", logo: caixaLogo },
-    { name: "Santander", logo: santanderLogo },
-    { name: "Bradesco", logo: bradescoLogo },
-    { name: "Itaú", logo: itauLogo },
     { name: "Sicoob", logo: sicoobLogo },
     { name: "Sicredi", logo: sicrediLogo },
-    { name: "BV Financeira", logo: bvLogo },
+    { name: "Cresol", logo: cresolLogo },
+    { name: "Banco da Amazônia", logo: bancoAmazoniaLogo },
   ];
 
   return (
@@ -38,7 +34,7 @@ const BanksFinancingSection = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
             {banks.map((bank, index) => (
               <Card key={index} className="hover:shadow-xl transition-all duration-300 group">
                 <CardContent className="p-6 text-center space-y-4">
