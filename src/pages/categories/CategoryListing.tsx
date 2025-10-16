@@ -8,7 +8,10 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Search, Filter, Eye, Calendar } from 'lucide-react';
-import { useSearch, SearchFilters, Anuncio } from '@/hooks/useSearch';
+import { useSearch, SearchFilters } from '@/hooks/useSearch';
+import EnergiaSolarContent from '@/components/categories/EnergiaSolarContent';
+import AstecAssessoriaContent from '@/components/categories/AstecAssessoriaContent';
+import GeneralContactForm from '@/components/forms/GeneralContactForm';
 
 const categoriaLabels: Record<string, string> = {
   'veiculos': 'Veículos',
@@ -28,6 +31,7 @@ const CategoryListing = () => {
   
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('recent');
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
 
   useEffect(() => {
     if (categoria) {
@@ -35,7 +39,6 @@ const CategoryListing = () => {
         categoria: categoria
       };
 
-      // Apply any URL search params
       const searchParam = searchParams.get('search');
       if (searchParam) {
         filters.searchTerm = searchParam;
@@ -44,7 +47,7 @@ const CategoryListing = () => {
 
       searchAnuncios(filters);
     }
-  }, [categoria, searchParams]); // Removed searchAnuncios dependency to prevent infinite loop
+  }, [categoria, searchParams]);
 
   const handleSearch = () => {
     if (categoria) {
@@ -92,20 +95,45 @@ const CategoryListing = () => {
   }
 
   const categoryTitle = categoriaLabels[categoria as keyof typeof categoriaLabels];
+  const isEnergiaSolar = categoria === 'energia_solar';
+  const isAstecAssessoria = categoria === 'astec_assessoria';
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
       <main className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-foreground mb-4">
-            {categoryTitle}
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Explore todos os anúncios da categoria {categoryTitle.toLowerCase()}
-          </p>
-        </div>
+        
+        {/* Institutional Content for Specific Categories */}
+        {isEnergiaSolar && <EnergiaSolarContent />}
+        {isAstecAssessoria && (
+          <AstecAssessoriaContent onContactClick={() => setIsContactFormOpen(true)} />
+        )}
+
+        {/* Divider for categories with institutional content */}
+        {(isEnergiaSolar || isAstecAssessoria) && (
+          <div className="my-16">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-foreground mb-4">
+                Anúncios de {categoryTitle}
+              </h2>
+              <p className="text-muted-foreground">
+                Confira todos os anúncios disponíveis nesta categoria
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Standard Category Header for other categories */}
+        {!isEnergiaSolar && !isAstecAssessoria && (
+          <div className="text-center mb-8">
+            <h1 className="text-4xl font-bold text-foreground mb-4">
+              {categoryTitle}
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Explore todos os anúncios da categoria {categoryTitle.toLowerCase()}
+            </p>
+          </div>
+        )}
 
         {/* Filters */}
         <div className="bg-card rounded-lg p-6 mb-8 shadow-sm border">
@@ -220,6 +248,13 @@ const CategoryListing = () => {
           </div>
         )}
       </main>
+      
+      <GeneralContactForm 
+        isOpen={isContactFormOpen}
+        onClose={() => setIsContactFormOpen(false)}
+        formType="consultor"
+      />
+      
       <Footer />
     </div>
   );

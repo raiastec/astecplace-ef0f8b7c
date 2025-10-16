@@ -39,9 +39,9 @@ const CategoriesSection = () => {
             const getCategoryLink = (title: string) => {
               switch (title) {
                 case 'Energia Solar':
-                  return '/energia-solar';
+                  return '/categoria/energia_solar';
                 case 'Astec Assessoria':
-                  return '/astec-assessoria';
+                  return '/categoria/astec_assessoria';
                 case 'Veículos':
                   return '/categoria/veiculos';
                 case 'Imobiliária':

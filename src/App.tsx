@@ -16,8 +16,6 @@ import { AnuncioForm } from "./pages/admin/AnuncioForm";
 import { NoticiasList } from "./pages/admin/NoticiasList";
 import { NoticiaForm } from "./pages/admin/NoticiaForm";
 import { UsuariosList } from "./pages/admin/UsuariosList";
-import EnergiaSolar from "./pages/categories/EnergiaSolar";
-import AstecAssessoria from "./pages/categories/AstecAssessoria";
 import CategoryListing from "./pages/categories/CategoryListing";
 import AnuncioDetails from "./pages/AnuncioDetails";
 
@@ -37,8 +35,6 @@ const App = () => (
         <Route path="/anuncio/:id" element={<AnuncioDetails />} />
             
             {/* Category Pages */}
-            <Route path="/energia-solar" element={<EnergiaSolar />} />
-            <Route path="/astec-assessoria" element={<AstecAssessoria />} />
             <Route path="/categoria/:categoria" element={<CategoryListing />} />
             
             {/* Admin Routes */}
