@@ -135,42 +135,6 @@ const CategoryListing = () => {
           </div>
         )}
 
-        {/* Filters */}
-        <div className="bg-card rounded-lg p-6 mb-8 shadow-sm border">
-          <div className="flex flex-col md:flex-row gap-4">
-            <div className="flex-1">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-                <Input
-                  placeholder={`Buscar em ${categoryTitle.toLowerCase()}...`}
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10"
-                  onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                />
-              </div>
-            </div>
-            <div className="md:w-48">
-              <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger>
-                  <Filter className="h-4 w-4 mr-2" />
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="recent">Mais recentes</SelectItem>
-                  <SelectItem value="oldest">Mais antigos</SelectItem>
-                  <SelectItem value="price-asc">Preço: menor para maior</SelectItem>
-                  <SelectItem value="price-desc">Preço: maior para menor</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <Button onClick={handleSearch}>
-              <Search className="h-4 w-4 mr-2" />
-              Buscar
-            </Button>
-          </div>
-        </div>
-
         {/* Results */}
         <div className="mb-6">
           <p className="text-muted-foreground">

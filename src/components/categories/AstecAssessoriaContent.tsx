@@ -12,7 +12,10 @@ import {
   ScrollText,
   Sprout,
   Wheat,
-  Scale
+  Scale,
+  Droplets,
+  TreePine,
+  Stethoscope
 } from "lucide-react";
 import astecLogo from "@/assets/astecplace-logo.png";
 
@@ -26,68 +29,182 @@ const AstecAssessoriaContent = ({ onContactClick }: AstecAssessoriaContentProps)
       {
         icon: DollarSign,
         title: "Investimento",
-        description: "Financiamento para aquisição de máquinas, equipamentos e construções rurais."
+        description: "Procurando oportunidades de investimento? Nós oferecemos consultoria especializada para maximizar seus retornos! Entre em contato e descubra as melhores opções para o seu capital.",
+        color: "text-green-600"
       },
       {
-        icon: Sprout,
+        icon: Scale,
         title: "Custeio",
-        description: "Capital de giro para insumos, sementes e despesas operacionais da safra."
+        description: "Precisando de custeio agrícola a pecuário? Oferecemos soluções financeiras para apoiar a sua produção! Entre em contato e impulsione seu negócio com nossos recursos.",
+        color: "text-blue-600"
+      },
+      {
+        icon: FileText,
+        title: "Consórcio",
+        description: "Pensando em consórcio? Nós oferecemos as melhores opções para você! Entre em contato e descubra como realizar seus planos com nossos consórcios vantajosos.",
+        color: "text-purple-600"
+      },
+      {
+        icon: Building2,
+        title: "Consignado",
+        description: "Precisando de crédito consignado? Nós oferecemos condições especiais para você! Entre em contato e obtenha o crédito que precisa com facilidade e segurança.",
+        color: "text-orange-600"
+      },
+      {
+        icon: DollarSign,
+        title: "Crédito Comercial",
+        description: "Procurando crédito comercial? Oferecemos soluções financeiras flexíveis para impulsionar seu negócio! Entre em contato e descubra como podemos apoiar seu crescimento.",
+        color: "text-red-600"
+      },
+      {
+        icon: Scale,
+        title: "Seguro Patrimonial",
+        description: "Precisa de seguro patrimonial ou veicular? Nós oferecemos proteção completa para seu patrimônio e veículos! Entre em contato e garanta a segurança que você merece.",
+        color: "text-blue-600"
       },
       {
         icon: Wheat,
-        title: "Comercialização",
-        description: "Crédito para estocagem e comercialização da produção agrícola."
+        title: "Seguro Agrícola",
+        description: "Proteja sua produção com nosso seguro agrícola! Oferecemos coberturas completas para garantir a segurança do seu cultivo. Entre em contato e assegure seu negócio com tranquilidade.",
+        color: "text-yellow-600"
+      },
+      {
+        icon: Home,
+        title: "Crédito Fundiário",
+        description: "Precisando de crédito fundiário? Oferecemos soluções financeiras para aquisição e melhoria de terras! Entre em contato e realize seus projetos com nosso apoio especializado.",
+        color: "text-green-700"
       }
     ],
     fundiaria: [
       {
         icon: FileText,
-        title: "Regularização de Terras",
-        description: "Documentação e legalização de propriedades rurais."
+        title: "CCIR",
+        description: "Precisa do Certificado de Cadastro de Imóvel Rural (CCIR)? Nós facilitamos o processo para você! Entre em contato e regularize seu imóvel rural com segurança e eficiência.",
+        color: "text-green-600"
       },
       {
         icon: Scale,
-        title: "Consultoria Jurídica",
-        description: "Assessoria especializada em direito agrário e ambiental."
+        title: "NIRF ITR",
+        description: "Precisando regularizar seu ITR? Estamos prontos para ajudar você a cumprir suas obrigações fiscais com a receita federal! nossa empresa oferece serviço especializado para a declaração do ITR.",
+        color: "text-blue-600"
+      },
+      {
+        icon: FileText,
+        title: "Declaração de ITR",
+        description: "Precisando declarar seu ITR? Nossa empresa oferece serviço especializado para a declaração do ITR.",
+        color: "text-purple-600"
+      },
+      {
+        icon: Building2,
+        title: "Memorial Descritivo",
+        description: "Precisando de memorial descritivo? Nós elaboramos documentos detalhados e precisos para seu projeto! Entre em contato e garanta a qualidade e a conformidade do seu empreendimento.",
+        color: "text-orange-600"
+      },
+      {
+        icon: Scale,
+        title: "CRO na PGT e GOV",
+        description: "Precisando da Certidão de Regularização da Obra (CRO) na PGT e GOV? Nós cuidamos de todo o processo para você! Entre em contato e regularize sua obra com eficiência e segurança.",
+        color: "text-red-600"
+      },
+      {
+        icon: Scale,
+        title: "Topografia",
+        description: "Precisa de serviços de topografia? Oferecemos medições precisas e detalhadas para seu projeto! Entre em contato e conte com nossa expertise para obter resultados confiáveis.",
+        color: "text-blue-600"
+      },
+      {
+        icon: FileText,
+        title: "Escritura",
+        description: "Precisando de escritura? Nós cuidamos de todo o processo para você! Entre em contato e regularize seu imóvel com segurança e tranquilidade.",
+        color: "text-yellow-600"
       },
       {
         icon: Home,
-        title: "Georreferenciamento",
-        description: "Mapeamento e certificação de áreas rurais."
+        title: "Título na PGT",
+        description: "Precisa de título na PGT? Nós facilitamos todo o processo para você! Entre em contato e regularize seu imóvel com segurança e eficiência.",
+        color: "text-green-600"
       }
     ],
     ambiental: [
       {
         icon: Leaf,
-        title: "CAR - Cadastro Ambiental Rural",
-        description: "Registro obrigatório de imóveis rurais."
+        title: "CAR",
+        description: "Oferecemos o serviço completo de cadastro ambiental rural (CAR), essencial para garantir a conformidade ambiental da sua propriedade e assegurar diversos benefícios legais e econômicos.",
+        color: "text-green-600"
       },
       {
-        icon: Building2,
-        title: "Licenciamento Ambiental",
-        description: "Obtenção de licenças para atividades rurais."
+        icon: Droplets,
+        title: "Outorga d'Água",
+        description: "precisando de outorga de água? nós cuidamos de todo o processo para você! entre em contato e garanta a regularização e segurança no uso dos recursos hídricos.",
+        color: "text-blue-600"
       },
       {
-        icon: Sprout,
-        title: "Recuperação de Áreas",
-        description: "Projetos de recuperação e conservação ambiental."
+        icon: Droplets,
+        title: "Dispensa da Outorga d'Água",
+        description: "precisa de dispensa de outorga de água? nós facilitamos o processo para você! entre em contato e regularize sua situação de forma rápida e segura.",
+        color: "text-purple-600"
+      },
+      {
+        icon: Scale,
+        title: "Licença de Operação LP, LI e LO",
+        description: "precisa de licença prévia (lp), licença de instalação (li) ou licença de operação (lo)? nós cuidamos de todo o processo para você! entre em contato e garanta a regularização ambiental do seu empreendimento.",
+        color: "text-orange-600"
+      },
+      {
+        icon: TreePine,
+        title: "PRAD",
+        description: "precisando de plano de recuperação de áreas degradadas (prad)? nós elaboramos e executamos projetos especializados para recuperar seu ambiente! entre em contato e restaure a saúde do seu ecossistema com segurança.",
+        color: "text-red-600"
+      },
+      {
+        icon: Leaf,
+        title: "Licença de Limpeza de Pastagem",
+        description: "precisa de licença para limpeza de pastagem? nós cuidamos de todo o processo para você! entre em contato e regularize sua atividade com agilidade e conformidade ambiental.",
+        color: "text-green-700"
+      },
+      {
+        icon: FileText,
+        title: "Laudo",
+        description: "Precisando de laudo técnico? Nós oferecemos serviços completos e precisos para atender suas necessidades! Entre em contato e obtenha a documentação que você precisa com qualidade.",
+        color: "text-blue-600"
       }
     ],
     agronomicos: [
       {
-        icon: Briefcase,
-        title: "Consultoria Técnica",
-        description: "Orientação especializada para gestão da propriedade rural."
+        icon: Stethoscope,
+        title: "Exame Andrológico",
+        description: "Precisando de exame andrológico? Nós oferecemos diagnósticos completos e precisos para garantir a saúde reprodutiva dos seus animais! Entre em contato e agende uma avaliação.",
+        color: "text-green-600"
       },
       {
-        icon: TrendingUp,
-        title: "Planejamento Agrícola",
-        description: "Projetos de viabilidade e gestão de produção."
+        icon: Stethoscope,
+        title: "Exame de Brucelose e Tuberculose",
+        description: "Precisando de exames de brucelose e tuberculose? Oferecemos diagnósticos precisos para garantir a saúde do seu rebanho! Entre em contato e agende seus exames.",
+        color: "text-blue-600"
       },
       {
-        icon: ScrollText,
-        title: "Laudos e Pareceres",
-        description: "Elaboração de documentos técnicos especializados."
+        icon: Scale,
+        title: "Atestado de Sanidade Animal",
+        description: "Precisa de atestado de sanidade animal? Nós oferecemos laudos confiáveis para garantir a saúde do seu rebanho! Entre em contato e obtenha a certificação necessária.",
+        color: "text-purple-600"
+      },
+      {
+        icon: Scale,
+        title: "Consultoria Pecuária",
+        description: "Precisando de consultoria pecuária? Nós oferecemos soluções especializadas para melhorar a eficiência e a produtividade do seu rebanho! Entre em contato e transforme sua produção.",
+        color: "text-orange-600"
+      },
+      {
+        icon: Wheat,
+        title: "Consultoria Agrícola",
+        description: "Precisando de consultoria agrícola? Nós oferecemos soluções especializadas para melhorar a eficiência e a produtividade da sua lavoura! Entre em contato e transforme sua produção.",
+        color: "text-red-600"
+      },
+      {
+        icon: DollarSign,
+        title: "Corretagem de Agroprodutos",
+        description: "Precisando de corretagem de agroprodutos? Nós conectamos você aos melhores negócios do setor! Entre em contato e maximize seus resultados com nossa expertise.",
+        color: "text-blue-600"
       }
     ]
   };
@@ -101,13 +218,13 @@ const AstecAssessoriaContent = ({ onContactClick }: AstecAssessoriaContentProps)
     { name: "Banco da Amazônia", logo: "/src/assets/banks/banco-amazonia.jpg" }
   ];
 
-  const ServiceCard = ({ icon: Icon, title, description }: { icon: any, title: string, description: string }) => (
-    <Card className="hover:shadow-lg transition-shadow">
-      <CardContent className="p-6">
-        <Icon className="h-12 w-12 text-primary mb-4" />
+  const ServiceCard = ({ icon: Icon, title, description, color }: { icon: any, title: string, description: string, color?: string }) => (
+    <Card className="hover:shadow-lg transition-shadow h-full">
+      <CardContent className="p-6 flex flex-col h-full">
+        <Icon className={`h-12 w-12 mb-4 ${color || 'text-primary'}`} />
         <h3 className="text-xl font-semibold mb-2">{title}</h3>
-        <p className="text-muted-foreground mb-4">{description}</p>
-        <Button variant="outline" onClick={onContactClick}>
+        <p className="text-muted-foreground mb-4 flex-grow">{description}</p>
+        <Button variant="outline" onClick={onContactClick} className="w-full">
           Entrar em Contato
         </Button>
       </CardContent>
@@ -131,7 +248,7 @@ const AstecAssessoriaContent = ({ onContactClick }: AstecAssessoriaContentProps)
       {/* Serviços de Crédito */}
       <section className="mb-16">
         <h2 className="text-3xl font-bold mb-8 text-center">SERVIÇOS DE CRÉDITO</h2>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.credito.map((service, index) => (
             <ServiceCard key={index} {...service} />
           ))}
@@ -141,7 +258,7 @@ const AstecAssessoriaContent = ({ onContactClick }: AstecAssessoriaContentProps)
       {/* Regularização Fundiária */}
       <section className="mb-16">
         <h2 className="text-3xl font-bold mb-8 text-center">REGULARIZAÇÃO FUNDIÁRIA</h2>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.fundiaria.map((service, index) => (
             <ServiceCard key={index} {...service} />
           ))}
@@ -151,7 +268,7 @@ const AstecAssessoriaContent = ({ onContactClick }: AstecAssessoriaContentProps)
       {/* Regularização Ambiental */}
       <section className="mb-16">
         <h2 className="text-3xl font-bold mb-8 text-center">REGULARIZAÇÃO AMBIENTAL</h2>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.ambiental.map((service, index) => (
             <ServiceCard key={index} {...service} />
           ))}
@@ -161,7 +278,7 @@ const AstecAssessoriaContent = ({ onContactClick }: AstecAssessoriaContentProps)
       {/* Serviços Agronômicos */}
       <section className="mb-16">
         <h2 className="text-3xl font-bold mb-8 text-center">SERVIÇOS AGRONÔMICOS</h2>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.agronomicos.map((service, index) => (
             <ServiceCard key={index} {...service} />
           ))}
