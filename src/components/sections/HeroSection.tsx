@@ -1,35 +1,52 @@
-import SearchCard from "@/components/search/SearchCard";
-import heroBackground from "@/assets/hero-background.jpg";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import GeneralContactForm from "@/components/forms/GeneralContactForm";
+import logoAstecHero from "@/assets/logo-astec-hero.jpg";
 
 const HeroSection = () => {
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+
   return (
-    <section className="relative min-h-[600px] flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroBackground})` }}
+    <>
+      <section className="py-[60px] bg-gradient-to-b from-[#0a4d1a] to-[#0d6827]">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            {/* Logo Image */}
+            <div className="mb-8">
+              <img 
+                src={logoAstecHero} 
+                alt="Astec Assessoria e Projetos Agropecuários" 
+                className="w-full max-w-[550px] mx-auto rounded-2xl shadow-lg"
+              />
+            </div>
+            
+            {/* Title */}
+            <h1 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              ASTEC Assessoria e Projetos Agropecuários
+            </h1>
+            
+            {/* Description */}
+            <p className="text-lg text-white/90 mb-8 leading-relaxed">
+              Soluções completas em crédito rural, regularização fundiária e ambiental, e consultoria agronômica para o sucesso do seu negócio.
+            </p>
+            
+            {/* CTA Button */}
+            <Button 
+              onClick={() => setIsContactFormOpen(true)}
+              className="bg-[#008000] hover:bg-[#006600] text-white font-semibold px-8 py-6 text-lg rounded-full shadow-lg transition-all hover:scale-105"
+            >
+              Fale Conosco
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      <GeneralContactForm 
+        isOpen={isContactFormOpen}
+        onClose={() => setIsContactFormOpen(false)}
+        formType="consultor"
       />
-      
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/40" />
-      
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 py-16">
-        <div className="max-w-4xl mx-auto text-center text-white mb-8">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className="text-accent">Seu Negócio</span> é no <span className="text-[#008000]">ASTECPLACE</span>!
-          </h1>
-          <p className="text-lg opacity-80">
-            O maior portal de anúncios do Brasil - Aqui comprador fala direto com vendedor!
-          </p>
-        </div>
-        
-        {/* Search Card */}
-        <div className="max-w-md mx-auto">
-          <SearchCard />
-        </div>
-      </div>
-    </section>
+    </>
   );
 };
 
