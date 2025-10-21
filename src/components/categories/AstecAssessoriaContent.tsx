@@ -18,6 +18,7 @@ import {
   Stethoscope
 } from "lucide-react";
 import astecLogo from "@/assets/astecplace-logo.png";
+import logoAstecHero from "@/assets/logo-astec-hero.jpg";
 
 interface AstecAssessoriaContentProps {
   onContactClick: () => void;
@@ -234,16 +235,38 @@ const AstecAssessoriaContent = ({ onContactClick }: AstecAssessoriaContentProps)
   return (
     <>
       {/* Hero Section */}
-      <div className="text-center mb-12">
-        <img src={astecLogo} alt="Astec Assessoria" className="h-24 mx-auto mb-6" />
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">
-          Astec Assessoria Agropecuária
-        </h1>
-        <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-          Soluções completas em crédito rural, regularização fundiária e ambiental, 
-          e consultoria agronômica para o sucesso do seu negócio.
-        </p>
-      </div>
+      <section className="py-[60px] bg-gradient-to-b from-[#0a4d1a] to-[#0d6827] -mx-4 md:-mx-6 lg:-mx-8 mb-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            {/* Logo Image */}
+            <div className="mb-8">
+              <img 
+                src={logoAstecHero} 
+                alt="Astec Assessoria e Projetos Agropecuários" 
+                className="w-full max-w-[550px] mx-auto rounded-2xl shadow-lg"
+              />
+            </div>
+            
+            {/* Title */}
+            <h1 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              ASTEC Assessoria e Projetos Agropecuários
+            </h1>
+            
+            {/* Description */}
+            <p className="text-lg text-white/90 mb-8 leading-relaxed">
+              Soluções completas em crédito rural, regularização fundiária e ambiental, e consultoria agronômica para o sucesso do seu negócio.
+            </p>
+            
+            {/* CTA Button */}
+            <Button 
+              onClick={onContactClick}
+              className="bg-[#008000] hover:bg-[#006600] text-white font-semibold px-8 py-6 text-lg rounded-full shadow-lg transition-all hover:scale-105"
+            >
+              Fale Conosco
+            </Button>
+          </div>
+        </div>
+      </section>
 
       {/* Serviços de Crédito */}
       <section className="mb-16">
