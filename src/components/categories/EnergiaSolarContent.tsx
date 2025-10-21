@@ -8,23 +8,62 @@ import astecLogo from "@/assets/astecplace-logo.png";
 const EnergiaSolarContent = () => {
   return (
     <>
-      {/* Hero Section with Calculator */}
-      <div className="relative bg-gradient-to-br from-green-500 via-green-600 to-green-700 rounded-xl overflow-hidden mb-12 p-8 md:p-12">
-        <div className="relative z-10 text-white">
-          <h1 className="text-3xl md:text-5xl font-bold mb-4">
-            Energia Solar ao seu alcance
-          </h1>
-          <p className="text-lg md:text-xl mb-8 text-green-50">
-            Gere economia, use nossa calculadora e aproveite para reduzir ao máximo sua conta de energia
-          </p>
+      {/* Hero Section */}
+      <div className="relative bg-gradient-to-br from-yellow-400 via-green-400 to-green-500 rounded-xl overflow-hidden mb-12">
+        <div className="grid md:grid-cols-2 gap-8 items-center p-8 md:p-12">
+          {/* Left Content */}
+          <div className="relative z-10 text-white">
+            <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
+              Reduza sua conta de luz com energia solar em Rondônia
+            </h1>
+            <p className="text-lg md:text-xl mb-8 text-white/90">
+              Simule agora quanto você pode economizar e descubra o tamanho ideal do seu sistema fotovoltaico
+            </p>
+            <button
+              onClick={() => {
+                const calculator = document.getElementById('solar-calculator');
+                calculator?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
+              className="bg-white text-green-600 hover:bg-green-50 px-8 py-4 rounded-full font-semibold text-lg transition-all hover:scale-105 shadow-lg"
+            >
+              Calcular Economia
+            </button>
+          </div>
+          
+          {/* Right Image */}
+          <div className="relative z-10 hidden md:flex justify-center items-center">
+            <div className="relative">
+              {/* Decorative sun */}
+              <div className="absolute -top-8 -right-8 w-24 h-24 bg-yellow-300 rounded-full blur-2xl opacity-50" />
+              <div className="absolute -top-4 -right-4 w-16 h-16 bg-yellow-400 rounded-full" />
+              
+              {/* Solar panel illustration */}
+              <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-8 border-2 border-white/20">
+                <div className="grid grid-cols-3 gap-2">
+                  {[...Array(9)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="w-16 h-16 bg-gradient-to-br from-blue-900 to-blue-700 rounded border-2 border-white/30"
+                      style={{
+                        boxShadow: 'inset 0 2px 4px rgba(255,255,255,0.1)'
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+        
         {/* Decorative elements */}
-        <div className="absolute top-10 left-10 w-32 h-32 bg-green-400/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-10 right-10 w-40 h-40 bg-green-300/20 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-0 w-full h-full opacity-20">
+          <div className="absolute top-10 left-10 w-32 h-32 bg-yellow-300 rounded-full blur-3xl" />
+          <div className="absolute bottom-10 right-10 w-40 h-40 bg-green-400 rounded-full blur-3xl" />
+        </div>
       </div>
 
       {/* Solar Calculator */}
-      <div className="mb-12">
+      <div id="solar-calculator" className="mb-12 scroll-mt-20">
         <SolarCalculator />
       </div>
 

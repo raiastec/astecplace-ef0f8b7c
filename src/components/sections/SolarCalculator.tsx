@@ -1,48 +1,142 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Calculator, Download, Mail, TrendingDown } from "lucide-react";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Sun, Zap, TrendingDown, Leaf, Download, Mail } from "lucide-react";
 import { toast } from "sonner";
 
+const CITIES_RO = [
+  { name: "Porto Velho", tariff: 0.89 },
+  { name: "Ariquemes", tariff: 0.87 },
+  { name: "Ji-Paraná", tariff: 0.88 },
+  { name: "Vilhena", tariff: 0.86 },
+  { name: "Cacoal", tariff: 0.87 },
+  { name: "Rolim de Moura", tariff: 0.88 },
+  { name: "Jaru", tariff: 0.87 },
+  { name: "Guajará-Mirim", tariff: 0.89 },
+  { name: "Pimenta Bueno", tariff: 0.87 },
+  { name: "Ouro Preto do Oeste", tariff: 0.88 },
+];
+
+// Constantes para cálculo
+const AVERAGE_SOLAR_GENERATION_RO = 5.5; // kWh/kWp/dia em Rondônia
+const SYSTEM_EFFICIENCY = 0.8; // 80% de eficiência do sistema
+const CO2_PER_KWH = 0.0817; // kg de CO₂ por kWh (média Brasil)
+
 const SolarCalculator = () => {
-  const [monthlyBill, setMonthlyBill] = useState<string>("");
+  const [monthlyConsumption, setMonthlyConsumption] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
   const [showResults, setShowResults] = useState(false);
-  const [email, setEmail] = useState<string>("");
-  const [showEmailInput, setShowEmailInput] = useState(false);
+  const [email, setEmail] = useState("");
+  const [showEmailDialog, setShowEmailDialog] = useState(false);
 
-  // Calculation assumptions
-  const SOLAR_SAVINGS_PERCENTAGE = 0.95; // 95% reduction
-  const SYSTEM_LIFETIME_YEARS = 25;
-  const AVERAGE_INCREASE_RATE = 0.08; // 8% annual increase in energy costs
+  const getCurrentTariff = () => {
+    const city = CITIES_RO.find(c => c.name === selectedCity);
+    return city?.tariff || 0.88;
+  };
 
-  const calculateSavings = () => {
-    const monthly = parseFloat(monthlyBill);
-    if (isNaN(monthly) || monthly <= 0) {
-      toast.error("Por favor, insira um valor válido");
+  const calculateSystemSize = () => {
+    const consumption = parseFloat(monthlyConsumption);
+    if (!consumption) return 0;
+    
+    const dailyConsumption = consumption / 30;
+    const systemSize = dailyConsumption / (AVERAGE_SOLAR_GENERATION_RO * SYSTEM_EFFICIENCY);
+    return systemSize;
+  };
+
+  const calculateMonthlyGeneration = () => {
+    const systemSize = calculateSystemSize();
+    return systemSize * AVERAGE_SOLAR_GENERATION_RO * 30 * SYSTEM_EFFICIENCY;
+  };
+
+  const calculateMonthlySavings = () => {
+    const generation = calculateMonthlyGeneration();
+    const tariff = getCurrentTariff();
+    return generation * tariff;
+  };
+
+  const calculateYearlySavings = () => {
+    return calculateMonthlySavings() * 12;
+  };
+
+  const calculateCO2Reduction = () => {
+    const yearlyGeneration = calculateMonthlyGeneration() * 12;
+    return yearlyGeneration * CO2_PER_KWH;
+  };
+
+  const calculatePayback = () => {
+    const systemSize = calculateSystemSize();
+    const systemCost = systemSize * 4500; // R$ 4.500 por kWp (média mercado)
+    const yearlySavings = calculateYearlySavings();
+    return systemCost / yearlySavings;
+  };
+
+  const handleCalculate = () => {
+    if (!monthlyConsumption || parseFloat(monthlyConsumption) <= 0) {
+      toast.error("Por favor, insira um consumo válido");
       return;
     }
-
-    setShowResults(true);
-  };
-
-  const getMonthlySavings = () => {
-    const monthly = parseFloat(monthlyBill);
-    return monthly * SOLAR_SAVINGS_PERCENTAGE;
-  };
-
-  const getYearlySavings = () => {
-    return getMonthlySavings() * 12;
-  };
-
-  const getLifetimeSavings = () => {
-    const yearly = getYearlySavings();
-    let total = 0;
-    for (let year = 0; year < SYSTEM_LIFETIME_YEARS; year++) {
-      total += yearly * Math.pow(1 + AVERAGE_INCREASE_RATE, year);
+    if (!selectedCity) {
+      toast.error("Por favor, selecione uma cidade");
+      return;
     }
-    return total;
+    setShowResults(true);
+    toast.success("Cálculo realizado com sucesso!");
+  };
+
+  const handleDownloadReport = () => {
+    const consumption = parseFloat(monthlyConsumption);
+    const systemSize = calculateSystemSize();
+    const monthlyGeneration = calculateMonthlyGeneration();
+    const monthlySavings = calculateMonthlySavings();
+    const yearlySavings = calculateYearlySavings();
+    const co2Reduction = calculateCO2Reduction();
+    const payback = calculatePayback();
+    const tariff = getCurrentTariff();
+
+    const reportContent = `
+RELATÓRIO DE VIABILIDADE - ENERGIA SOLAR
+==========================================
+
+DADOS DO CLIENTE
+Cidade: ${selectedCity}
+Consumo médio mensal: ${consumption} kWh
+Tarifa de energia: R$ ${tariff.toFixed(2)}/kWh
+
+SISTEMA RECOMENDADO
+Potência: ${systemSize.toFixed(2)} kWp
+Geração média mensal: ${monthlyGeneration.toFixed(0)} kWh
+
+ECONOMIA ESTIMADA
+Mensal: R$ ${monthlySavings.toFixed(2)}
+Anual: R$ ${yearlySavings.toFixed(2)}
+
+IMPACTO AMBIENTAL
+Redução de CO₂: ${co2Reduction.toFixed(0)} kg/ano
+Equivalente a: ${(co2Reduction / 20).toFixed(0)} árvores plantadas
+
+RETORNO DO INVESTIMENTO
+Payback estimado: ${payback.toFixed(1)} anos
+
+==========================================
+Relatório gerado por AstecPlace
+www.astecplace.com
+    `.trim();
+
+    const blob = new Blob([reportContent], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `relatorio-solar-${selectedCity}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    
+    toast.success("Relatório baixado com sucesso!");
   };
 
   const handleSendEmail = () => {
@@ -50,146 +144,193 @@ const SolarCalculator = () => {
       toast.error("Por favor, insira um e-mail válido");
       return;
     }
-
-    // In a real application, this would send the report via email
-    toast.success("Relatório enviado com sucesso para " + email);
-    setShowEmailInput(false);
+    
+    // Aqui você implementaria o envio real do e-mail via edge function
+    toast.success(`Relatório enviado para ${email}!`);
+    setShowEmailDialog(false);
     setEmail("");
   };
 
   return (
-    <div className="py-16 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20">
-      <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Calculadora de Economia Solar
-            </h2>
-            <p className="text-muted-foreground text-lg">
-              Descubra quanto você pode economizar com energia solar
+    <Card className="bg-gradient-to-br from-green-50 to-yellow-50 border-green-200">
+      <CardHeader className="text-center">
+        <div className="flex justify-center mb-4">
+          <div className="bg-gradient-to-br from-yellow-400 to-green-500 p-4 rounded-full">
+            <Sun className="h-8 w-8 text-white" />
+          </div>
+        </div>
+        <CardTitle className="text-3xl font-bold text-green-800">
+          Calculadora de Energia Solar
+        </CardTitle>
+        <CardDescription className="text-lg">
+          Descubra quanto você pode economizar com energia solar em Rondônia
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        {/* Input Form */}
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <Label htmlFor="consumption" className="text-base font-semibold">
+              Consumo médio mensal (kWh)
+            </Label>
+            <Input
+              id="consumption"
+              type="number"
+              placeholder="Ex: 450"
+              value={monthlyConsumption}
+              onChange={(e) => setMonthlyConsumption(e.target.value)}
+              className="text-lg h-12"
+            />
+            <p className="text-sm text-muted-foreground">
+              Consulte sua conta de energia
             </p>
           </div>
 
-          <Card className="shadow-xl">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Calculator className="w-6 h-6 text-green-600" />
-                Calcule sua Economia
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="space-y-2">
-                <Label htmlFor="monthly-bill">
-                  Quanto você gasta de energia por mês? (R$)
-                </Label>
-                <Input
-                  id="monthly-bill"
-                  type="number"
-                  placeholder="Ex: 500"
-                  value={monthlyBill}
-                  onChange={(e) => setMonthlyBill(e.target.value)}
-                  min="0"
-                  step="0.01"
-                />
+          <div className="space-y-2">
+            <Label htmlFor="city" className="text-base font-semibold">
+              Cidade
+            </Label>
+            <Select value={selectedCity} onValueChange={setSelectedCity}>
+              <SelectTrigger id="city" className="text-lg h-12">
+                <SelectValue placeholder="Selecione sua cidade" />
+              </SelectTrigger>
+              <SelectContent>
+                {CITIES_RO.map((city) => (
+                  <SelectItem key={city.name} value={city.name}>
+                    {city.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            {selectedCity && (
+              <p className="text-sm text-muted-foreground">
+                Tarifa: R$ {getCurrentTariff().toFixed(2)}/kWh
+              </p>
+            )}
+          </div>
+        </div>
+
+        <Button 
+          onClick={handleCalculate}
+          className="w-full h-14 text-lg bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600"
+        >
+          <Zap className="mr-2 h-5 w-5" />
+          Simular Economia
+        </Button>
+
+        {/* Results */}
+        {showResults && (
+          <div className="space-y-6 mt-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <div className="bg-white rounded-xl p-6 shadow-lg border-2 border-green-200">
+              <h3 className="text-2xl font-bold text-green-800 mb-6 text-center">
+                Resumo Gerado
+              </h3>
+              
+              <div className="grid md:grid-cols-2 gap-4 mb-6">
+                <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-lg border border-blue-200">
+                  <div className="flex items-center gap-3 mb-2">
+                    <Sun className="h-6 w-6 text-blue-600" />
+                    <p className="text-sm font-medium text-blue-800">Sistema Recomendado</p>
+                  </div>
+                  <p className="text-3xl font-bold text-blue-900">
+                    {calculateSystemSize().toFixed(2)} kWp
+                  </p>
+                </div>
+
+                <div className="bg-gradient-to-br from-green-50 to-green-100 p-4 rounded-lg border border-green-200">
+                  <div className="flex items-center gap-3 mb-2">
+                    <Zap className="h-6 w-6 text-green-600" />
+                    <p className="text-sm font-medium text-green-800">Geração Mensal</p>
+                  </div>
+                  <p className="text-3xl font-bold text-green-900">
+                    {calculateMonthlyGeneration().toFixed(0)} kWh
+                  </p>
+                </div>
+
+                <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 p-4 rounded-lg border border-yellow-200">
+                  <div className="flex items-center gap-3 mb-2">
+                    <TrendingDown className="h-6 w-6 text-yellow-600" />
+                    <p className="text-sm font-medium text-yellow-800">Economia Mensal</p>
+                  </div>
+                  <p className="text-3xl font-bold text-yellow-900">
+                    R$ {calculateMonthlySavings().toFixed(2)}
+                  </p>
+                </div>
+
+                <div className="bg-gradient-to-br from-emerald-50 to-emerald-100 p-4 rounded-lg border border-emerald-200">
+                  <div className="flex items-center gap-3 mb-2">
+                    <Leaf className="h-6 w-6 text-emerald-600" />
+                    <p className="text-sm font-medium text-emerald-800">Redução CO₂/ano</p>
+                  </div>
+                  <p className="text-3xl font-bold text-emerald-900">
+                    {calculateCO2Reduction().toFixed(0)} kg
+                  </p>
+                </div>
               </div>
 
-              <Button 
-                onClick={calculateSavings} 
-                className="w-full bg-green-600 hover:bg-green-700"
-                size="lg"
-              >
-                <Calculator className="w-5 h-5 mr-2" />
-                Calcular Economia
-              </Button>
+              <div className="bg-gradient-to-r from-green-100 to-yellow-100 p-4 rounded-lg border-2 border-green-300 mb-6">
+                <p className="text-lg text-center">
+                  <span className="font-semibold text-green-800">Economia anual estimada:</span>{" "}
+                  <span className="text-2xl font-bold text-green-900">
+                    R$ {calculateYearlySavings().toFixed(2)}
+                  </span>
+                </p>
+                <p className="text-sm text-center mt-2 text-green-700">
+                  Payback aproximado: {calculatePayback().toFixed(1)} anos
+                </p>
+              </div>
 
-              {showResults && (
-                <div className="space-y-4 pt-6 border-t">
-                  <h3 className="text-xl font-semibold flex items-center gap-2 text-green-600">
-                    <TrendingDown className="w-5 h-5" />
-                    Sua Economia Estimada
-                  </h3>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <Card className="bg-green-50 dark:bg-green-950/20 border-green-200">
-                      <CardContent className="pt-6">
-                        <p className="text-sm text-muted-foreground mb-2">Por Mês</p>
-                        <p className="text-2xl font-bold text-green-600">
-                          R$ {getMonthlySavings().toFixed(2)}
-                        </p>
-                      </CardContent>
-                    </Card>
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Button
+                  onClick={handleDownloadReport}
+                  variant="outline"
+                  className="flex-1 h-12 border-green-600 text-green-700 hover:bg-green-50"
+                >
+                  <Download className="mr-2 h-5 w-5" />
+                  Baixar Relatório
+                </Button>
 
-                    <Card className="bg-green-50 dark:bg-green-950/20 border-green-200">
-                      <CardContent className="pt-6">
-                        <p className="text-sm text-muted-foreground mb-2">Por Ano</p>
-                        <p className="text-2xl font-bold text-green-600">
-                          R$ {getYearlySavings().toFixed(2)}
-                        </p>
-                      </CardContent>
-                    </Card>
-
-                    <Card className="bg-green-50 dark:bg-green-950/20 border-green-200">
-                      <CardContent className="pt-6">
-                        <p className="text-sm text-muted-foreground mb-2">Em 25 Anos</p>
-                        <p className="text-2xl font-bold text-green-600">
-                          R$ {getLifetimeSavings().toLocaleString('pt-BR', { maximumFractionDigits: 0 })}
-                        </p>
-                      </CardContent>
-                    </Card>
-                  </div>
-
-                  <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg">
-                    <p className="text-sm text-muted-foreground">
-                      * Cálculo baseado em 95% de redução na conta de luz e aumento médio de 8% ao ano nas tarifas de energia.
-                    </p>
-                  </div>
-
-                  <div className="space-y-3 pt-4">
-                    {!showEmailInput ? (
-                      <Button 
-                        onClick={() => setShowEmailInput(true)}
-                        variant="outline"
-                        className="w-full"
-                        size="lg"
-                      >
-                        <Download className="w-5 h-5 mr-2" />
-                        Gerar Relatório
-                      </Button>
-                    ) : (
-                      <div className="space-y-3 p-4 bg-secondary/20 rounded-lg">
-                        <Label htmlFor="email">
-                          Enviar relatório por e-mail (opcional)
-                        </Label>
-                        <div className="flex gap-2">
-                          <Input
-                            id="email"
-                            type="email"
-                            placeholder="seu@email.com"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                          />
-                          <Button onClick={handleSendEmail} className="bg-green-600 hover:bg-green-700">
-                            <Mail className="w-4 h-4 mr-2" />
-                            Enviar
-                          </Button>
-                        </div>
-                        <Button 
-                          onClick={() => setShowEmailInput(false)}
-                          variant="ghost"
-                          size="sm"
-                        >
-                          Cancelar
-                        </Button>
+                <Dialog open={showEmailDialog} onOpenChange={setShowEmailDialog}>
+                  <DialogTrigger asChild>
+                    <Button className="flex-1 h-12 bg-green-600 hover:bg-green-700">
+                      <Mail className="mr-2 h-5 w-5" />
+                      Enviar por E-mail
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Enviar Relatório por E-mail</DialogTitle>
+                      <DialogDescription>
+                        Digite seu e-mail para receber o relatório completo de viabilidade
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="space-y-4 py-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="email">E-mail</Label>
+                        <Input
+                          id="email"
+                          type="email"
+                          placeholder="seu@email.com"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                        />
                       </div>
-                    )}
-                  </div>
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-    </div>
+                      <Button 
+                        onClick={handleSendEmail}
+                        className="w-full bg-green-600 hover:bg-green-700"
+                      >
+                        Enviar Relatório
+                      </Button>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+              </div>
+            </div>
+          </div>
+        )}
+      </CardContent>
+    </Card>
   );
 };
 
