@@ -9,63 +9,73 @@ const EnergiaSolarContent = () => {
   return (
     <>
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-br from-yellow-400 via-green-400 to-green-500 rounded-xl overflow-hidden mb-12">
-        <div className="grid md:grid-cols-2 gap-8 items-center p-8 md:p-12">
-          {/* Left Content */}
-          <div className="relative z-10 text-white">
-            <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
-              Reduza sua conta de luz com energia solar em Rondônia
-            </h1>
-            <p className="text-lg md:text-xl mb-8 text-white/90">
-              Simule agora quanto você pode economizar e descubra o tamanho ideal do seu sistema fotovoltaico
-            </p>
-            <button
-              onClick={() => {
-                const calculator = document.getElementById('solar-calculator');
-                calculator?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              }}
-              className="bg-white text-green-600 hover:bg-green-50 px-8 py-4 rounded-full font-semibold text-lg transition-all hover:scale-105 shadow-lg"
-            >
-              Calcular Economia
-            </button>
-          </div>
-          
-          {/* Right Image */}
-          <div className="relative z-10 hidden md:flex justify-center items-center">
-            <div className="relative">
-              {/* Decorative sun */}
-              <div className="absolute -top-8 -right-8 w-24 h-24 bg-yellow-300 rounded-full blur-2xl opacity-50" />
-              <div className="absolute -top-4 -right-4 w-16 h-16 bg-yellow-400 rounded-full" />
-              
-              {/* Solar panel illustration */}
-              <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-8 border-2 border-white/20">
-                <div className="grid grid-cols-3 gap-2">
-                  {[...Array(9)].map((_, i) => (
-                    <div
-                      key={i}
-                      className="w-16 h-16 bg-gradient-to-br from-blue-900 to-blue-700 rounded border-2 border-white/30"
-                      style={{
-                        boxShadow: 'inset 0 2px 4px rgba(255,255,255,0.1)'
-                      }}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        {/* Decorative elements */}
-        <div className="absolute top-0 left-0 w-full h-full opacity-20">
-          <div className="absolute top-10 left-10 w-32 h-32 bg-yellow-300 rounded-full blur-3xl" />
-          <div className="absolute bottom-10 right-10 w-40 h-40 bg-green-400 rounded-full blur-3xl" />
-        </div>
-      </div>
+<section className="relative flex flex-col items-center justify-center text-center py-20 px-6 overflow-hidden bg-gradient-to-br from-green-600 via-green-700 to-emerald-800">
+  <div className="absolute inset-0">
+    <img
+      src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1920"
+      alt="Painéis solares"
+      className="w-full h-full object-cover opacity-40"
+    />
+  </div>
 
-      {/* Solar Calculator */}
-      <div id="solar-calculator" className="mb-12 scroll-mt-20">
-        <SolarCalculator />
-      </div>
+  <div className="relative z-10 max-w-3xl text-white">
+    <h1 className="text-4xl md:text-5xl font-bold mb-4">
+      Economize com <span className="text-yellow-300">Energia Solar</span>
+    </h1>
+    <p className="text-lg mb-8 text-white/90">
+      Descubra quanto você pode economizar instalando um sistema solar em Rondônia.
+    </p>
+
+    {/* Calculadora simples */}
+    <div className="bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow-xl text-left">
+      <h2 className="text-xl font-semibold mb-4 text-white">Simule sua Economia</h2>
+      <form
+        id="calcSolar"
+        className="grid grid-cols-1 md:grid-cols-2 gap-4 text-black"
+        onSubmit={(e) => {
+          e.preventDefault();
+          const consumo = parseFloat((document.getElementById('consumo') as HTMLInputElement).value);
+          const valor = consumo * 0.95; // valor médio kWh em Rondônia (R$ 0,95)
+          const economia = valor * 0.85; // 85% de economia estimada
+          alert(`Você pode economizar cerca de R$ ${economia.toFixed(2)} por mês com energia solar!`);
+        }}
+      >
+        <div>
+          <label htmlFor="consumo" className="block text-white mb-2 font-medium">
+            Consumo mensal (kWh)
+          </label>
+          <input
+            id="consumo"
+            type="number"
+            required
+            placeholder="Ex: 400"
+            className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+          />
+        </div>
+        <div className="flex items-end">
+          <button
+            type="submit"
+            className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-3 rounded-md transition"
+          >
+            Calcular Economia
+          </button>
+        </div>
+      </form>
+    </div>
+
+    {/* CTA final */}
+    <div className="mt-10">
+      <a
+        href="#contato"
+        className="inline-block bg-green-500 hover:bg-green-600 text-white font-semibold px-8 py-3 rounded-lg transition"
+      >
+        Solicitar Orçamento Personalizado
+      </a>
+    </div>
+  </div>
+</section>
+
+
 
       {/* About Section */}
       <div className="mb-12">
