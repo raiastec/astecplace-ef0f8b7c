@@ -6,6 +6,8 @@ import { CheckCircle2 } from 'lucide-react';
 import SolarCalculator from '@/components/sections/SolarCalculator';
 import BanksFinancingSection from '@/components/sections/BanksFinancingSection';
 
+
+
 const EnergiaSolar = () => {
   const portfolioImages = [
     "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800",
