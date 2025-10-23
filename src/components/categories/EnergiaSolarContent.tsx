@@ -3,7 +3,7 @@ import BanksFinancingSection from "@/components/sections/BanksFinancingSection";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import astecLogo from "@/assets/astecplace-logo.png";
+import astecLogo from "@/assets/ecopower.jpg";
 
 const EnergiaSolarContent = () => {
   return (

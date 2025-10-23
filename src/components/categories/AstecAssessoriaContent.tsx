@@ -211,10 +211,10 @@ const AstecAssessoriaContent = ({ onContactClick }: AstecAssessoriaContentProps)
   };
 
   const partners = [
-    { name: "Banco do Brasil", logo: "/src/assets/banks/banco-do-brasil.png" },
-    { name: "Caixa Econômica", logo: "/src/assets/banks/caixa.png" },
-    { name: "Sicoob", logo: "/src/assets/banks/sicoob.png" },
-    { name: "Sicredi", logo: "/src/assets/banks/sicredi.png" },
+    { name: "Banco do Brasil", logo: "/src/assets/banks/banco brasil rural.png" },
+    { name: "Caixa Econômica", logo: "/src/assets/banks/caixa rural1.png" },
+    { name: "Sicoob", logo: "/src/assets/banks/sicoob rural.png" },
+    { name: "Sicredi", logo: "/src/assets/banks/credisis rural.png" },
     { name: "Cresol", logo: "/src/assets/banks/cresol.png" },
     { name: "Banco da Amazônia", logo: "/src/assets/banks/banco-amazonia.jpg" }
   ];
