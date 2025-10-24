@@ -10,7 +10,7 @@ import sicoob from "@/assets/banks/sicoob_rural.png";
 import sicredi from "@/assets/banks/credisis_rural.png";
 // import bv from "@/assets/banks/bv.png";
 import cresol from "@/assets/banks/cresol.png";
-import bancoAmazonia from "@/assets/banks/Banco_da_Amazônia.jpg";
+import bancoAmazonia from "@/assets/banks/Banco_da_Amazônia.png";
 
 const banks = [
   { name: "Banco do Brasil", logo: bancoDoBrasil },
