@@ -83,6 +83,8 @@ const EnergiaSolar = () => {
           </div>
         </section>
 
+        
+
         {/* Solar Calculator Section */}
         <SolarCalculator />
 
@@ -121,9 +123,12 @@ const EnergiaSolar = () => {
           </div>
         </section>
       </main>
+
       <Footer />
     </div>
   );
 };
+
+
 
 export default EnergiaSolar;

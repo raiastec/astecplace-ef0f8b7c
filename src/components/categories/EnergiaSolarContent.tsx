@@ -4,6 +4,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import astecLogo from "@/assets/ecopower.jpg";
+import hospitaldoamor from "@/assets/hospital-de-amor-barretos.png";
+import ze from "@/assets/zeze.png";
+import barretos from "@/assets/barretos.jpg";
 
 const EnergiaSolarContent = () => {
   return (
@@ -76,7 +79,44 @@ const EnergiaSolarContent = () => {
 </section>
 
 
+      {/* Bloco de Patrocinadores */}
+<section className="w-full bg-gradient-to-r from-green-700 via-green-600 to-green-800 py-12 mt-16">
+  <div className="max-w-7xl mx-auto text-center px-4">
+    <h2 className="text-3xl font-bold text-white mb-10">
+      Nossos Patrocinadores
+    </h2>
 
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+      {/* Patrocinador 1 */}
+      <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl shadow-lg hover:scale-105 hover:bg-white/20 transition-transform duration-500 flex items-center justify-center">
+        <img
+          src= {ze}
+          alt="Zezé Di Camargo & Luciano"
+          className="w-32 h-20 object-contain"
+        />
+      </div>
+      {/* Patrocinador 2 */}
+      <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl shadow-lg hover:scale-105 hover:bg-white/20 transition-transform duration-500 flex items-center justify-center">
+        <img
+          src= {barretos}
+          alt="Hospital de Amor"
+          className="w-32 h-20 object-contain"
+           />
+      </div>
+      {/* Patrocinador 3 */}
+      <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl shadow-lg hover:scale-105 hover:bg-white/20 transition-transform duration-500 flex items-center justify-center">
+        <img
+          src= {hospitaldoamor}
+          alt="Hospital de Amor"
+          className="w-32 h-20 object-contain"
+        />
+      </div>
+    </div>
+    <p className="text-white/80 mt-10 text-sm">
+      Agradecemos o apoio de nossos parceiros na missão de promover energia limpa e sustentável 💚
+    </p>
+  </div>
+</section>
       {/* About Section */}
       <div className="mb-12">
         <Card className="overflow-hidden">

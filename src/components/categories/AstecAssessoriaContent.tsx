@@ -216,7 +216,7 @@ const AstecAssessoriaContent = ({ onContactClick }: AstecAssessoriaContentProps)
     { name: "Sicoob", logo: "/src/assets/banks/sicoob_rural.png" },
     { name: "Sicredi", logo: "/src/assets/banks/credisis_rural.png" },
     { name: "Cresol", logo: "/src/assets/banks/cresol.png" },
-    { name: "Banco da Amazônia", logo: "/src/assets/banks/banco_amazonia.jpg" }
+    { name: "Banco da Amazônia", logo: "/src/assets/banks/Banco_da_Amazônia.jpg" }
   ];
 
   const ServiceCard = ({ icon: Icon, title, description, color }: { icon: any, title: string, description: string, color?: string }) => (
