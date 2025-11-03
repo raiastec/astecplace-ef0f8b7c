@@ -20,10 +20,10 @@ const ConexaoSection = () => {
   ];
 
   return (
-    <section className="py-16 bg-secondary/20">
+    <section className="py-12 md:py-16 bg-secondary/20">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-10 lg:gap-12">
             {steps.map((step, index) => (
               <div key={index} className="text-center relative">
                 {/* Connector Arrow */}
@@ -34,14 +34,16 @@ const ConexaoSection = () => {
                 )}
                 
                 {/* Step Circle */}
-                <div className="w-24 h-24 mx-auto mb-6 bg-background border-2 border-primary/20 rounded-full flex items-center justify-center shadow-lg">
-                  {step.icon}
+                <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-4 md:mb-6 bg-background border-2 border-primary/20 rounded-full flex items-center justify-center shadow-lg">
+                  <div className="scale-75 sm:scale-100">
+                    {step.icon}
+                  </div>
                 </div>
                 
                 {/* Content */}
-                <div className="space-y-4">
-                  <h3 className="text-xl font-bold text-foreground">{step.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{step.description}</p>
+                <div className="space-y-3 md:space-y-4 px-2">
+                  <h3 className="text-lg sm:text-xl font-bold text-foreground">{step.title}</h3>
+                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{step.description}</p>
                 </div>
               </div>
             ))}

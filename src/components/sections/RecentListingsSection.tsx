@@ -84,26 +84,26 @@ const RecentListingsSection = () => {
   }
 
   return (
-    <section className="py-16">
+    <section className="py-12 md:py-16">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between mb-12">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 md:mb-12 gap-4">
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-2 md:mb-4">
               Anúncios Recentes
             </h2>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground">
               Confira as últimas oportunidades disponíveis
             </p>
           </div>
           
-          <Button variant="outline" className="hidden md:flex" asChild>
+          <Button variant="outline" className="hidden md:flex shrink-0" asChild>
             <Link to="/catalogo">
               Ver todos
             </Link>
           </Button>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {anuncios.map((anuncio) => (
             <ListingCard
               key={anuncio.id}
@@ -122,8 +122,8 @@ const RecentListingsSection = () => {
           ))}
         </div>
         
-        <div className="text-center mt-8 md:hidden">
-          <Button variant="outline" asChild>
+        <div className="text-center mt-6 md:mt-8 md:hidden">
+          <Button variant="outline" className="w-full sm:w-auto" asChild>
             <Link to="/catalogo">
               Ver todos os anúncios
             </Link>

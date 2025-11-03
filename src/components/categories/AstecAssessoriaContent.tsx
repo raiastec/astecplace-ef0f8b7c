@@ -235,32 +235,32 @@ const AstecAssessoriaContent = ({ onContactClick }: AstecAssessoriaContentProps)
   return (
     <>
       {/* Hero Section */}
-      <section className="py-[60px] bg-gradient-to-b from-[#0a4d1a] to-[#0d6827] -mx-4 md:-mx-6 lg:-mx-8 mb-16">
+      <section className="py-12 sm:py-16 md:py-[60px] bg-gradient-to-b from-[#0a4d1a] to-[#0d6827] -mx-4 md:-mx-6 lg:-mx-8 mb-12 md:mb-16">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             {/* Logo Image */}
-            <div className="mb-8">
+            <div className="mb-6 md:mb-8">
               <img 
                 src={logoAstecHero} 
                 alt="Astec Assessoria e Projetos Agropecuários" 
-                className="w-full max-w-[550px] mx-auto rounded-2xl shadow-lg"
+                className="w-full max-w-[90%] sm:max-w-[450px] md:max-w-[550px] mx-auto rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg"
               />
             </div>
             
             {/* Title */}
-            <h1 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 md:mb-6 px-2">
               ASTEC Assessoria e Projetos Agropecuários
             </h1>
             
             {/* Description */}
-            <p className="text-lg text-white/90 mb-8 leading-relaxed">
+            <p className="text-base sm:text-lg text-white/90 mb-6 md:mb-8 leading-relaxed px-2">
               Soluções completas em crédito rural, regularização fundiária e ambiental, e consultoria agronômica para o sucesso do seu negócio.
             </p>
             
             {/* CTA Button */}
             <Button 
               onClick={onContactClick}
-              className="bg-[#008000] hover:bg-[#006600] text-white font-semibold px-8 py-6 text-lg rounded-full shadow-lg transition-all hover:scale-105"
+              className="bg-[#008000] hover:bg-[#006600] text-white font-semibold px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg rounded-full shadow-lg transition-all hover:scale-105"
             >
               Fale Conosco
             </Button>
@@ -269,9 +269,9 @@ const AstecAssessoriaContent = ({ onContactClick }: AstecAssessoriaContentProps)
       </section>
 
       {/* Serviços de Crédito */}
-      <section className="mb-16">
-        <h2 className="text-3xl font-bold mb-8 text-center">SERVIÇOS DE CRÉDITO</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <section className="mb-12 md:mb-16">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-6 md:mb-8 text-center px-4">SERVIÇOS DE CRÉDITO</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
           {services.credito.map((service, index) => (
             <ServiceCard key={index} {...service} />
           ))}
@@ -279,9 +279,9 @@ const AstecAssessoriaContent = ({ onContactClick }: AstecAssessoriaContentProps)
       </section>
 
       {/* Regularização Fundiária */}
-      <section className="mb-16">
-        <h2 className="text-3xl font-bold mb-8 text-center">REGULARIZAÇÃO FUNDIÁRIA</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <section className="mb-12 md:mb-16">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-6 md:mb-8 text-center px-4">REGULARIZAÇÃO FUNDIÁRIA</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
           {services.fundiaria.map((service, index) => (
             <ServiceCard key={index} {...service} />
           ))}
@@ -289,9 +289,9 @@ const AstecAssessoriaContent = ({ onContactClick }: AstecAssessoriaContentProps)
       </section>
 
       {/* Regularização Ambiental */}
-      <section className="mb-16">
-        <h2 className="text-3xl font-bold mb-8 text-center">REGULARIZAÇÃO AMBIENTAL</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <section className="mb-12 md:mb-16">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-6 md:mb-8 text-center px-4">REGULARIZAÇÃO AMBIENTAL</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
           {services.ambiental.map((service, index) => (
             <ServiceCard key={index} {...service} />
           ))}
@@ -299,9 +299,9 @@ const AstecAssessoriaContent = ({ onContactClick }: AstecAssessoriaContentProps)
       </section>
 
       {/* Serviços Agronômicos */}
-      <section className="mb-16">
-        <h2 className="text-3xl font-bold mb-8 text-center">SERVIÇOS AGRONÔMICOS</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section className="mb-12 md:mb-16">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-6 md:mb-8 text-center px-4">SERVIÇOS AGRONÔMICOS</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {services.agronomicos.map((service, index) => (
             <ServiceCard key={index} {...service} />
           ))}
@@ -309,11 +309,11 @@ const AstecAssessoriaContent = ({ onContactClick }: AstecAssessoriaContentProps)
       </section>
 
       {/* Parceiros */}
-      <section className="mb-16">
-        <h2 className="text-3xl font-bold mb-8 text-center">Principais Parceiros</h2>
-        <div className="flex flex-wrap justify-center items-center gap-8">
+      <section className="mb-12 md:mb-16">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-6 md:mb-8 text-center px-4">Principais Parceiros</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-8 justify-items-center">
           {partners.map((partner, index) => (
-            <div key={index} className="w-32 h-20 flex items-center justify-center grayscale hover:grayscale-0 transition-all">
+            <div key={index} className="w-24 h-16 sm:w-32 sm:h-20 flex items-center justify-center grayscale hover:grayscale-0 transition-all">
               <img 
                 src={partner.logo} 
                 alt={partner.name} 
@@ -326,13 +326,13 @@ const AstecAssessoriaContent = ({ onContactClick }: AstecAssessoriaContentProps)
 
       {/* CTA Final */}
       <Card className="bg-primary text-primary-foreground">
-        <CardContent className="p-8 text-center">
-          <Users className="h-16 w-16 mx-auto mb-4" />
-          <h2 className="text-3xl font-bold mb-4">Pronto para Crescer?</h2>
-          <p className="text-lg mb-6 opacity-90">
+        <CardContent className="p-6 md:p-8 text-center">
+          <Users className="h-12 w-12 sm:h-16 sm:w-16 mx-auto mb-4" />
+          <h2 className="text-2xl sm:text-3xl font-bold mb-3 md:mb-4 px-2">Pronto para Crescer?</h2>
+          <p className="text-base sm:text-lg mb-4 md:mb-6 opacity-90 px-2">
             Entre em contato conosco e descubra como podemos ajudar seu negócio rural a prosperar.
           </p>
-          <Button size="lg" variant="secondary" onClick={onContactClick}>
+          <Button size="lg" variant="secondary" onClick={onContactClick} className="w-full sm:w-auto">
             Falar com Consultor
           </Button>
         </CardContent>
