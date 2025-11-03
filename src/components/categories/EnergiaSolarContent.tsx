@@ -12,68 +12,41 @@ const EnergiaSolarContent = () => {
   return (
     <>
       {/* Hero Section */}
-<section className="relative flex flex-col items-center justify-center text-center py-12 sm:py-16 md:py-20 px-4 sm:px-6 overflow-hidden bg-gradient-to-br from-green-600 via-green-700 to-emerald-800">
-  <div className="absolute inset-0">
+<section className="relative py-16 sm:py-20 md:py-24 bg-gradient-to-br from-yellow-50 via-green-50 to-emerald-100 dark:from-yellow-950/20 dark:via-green-950/20 dark:to-emerald-950/30 overflow-hidden">
+  <div className="absolute inset-0 opacity-10">
     <img
       src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1920"
       alt="Painéis solares"
-      className="w-full h-full object-cover opacity-40"
+      className="w-full h-full object-cover"
     />
   </div>
 
-  <div className="relative z-10 max-w-3xl text-white w-full">
-    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 md:mb-4 px-2">
-      Economize com <span className="text-yellow-300">Energia Solar</span>
-    </h1>
-    <p className="text-base sm:text-lg mb-6 md:mb-8 text-white/90 px-2">
-      Descubra quanto você pode economizar instalando um sistema solar em Rondônia.
-    </p>
+  <div className="container mx-auto px-4 relative z-10">
+    <div className="grid md:grid-cols-2 gap-8 items-center max-w-7xl mx-auto">
+      {/* Conteúdo */}
+      <div className="text-center md:text-left">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-foreground">
+          Reduza sua conta de luz com <span className="text-green-600">energia solar</span>
+        </h1>
+        <p className="text-base sm:text-lg mb-6 text-muted-foreground">
+          Simule agora quanto você pode economizar e descubra o tamanho ideal do seu sistema fotovoltaico em Rondônia.
+        </p>
+        <a
+          href="#calculadora"
+          className="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition text-sm sm:text-base shadow-lg"
+        >
+          Calcular Economia
+        </a>
+      </div>
 
-    {/* Calculadora simples */}
-    <div className="bg-white/10 backdrop-blur-md p-4 sm:p-6 rounded-xl md:rounded-2xl shadow-xl text-left">
-      <h2 className="text-lg sm:text-xl font-semibold mb-3 md:mb-4 text-white">Simule sua Economia</h2>
-      <form
-        id="calcSolar"
-        className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 text-black"
-        onSubmit={(e) => {
-          e.preventDefault();
-          const consumo = parseFloat((document.getElementById('consumo') as HTMLInputElement).value);
-          const valor = consumo * 0.95; // valor médio kWh em Rondônia (R$ 0,95)
-          const economia = valor * 0.85; // 85% de economia estimada
-          alert(`Você pode economizar cerca de R$ ${economia.toFixed(2)} por mês com energia solar!`);
-        }}
-      >
-        <div>
-          <label htmlFor="consumo" className="block text-white mb-2 font-medium text-sm sm:text-base">
-            Consumo mensal (kWh)
-          </label>
-          <input
-            id="consumo"
-            type="number"
-            required
-            placeholder="Ex: 400"
-            className="w-full p-2 sm:p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-sm sm:text-base"
-          />
-        </div>
-        <div className="flex items-end">
-          <button
-            type="submit"
-            className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 sm:py-3 rounded-md transition text-sm sm:text-base"
-          >
-            Calcular Economia
-          </button>
-        </div>
-      </form>
-    </div>
-
-    {/* CTA final */}
-    <div className="mt-6 md:mt-10">
-      <a
-        href="#contato"
-        className="inline-block bg-green-500 hover:bg-green-600 text-white font-semibold px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg transition text-sm sm:text-base"
-      >
-        Solicitar Orçamento Personalizado
-      </a>
+      {/* Imagem ilustrativa */}
+      <div className="flex justify-center md:justify-end">
+        <img
+          src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800"
+          alt="Casa com painéis solares"
+          className="rounded-2xl shadow-2xl max-w-full h-auto"
+        />
+      </div>
     </div>
   </div>
 </section>
@@ -182,20 +155,34 @@ const EnergiaSolarContent = () => {
       </div>
 
       {/* Portfolio Section */}
-      <div className="mb-12 text-center">
+      <div className="mb-12 text-center" id="projetos">
         <Badge className="mb-3 md:mb-4 bg-green-100 text-green-700 hover:bg-green-100">
           PORTFÓLIO
         </Badge>
-        <h2 className="text-2xl sm:text-3xl font-bold mb-3 md:mb-4 px-4">Projetos</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold mb-3 md:mb-4 px-4">Projetos de Energia Solar</h2>
         <p className="text-muted-foreground max-w-3xl mx-auto mb-6 md:mb-8 text-sm sm:text-base px-4">
           Somos capazes de concluir projetos de qualquer escala, da preferência do cliente. 
           Nossos serviços incluem, entre outros, design, construção e instalação.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-          {[1, 2, 3, 4, 5, 6].map((i) => (
-            <Card key={i} className="overflow-hidden group">
-              <div className="h-48 sm:h-56 md:h-64 bg-muted flex items-center justify-center overflow-hidden">
-                <span className="text-muted-foreground text-sm sm:text-base">Projeto {i}</span>
+          {[
+            "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800",
+            "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=800",
+            "https://images.unsplash.com/photo-1497440001374-f26997328c1b?w=800",
+            "https://images.unsplash.com/photo-1559302504-64aae6ca6b6d?w=800",
+            "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800",
+            "https://images.unsplash.com/photo-1624397640148-949b1732bb0a?w=800"
+          ].map((img, i) => (
+            <Card key={i} className="overflow-hidden group cursor-pointer">
+              <div className="h-48 sm:h-56 md:h-64 bg-muted overflow-hidden relative">
+                <img 
+                  src={img} 
+                  alt={`Projeto ${i + 1}`}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                  <span className="text-white font-semibold">Projeto {i + 1}</span>
+                </div>
               </div>
             </Card>
           ))}

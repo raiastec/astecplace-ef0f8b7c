@@ -139,20 +139,65 @@ www.astecplace.com
     toast.success("Relatório baixado com sucesso!");
   };
 
-  const handleSendEmail = () => {
+  const handleSendEmail = async () => {
     if (!email || !email.includes('@')) {
       toast.error("Por favor, insira um e-mail válido");
       return;
     }
-    
-    // Aqui você implementaria o envio real do e-mail via edge function
-    toast.success(`Relatório enviado para ${email}!`);
-    setShowEmailDialog(false);
-    setEmail("");
+
+    try {
+      const reportContent = `
+RELATÓRIO DE ECONOMIA SOLAR - RONDÔNIA
+
+Dados da Simulação:
+- Consumo Mensal: ${monthlyConsumption} kWh
+- Cidade: ${selectedCity}
+- Tarifa Atual: R$ ${getCurrentTariff().toFixed(2)}/kWh
+
+Resultados:
+- Tamanho do Sistema: ${calculateSystemSize().toFixed(2)} kWp
+- Geração Mensal: ${calculateMonthlyGeneration().toFixed(2)} kWh
+- Economia Mensal: R$ ${calculateMonthlySavings().toFixed(2)}
+- Economia Anual: R$ ${calculateYearlySavings().toFixed(2)}
+- Redução de CO₂: ${calculateCO2Reduction().toFixed(2)} kg/ano
+- Payback Estimado: ${calculatePayback().toFixed(1)} anos
+
+Relatório gerado em ${new Date().toLocaleDateString('pt-BR')} às ${new Date().toLocaleTimeString('pt-BR')}
+      `;
+
+      const response = await fetch('https://uzopxniwvpzafjapeykp.supabase.co/functions/v1/bitrix24-lead', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          fields: {
+            TITLE: `Simulação Solar - ${selectedCity}`,
+            NAME: email.split('@')[0],
+            EMAIL: [{ VALUE: email, VALUE_TYPE: 'WORK' }],
+            COMMENTS: reportContent,
+            SOURCE_ID: 'WEB',
+            OPPORTUNITY: calculateYearlySavings()
+          }
+        })
+      });
+
+      if (response.ok) {
+        toast.success('Relatório enviado com sucesso!');
+      } else {
+        toast.error('Erro ao enviar relatório. Tente novamente.');
+      }
+      
+      setShowEmailDialog(false);
+      setEmail('');
+    } catch (error) {
+      console.error('Erro ao enviar e-mail:', error);
+      toast.error('Erro ao enviar relatório. Tente novamente.');
+    }
   };
 
   return (
-    <Card className="bg-gradient-to-br from-green-50 to-yellow-50 border-green-200">
+    <Card id="calculadora" className="bg-gradient-to-br from-green-50 to-yellow-50 border-green-200">
       <CardHeader className="text-center">
         <div className="flex justify-center mb-4">
           <div className="bg-gradient-to-br from-yellow-400 to-green-500 p-4 rounded-full">

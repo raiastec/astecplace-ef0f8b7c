@@ -109,20 +109,6 @@ const CategoryListing = () => {
           <AstecAssessoriaContent onContactClick={() => setIsContactFormOpen(true)} />
         )}
 
-        {/* Divider for categories with institutional content */}
-        {(isEnergiaSolar || isAstecAssessoria) && (
-          <div className="my-16">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-foreground mb-4">
-                Anúncios de {categoryTitle}
-              </h2>
-              <p className="text-muted-foreground">
-                Confira todos os anúncios disponíveis nesta categoria
-              </p>
-            </div>
-          </div>
-        )}
-
         {/* Standard Category Header for other categories */}
         {!isEnergiaSolar && !isAstecAssessoria && (
           <div className="text-center mb-8">
@@ -131,83 +117,6 @@ const CategoryListing = () => {
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Explore todos os anúncios da categoria {categoryTitle.toLowerCase()}
-            </p>
-          </div>
-        )}
-
-        {/* Results */}
-        <div className="mb-6">
-          <p className="text-muted-foreground">
-            {loading ? 'Carregando...' : `${sortedAnuncios.length} anúncios encontrados`}
-          </p>
-        </div>
-
-        {/* Listings Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {sortedAnuncios.map((anuncio) => (
-            <Card key={anuncio.id} className="group hover:shadow-lg transition-all duration-300 cursor-pointer overflow-hidden">
-              <div className="relative h-48 overflow-hidden">
-                {anuncio.imagens && anuncio.imagens.length > 0 ? (
-                  <img 
-                    src={anuncio.imagens[0]} 
-                    alt={anuncio.titulo}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                ) : (
-                  <div className="w-full h-full bg-muted flex items-center justify-center">
-                    <span className="text-muted-foreground">Sem imagem</span>
-                  </div>
-                )}
-                <Badge className="absolute top-3 left-3 bg-background/80 text-foreground">
-                  {categoryTitle}
-                </Badge>
-              </div>
-              
-              <CardContent className="p-4">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs text-muted-foreground flex items-center">
-                    <Calendar className="w-3 h-3 mr-1" />
-                    {new Date(anuncio.data_publicacao).toLocaleDateString('pt-BR')}
-                  </span>
-                  {anuncio.localizacao && (
-                    <span className="text-xs text-muted-foreground">
-                      {anuncio.localizacao}
-                    </span>
-                  )}
-                </div>
-                
-                <h3 className="font-semibold mb-2 text-foreground line-clamp-2 group-hover:text-primary transition-colors">
-                  {anuncio.titulo}
-                </h3>
-                
-                {anuncio.descricao && (
-                  <p className="text-muted-foreground text-sm mb-3 line-clamp-2">
-                    {anuncio.descricao}
-                  </p>
-                )}
-                
-                <div className="flex items-center justify-between">
-                  <span className="text-xl font-bold text-primary">
-                    {anuncio.preco ? formatPrice(anuncio.preco) : 'Consulte'}
-                  </span>
-                  <Button variant="outline" size="sm" asChild>
-                    <Link to={`/anuncio/${anuncio.id}`}>
-                      <Eye className="h-4 w-4 mr-2" />
-                      Ver detalhes
-                    </Link>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        {/* No results message */}
-        {!loading && sortedAnuncios.length === 0 && (
-          <div className="text-center py-12">
-            <h3 className="text-lg font-semibold mb-2">Nenhum anúncio encontrado</h3>
-            <p className="text-muted-foreground">
-              Não encontramos anúncios para os filtros selecionados. Tente ajustar sua busca.
             </p>
           </div>
         )}
