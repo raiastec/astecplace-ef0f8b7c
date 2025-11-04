@@ -3,7 +3,7 @@ import heroBackground from "@/assets/hero-background.jpg";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-[600px] flex items-center justify-center overflow-hidden">
+    <section className="w-full relative min-h-[600px] flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"

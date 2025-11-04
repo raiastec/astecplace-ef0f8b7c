@@ -235,8 +235,8 @@ const AstecAssessoriaContent = ({ onContactClick }: AstecAssessoriaContentProps)
   return (
     <>
       {/* Hero Section */}
-      <section className="py-12 sm:py-16 md:py-[60px] bg-gradient-to-b from-[#0a4d1a] to-[#0d6827] -mx-4 md:-mx-6 lg:-mx-8 mb-12 md:mb-16">
-        <div className="container mx-auto px-4">
+      <section className="w-full py-12 sm:py-16 md:py-20 bg-gradient-to-b from-[#0a4d1a] to-[#0d6827] mb-12 md:mb-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             {/* Logo Image */}
             <div className="mb-6 md:mb-8">

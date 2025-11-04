@@ -12,7 +12,7 @@ const EnergiaSolarContent = () => {
   return (
     <>
       {/* Hero Section */}
-<section className="relative py-16 sm:py-20 md:py-24 bg-gradient-to-br from-yellow-50 via-green-50 to-emerald-100 dark:from-yellow-950/20 dark:via-green-950/20 dark:to-emerald-950/30 overflow-hidden">
+<section className="w-full relative py-16 sm:py-20 md:py-24 bg-gradient-to-br from-yellow-50 via-green-50 to-emerald-100 dark:from-yellow-950/20 dark:via-green-950/20 dark:to-emerald-950/30 overflow-hidden">
   <div className="absolute inset-0 opacity-10">
     <img
       src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1920"
@@ -21,7 +21,7 @@ const EnergiaSolarContent = () => {
     />
   </div>
 
-  <div className="container mx-auto px-4 relative z-10">
+  <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <div className="grid md:grid-cols-2 gap-8 items-center max-w-7xl mx-auto">
       {/* Conteúdo */}
       <div className="text-center md:text-left">
@@ -54,7 +54,7 @@ const EnergiaSolarContent = () => {
 
       {/* Bloco de Patrocinadores */}
 <section className="w-full bg-gradient-to-r from-green-700 via-green-600 to-green-800 py-8 sm:py-10 md:py-12 mt-12 md:mt-16">
-  <div className="max-w-7xl mx-auto text-center px-4">
+  <div className="max-w-7xl mx-auto text-center px-4 sm:px-6 lg:px-8">
     <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6 md:mb-10">
       Nossos Patrocinadores
     </h2>
