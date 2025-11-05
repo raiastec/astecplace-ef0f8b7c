@@ -13,8 +13,8 @@ const AstecAssessoria = () => {
       <Header />
       <main>
         {/* Hero Section */}
-        <section className="py-20 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20">
-          <div className="container mx-auto px-4">
+        <section className="w-full py-20 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center">
               <div className="flex justify-center mb-6">
                 <img src="/lovable-uploads/98278bd0-3ec7-4308-a78e-de9884b89a86.png" alt="Astec Assessoria Agropecuária" className="h-40 w-auto rounded-lg" />

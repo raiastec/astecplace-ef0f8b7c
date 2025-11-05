@@ -23,7 +23,7 @@ const EnergiaSolar = () => {
       <Header />
       <main>
         {/* Hero Section - Serviço Solar Especializado */}
-        <section className="relative h-[500px] flex items-center justify-center overflow-hidden">
+        <section className="w-full relative min-h-[400px] md:min-h-[500px] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0">
             <img 
               src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1920" 
@@ -32,7 +32,7 @@ const EnergiaSolar = () => {
             />
             <div className="absolute inset-0 bg-black/50" />
           </div>
-          <div className="relative z-10 text-center px-4">
+          <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
               Serviço Solar<br />
               <span className="text-green-400">Especializado</span>
