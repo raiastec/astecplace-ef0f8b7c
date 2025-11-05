@@ -3,6 +3,7 @@ import BanksFinancingSection from "@/components/sections/BanksFinancingSection";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { motion } from "framer-motion";
 import astecLogo from "@/assets/ecopower.jpg";
 import hospitaldoamor from "@/assets/hospital-de-amor-barretos.png";
 import ze from "@/assets/zeze.png";
@@ -24,29 +25,42 @@ const EnergiaSolarContent = () => {
   <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <div className="grid md:grid-cols-2 gap-8 items-center max-w-7xl mx-auto">
       {/* Conteúdo */}
-      <div className="text-center md:text-left">
+      <motion.div 
+        className="text-center md:text-left"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-foreground">
           Reduza sua conta de luz com <span className="text-green-600">energia solar</span>
         </h1>
         <p className="text-base sm:text-lg mb-6 text-muted-foreground">
           Simule agora quanto você pode economizar e descubra o tamanho ideal do seu sistema fotovoltaico em Rondônia.
         </p>
-        <a
+        <motion.a
           href="#calculadora"
           className="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition text-sm sm:text-base shadow-lg"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
         >
           Calcular Economia
-        </a>
-      </div>
+        </motion.a>
+      </motion.div>
 
       {/* Imagem ilustrativa */}
-      <div className="flex justify-center md:justify-end">
+      <motion.div 
+        className="flex justify-center md:justify-end"
+        initial={{ opacity: 0, x: 30 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+      >
         <img
           src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800"
           alt="Casa com painéis solares"
           className="rounded-2xl shadow-2xl max-w-full h-auto"
         />
-      </div>
+      </motion.div>
     </div>
   </div>
 </section>

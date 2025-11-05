@@ -17,6 +17,7 @@ import {
   TreePine,
   Stethoscope
 } from "lucide-react";
+import { motion } from "framer-motion";
 import astecLogo from "@/assets/astecplace-logo.png";
 import logoAstecHero from "@/assets/logo-astec-hero.jpg";
 
@@ -237,15 +238,25 @@ const AstecAssessoriaContent = ({ onContactClick }: AstecAssessoriaContentProps)
       {/* Hero Section */}
       <section className="w-full py-12 sm:py-16 md:py-20 bg-gradient-to-b from-[#0a4d1a] to-[#0d6827] mb-12 md:mb-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
+          <motion.div 
+            className="max-w-3xl mx-auto text-center"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
             {/* Logo Image */}
-            <div className="mb-6 md:mb-8">
+            <motion.div 
+              className="mb-6 md:mb-8"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            >
               <img 
                 src={logoAstecHero} 
                 alt="Astec Assessoria e Projetos Agropecuários" 
                 className="w-full max-w-[90%] sm:max-w-[450px] md:max-w-[550px] mx-auto rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg"
               />
-            </div>
+            </motion.div>
             
             {/* Title */}
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 md:mb-6 px-2">
@@ -258,13 +269,19 @@ const AstecAssessoriaContent = ({ onContactClick }: AstecAssessoriaContentProps)
             </p>
             
             {/* CTA Button */}
-            <Button 
-              onClick={onContactClick}
-              className="bg-[#008000] hover:bg-[#006600] text-white font-semibold px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg rounded-full shadow-lg transition-all hover:scale-105"
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
             >
-              Fale Conosco
-            </Button>
-          </div>
+              <Button 
+                onClick={onContactClick}
+                className="bg-[#008000] hover:bg-[#006600] text-white font-semibold px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg rounded-full shadow-lg transition-all hover:scale-105"
+              >
+                Fale Conosco
+              </Button>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
