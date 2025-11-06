@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { MessageSquare, DollarSign, FileText, Leaf, Stethoscope, Calculator, Home, Droplets, Shield, Building, TreePine, Wheat } from 'lucide-react';
 import GeneralContactForm from '@/components/forms/GeneralContactForm';
+import BanksCarousel from '@/components/sections/BanksCarousel';
 
 const AstecAssessoria = () => {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
@@ -519,46 +520,14 @@ const AstecAssessoria = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                CONHEÇA NOSSOS PRINCIPAIS PARCEIROS
+                Principais Parceiros
               </h2>
+              <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+                Principais instituições financeiras parceiras
+              </p>
             </div>
             
-            {/* Carrossel de logos */}
-            <div className="relative overflow-hidden">
-              <div className="flex animate-scroll space-x-8">
-                <div className="flex-shrink-0 w-40 h-20 bg-white rounded-lg shadow-sm flex items-center justify-center">
-                  <span className="text-orange-600 font-bold text-lg">CRESOL</span>
-                </div>
-                <div className="flex-shrink-0 w-40 h-20 bg-white rounded-lg shadow-sm flex items-center justify-center">
-                  <span className="text-green-600 font-bold text-lg">SICOOB</span>
-                </div>
-                <div className="flex-shrink-0 w-40 h-20 bg-white rounded-lg shadow-sm flex items-center justify-center">
-                  <span className="text-blue-600 font-bold text-lg">IBAMA</span>
-                </div>
-                <div className="flex-shrink-0 w-40 h-20 bg-white rounded-lg shadow-sm flex items-center justify-center">
-                  <span className="text-green-700 font-bold text-lg">INCRA</span>
-                </div>
-                <div className="flex-shrink-0 w-40 h-20 bg-white rounded-lg shadow-sm flex items-center justify-center">
-                  <span className="text-gray-700 font-bold text-sm">COFFEEBRAND</span>
-                </div>
-                <div className="flex-shrink-0 w-40 h-20 bg-white rounded-lg shadow-sm flex items-center justify-center">
-                  <span className="text-blue-700 font-bold text-lg">SEDAM</span>
-                </div>
-                {/* Duplicar para efeito contínuo */}
-                <div className="flex-shrink-0 w-40 h-20 bg-white rounded-lg shadow-sm flex items-center justify-center">
-                  <span className="text-orange-600 font-bold text-lg">CRESOL</span>
-                </div>
-                <div className="flex-shrink-0 w-40 h-20 bg-white rounded-lg shadow-sm flex items-center justify-center">
-                  <span className="text-green-600 font-bold text-lg">SICOOB</span>
-                </div>
-                <div className="flex-shrink-0 w-40 h-20 bg-white rounded-lg shadow-sm flex items-center justify-center">
-                  <span className="text-blue-600 font-bold text-lg">IBAMA</span>
-                </div>
-                <div className="flex-shrink-0 w-40 h-20 bg-white rounded-lg shadow-sm flex items-center justify-center">
-                  <span className="text-green-700 font-bold text-lg">INCRA</span>
-                </div>
-              </div>
-            </div>
+            <BanksCarousel />
           </div>
         </section>
 
