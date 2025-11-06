@@ -1,28 +1,18 @@
 import { useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import AutoScroll from "embla-carousel-auto-scroll";
-import bancoDoBrasil from "@/assets/banks/banco_brasil_rural.png";
-import caixa from "@/assets/banks/caixa_rural.png";
-import santander from "@/assets/banks/santander.png";
-import bradesco from "@/assets/banks/bradesco.jpg";
-import itau from "@/assets/banks/itau.png";
-import sicoob from "@/assets/banks/sicoob_rural.png";
-import sicredi from "@/assets/banks/credisis_rural.png";
-import bv from "@/assets/banks/bv.jpg";
-import cresol from "@/assets/banks/cresol.png";
-import bancoAmazonia from "@/assets/banks/Banco_da_Amazônia.jpg";
 
 const banks = [
-  { name: "Banco do Brasil", logo: bancoDoBrasil },
-  { name: "Caixa Econômica", logo: caixa },
-  { name: "Santander", logo: santander },
-  { name: "Bradesco", logo: bradesco },
-  { name: "Itaú", logo: itau },
-  { name: "Sicoob", logo: sicoob },
-  { name: "Sicredi", logo: sicredi },
-  { name: "BV Financeira", logo: bv },
-  { name: "Cresol", logo: cresol },
-  { name: "Banco da Amazônia", logo: bancoAmazonia },
+  { name: "Banco do Brasil", logo: "/banks/banco_brasil_rural.png" },
+  { name: "Caixa Econômica", logo: "/banks/caixa_rural.png" },
+  { name: "Santander", logo: "/banks/santander.png" },
+  { name: "Bradesco", logo: "/banks/bradesco.jpg" },
+  { name: "Itaú", logo: "/banks/itau.png" },
+  { name: "Sicoob", logo: "/banks/sicoob_rural.png" },
+  { name: "Sicredi", logo: "/banks/credisis_rural.png" },
+  { name: "BV Financeira", logo: "/banks/bv.jpg" },
+  { name: "Cresol", logo: "/banks/cresol.png" },
+  { name: "Banco da Amazônia", logo: "/banks/banco_amazonia.jpg" },
 ];
 
 const BanksCarousel = () => {
