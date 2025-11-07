@@ -18,8 +18,8 @@ import {
   Stethoscope
 } from "lucide-react";
 import { motion } from "framer-motion";
-import astecLogo from "@/assets/astecplace-logo.png";
 import logoAstecHero from "@/assets/logo-astec-hero.jpg";
+import BanksCarousel from "@/components/sections/BanksCarousel";
 
 interface AstecAssessoriaContentProps {
   onContactClick: () => void;
@@ -211,14 +211,6 @@ const AstecAssessoriaContent = ({ onContactClick }: AstecAssessoriaContentProps)
     ]
   };
 
-  const partners = [
-    { name: "Banco do Brasil", logo: "/src/assets/banks/banco_brasil_rural.png" },
-    { name: "Caixa Econômica", logo: "/src/assets/banks/caixa_rural.png" },
-    { name: "Sicoob", logo: "/src/assets/banks/sicoob_rural.png" },
-    { name: "Sicredi", logo: "/src/assets/banks/credisis_rural.png" },
-    { name: "Cresol", logo: "/src/assets/banks/cresol.png" },
-    { name: "Banco da Amazônia", logo: "/src/assets/banks/Banco_da_Amazônia.jpg" }
-  ];
 
   const ServiceCard = ({ icon: Icon, title, description, color }: { icon: any, title: string, description: string, color?: string }) => (
     <Card className="hover:shadow-lg transition-shadow h-full">
@@ -327,18 +319,13 @@ const AstecAssessoriaContent = ({ onContactClick }: AstecAssessoriaContentProps)
 
       {/* Parceiros */}
       <section className="mb-12 md:mb-16">
-        <h2 className="text-2xl sm:text-3xl font-bold mb-6 md:mb-8 text-center px-4">Principais Parceiros</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-8 justify-items-center">
-          {partners.map((partner, index) => (
-            <div key={index} className="w-24 h-16 sm:w-32 sm:h-20 flex items-center justify-center grayscale hover:grayscale-0 transition-all">
-              <img 
-                src={partner.logo} 
-                alt={partner.name} 
-                className="max-w-full max-h-full object-contain"
-              />
-            </div>
-          ))}
+        <div className="text-center mb-8">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-3 md:mb-4 px-4">Principais Parceiros</h2>
+          <p className="text-muted-foreground text-lg max-w-3xl mx-auto px-4">
+            Principais instituições financeiras parceiras
+          </p>
         </div>
+        <BanksCarousel />
       </section>
 
       {/* CTA Final */}
