@@ -18,6 +18,7 @@ interface AnuncioFormData {
   descricao: string;
   preco: string;
   categoria: string;
+  localizacao: string;
   imagens: string[];
   ativo: boolean;
 }
@@ -31,6 +32,23 @@ const categoriaOptions = [
   { value: 'outros', label: 'Outros' }
 ];
 
+const CIDADES_RO = [
+  "Porto Velho", "Ariquemes", "Ji-Paraná", "Vilhena", "Cacoal",
+  "Rolim de Moura", "Jaru", "Guajará-Mirim", "Pimenta Bueno",
+  "Ouro Preto do Oeste", "Espigão do Oeste", "Colorado do Oeste",
+  "Cerejeiras", "Buritis", "Costa Marques", "Alta Floresta d'Oeste",
+  "Alvorada d'Oeste", "Campo Novo de Rondônia", "Candeias do Jamari",
+  "Cujubim", "Governador Jorge Teixeira", "Machadinho d'Oeste",
+  "Ministro Andreazza", "Mirante da Serra", "Monte Negro",
+  "Nova Brasilândia d'Oeste", "Nova Mamoré", "Nova União",
+  "Novo Horizonte do Oeste", "Parecis", "Pimenteiras do Oeste",
+  "Porto Velho", "Presidente Médici", "Primavera de Rondônia",
+  "Rio Crespo", "Santa Luzia d'Oeste", "São Felipe d'Oeste",
+  "São Francisco do Guaporé", "São Miguel do Guaporé",
+  "Seringueiras", "Teixeirópolis", "Theobroma", "Urupá",
+  "Vale do Anari", "Vale do Paraíso"
+].sort();
+
 export const AnuncioForm = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -43,6 +61,7 @@ export const AnuncioForm = () => {
     descricao: '',
     preco: '',
     categoria: 'outros',
+    localizacao: '',
     imagens: [],
     ativo: true
   });
@@ -70,6 +89,7 @@ export const AnuncioForm = () => {
         descricao: data.descricao || '',
         preco: data.preco?.toString() || '',
         categoria: data.categoria || '',
+        localizacao: data.localizacao || '',
         imagens: data.imagens || [],
         ativo: data.ativo
       });
@@ -95,6 +115,7 @@ export const AnuncioForm = () => {
         descricao: formData.descricao,
         preco: formData.preco ? parseFloat(formData.preco) : null,
         categoria: formData.categoria,
+        localizacao: formData.localizacao || null,
         imagens: formData.imagens,
         ativo: formData.ativo,
         usuario_id: profile.user_id
@@ -184,13 +205,41 @@ export const AnuncioForm = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="categoria">Categoria</Label>
-              <Input
-                id="categoria"
-                value={formData.categoria}
-                onChange={(e) => setFormData(prev => ({ ...prev, categoria: e.target.value }))}
-                placeholder="Ex: Eletrônicos, Automóveis, Casa"
-              />
+              <Label htmlFor="categoria">Categoria *</Label>
+              <Select 
+                value={formData.categoria} 
+                onValueChange={(value) => setFormData(prev => ({ ...prev, categoria: value }))}
+              >
+                <SelectTrigger id="categoria">
+                  <SelectValue placeholder="Selecione uma categoria" />
+                </SelectTrigger>
+                <SelectContent>
+                  {categoriaOptions.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="localizacao">Localização</Label>
+              <Select 
+                value={formData.localizacao} 
+                onValueChange={(value) => setFormData(prev => ({ ...prev, localizacao: value }))}
+              >
+                <SelectTrigger id="localizacao">
+                  <SelectValue placeholder="Selecione uma cidade de RO" />
+                </SelectTrigger>
+                <SelectContent>
+                  {CIDADES_RO.map((cidade) => (
+                    <SelectItem key={cidade} value={cidade}>
+                      {cidade}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
 
             <div className="space-y-2">
